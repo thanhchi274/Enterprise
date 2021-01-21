@@ -1,7 +1,5 @@
-/client/node_modules
-/client/build/node_modules
 /.pnp
-/node_modules
+/**/node_modules
 .pnp.js
 # misc
 .DS_Store
