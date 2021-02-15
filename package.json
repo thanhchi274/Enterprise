@@ -10,17 +10,17 @@
     "npm": "7.5.1"
   },
   "scripts": {
-    "client": "cd client && npm start",
+    "client": "cd client && yarn start",
     "server": "cd server && nodemon server.js",
     "build": "cd client && npm run build",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "start": "cd server && node server.js",
-    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
+    "test-client": "cd client && yarn test"
   },
   "dependencies": {
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
-    "concurrently": "^5.3.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -29,7 +29,10 @@
     "firebase-admin": "^9.5.0",
     "lodash": "^4.17.20",
     "nodemailer": "^6.4.18",
-    "nodemon": "^2.0.7",
     "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.7"
   }
 }
