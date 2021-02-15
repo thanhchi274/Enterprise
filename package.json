@@ -4,6 +4,7 @@
   "main": "index.js",
   "repository": "https://github.com/n01know/enterprise-web.git",
   "author": "thanhchi274 <anarapham274@gmail.com>",
+  "homepage": "https://enterprise-comp1640.herokuapp.com/",
   "license": "MIT",
   "engines": {
     "node": "15.8.0",
