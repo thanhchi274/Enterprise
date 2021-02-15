@@ -5,19 +5,31 @@
   "repository": "https://github.com/n01know/enterprise-web.git",
   "author": "thanhchi274 <anarapham274@gmail.com>",
   "license": "MIT",
+  "engines": {
+    "node": "15.8.0",
+    "npm": "7.5.1"
+  },
   "scripts": {
-    "client": "cd front-end && npm start",
-    "server": "cd back-end && nodemon server.js",
-    "build": "cd front-end && npm run build",
+    "client": "cd client && npm start",
+    "server": "cd server && nodemon server.js",
+    "build": "cd client && npm run build",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "start": "cd back-end && node server.js"
+    "start": "cd server && node server.js",
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "concurrently": "^5.3.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "nodemon": "^2.0.7"
+    "express-async-handler": "^1.1.4",
+    "express-session": "^1.17.1",
+    "firebase-admin": "^9.5.0",
+    "lodash": "^4.17.20",
+    "nodemailer": "^6.4.18",
+    "nodemon": "^2.0.7",
+    "uuid": "^8.3.2"
   }
 }
