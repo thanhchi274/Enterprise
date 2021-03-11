@@ -20,8 +20,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const sections = [
-  { title: 'Home', url: '#' },
-  { title: 'Magazine', url: '#' },
+  { title: 'Home', url: '/' },
+  { title: 'Magazine', url: '/magazine' },
   { title: 'About Us', url: '#' },
   { title: 'Contact Us', url: '#' },
 ];

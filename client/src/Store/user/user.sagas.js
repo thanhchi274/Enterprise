@@ -1,7 +1,7 @@
 import { takeLatest, all, call, put,select } from "redux-saga/effects";
 import UserActionTypes from "./user.type";
 import { getUserExtraRef,
-  //  cloudStorage
+   cloudStorage
   } from '../../services/firebase.utils';
 import { selectCurrentUser } from '../user/user.selector';
 import {
@@ -9,8 +9,9 @@ import {
   createUserProfileDocument,
   getCurrentUser
 } from "../../services/firebase.utils";
-import { signInSuccess, signInFailure, signOutSuccess, signOutFailure, signUpSuccess, signUpFailure, updateUserSuccess, updateUserFailure, setExtraDataUserInFirebase } from "./user.action";
+import { signInSuccess, signInFailure, signOutSuccess, signOutFailure, signUpSuccess, signUpFailure, updateUserSuccess, uploadDataFailure, setExtraDataUserInFirebase } from "./user.action";
 import axios from "axios";
+import _ from 'lodash'
 import { toast } from "material-react-toastify";
 export function* getSnapshotFromAuth(userAuth,additionalData) {
   try {
@@ -50,38 +51,30 @@ export function* isUserAuthenticated(){
     yield put(signInFailure(error))
   }
 }
-// export function* onUpdateUserProfileStart(){
-//   yield takeLatest(UserActionTypes.UPDATE_USER_PROFILE_START,updateUserProfileAsync)
-// }
-// export function* updateUserProfileAsync({userCredentials}){
-//   const currentUser = yield select(selectCurrentUser);
-//   if (currentUser) {
-//     try {
-//     const image = yield userCredentials.photoURL
-//     if(image!=="http://www.example.com/12345678/photo.png" &&image){
-//       yield cloudStorage.ref('/images').child(image.name).put(image)
-//       const imageUrl = yield cloudStorage.ref('/images').child(image.name).getDownloadURL()
-//       const userData = {...userCredentials,photoURL:imageUrl}
-//       yield axios.patch(`${process.env.REACT_APP_BASE_URL}/users/?id=${currentUser.id}`,userData)
-//       .then(res=>toast.success(`Update Successfully!`)).then((updateUserSuccess()))
-//       const extraDataUserRef = yield getUserExtraRef(currentUser.id);
-//       yield extraDataUserRef.update(userData);
-//       yield window.location.reload()
-//     }
-//     else{
-//       yield axios.patch(`${process.env.REACT_APP_BASE_URL}/users/?id=${currentUser.id}`,{...userCredentials})
-//       .then(res=>toast.success(`Update Successfully!`)).then(yield put(updateUserSuccess()))
-//       const extraDataUserRef = yield getUserExtraRef(currentUser.id);
-//       yield extraDataUserRef.update(userCredentials);
-//       yield window.location.reload()
-//     }
-//     } catch (error) {
-//       yield toast.error(`Update Error, please try again!`)
-//       yield put(updateUserFailure(error))
-//       yield window.location.reload()
-//     }
-//   }
-// }
+export function* onUploadDataStart(){
+  yield takeLatest(UserActionTypes.UPLOAD_DATA_START,updateDataAsync)
+}
+export function* updateDataAsync({files}){
+  const currentUser = yield select(selectCurrentUser);
+  if (currentUser) {
+    try {
+      if(files.length===1){
+        yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[0].name).put(files[0])
+        yield alert('Success Upload')
+      }
+      if(files.length===2){
+        yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[0].name).put(files[0])
+        yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[1].name).put(files[1])
+        yield alert('Success Upload')
+      }
+    }
+     catch (error) {
+      yield toast.error(`Update Error, please try again!`)
+      yield put(uploadDataFailure(error))
+      // yield window.location.reload()
+    }
+  }
+}
 export function* onEmailSignInStart() {
   yield takeLatest(UserActionTypes.EMAIL_SIGN_IN_START, signInWithEmail);
 }
@@ -115,7 +108,7 @@ export function* onSignUpSuccess(){
 //   );
 // }
 export function* userSagas() {
-  yield all([ call(onEmailSignInStart), call(onCheckUserSessions), call(onSignOutStart),call(onSignUpStart) ,call(onSignUpSuccess),
-    //  call(onUserDataChange) 
+  yield all([ call(onEmailSignInStart), call(onCheckUserSessions), call(onSignOutStart),call(onSignUpStart) ,call(onSignUpSuccess), call(onUploadDataStart)
+    //  call(onUserDataChange)
     ]);
 }

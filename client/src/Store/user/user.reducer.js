@@ -5,11 +5,11 @@ const INITIAL_STATE = {
 };
 const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case UserActionTypes.UPDATE_USER_PROFILE_START:
+    case UserActionTypes.UPLOAD_DATA_START:
       return {
         ...state
       }
-    case UserActionTypes.UPDATE_USER_PROFILE_SUCCESS:
+    case UserActionTypes.UPLOAD_DATA_SUCCESS:
     case UserActionTypes.SIGN_IN_SUCCESS:
       return {
         ...state,
@@ -22,7 +22,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
         currentUser:null,
         error: null
         }
-    case UserActionTypes.UPDATE_USER_PROFILE_FAILURE:
+    case UserActionTypes.UPLOAD_DATA_FAILURE:
     case UserActionTypes.SIGN_OUT_FAILURE:
     case UserActionTypes.SIGN_IN_FAILURE:
     case UserActionTypes.SIGN_UP_FAILURE:

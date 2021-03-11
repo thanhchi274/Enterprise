@@ -95,7 +95,7 @@ export const getCurrentUser = ()=>{
 firebase.initializeApp(configToDB);
 export const auth = firebase.auth();
 export const firestore =firebase.firestore();
-// export const cloudStorage =firebase.storage()
+export const cloudStorage =firebase.storage()
 export const firebaseAuthFunction = firebase.auth
 export const firebaseLanguage = firebase.auth().useDeviceLanguage();
 export default firebase;

@@ -36,15 +36,15 @@ export const signUpFailure =error =>({
           type: UserActionTypes.SIGN_UP_FAILURE,
           payload:error
 });
-export const updateUserStart =(userCredentials) =>({
-          type: UserActionTypes.UPDATE_USER_PROFILE_START,
-          userCredentials
+export const uploadDataStart =(files) =>({
+          type: UserActionTypes.UPLOAD_DATA_START,
+          files
 });
-export const updateUserSuccess =()=>({
-          type:UserActionTypes.UPDATE_USER_PROFILE_SUCCESS,
+export const uploadDataSuccess =()=>({
+          type:UserActionTypes.UPLOAD_DATA_SUCCESS,
 });
-export const updateUserFailure =error =>({
-          type: UserActionTypes.UPDATE_USER_PROFILE_FAILURE,
+export const uploadDataFailure =error =>({
+          type: UserActionTypes.UPLOAD_DATA_FAILURE,
           payload:error
 });
 export const setExtraDataUserInFirebase =(extraData) =>({

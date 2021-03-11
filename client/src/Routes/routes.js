@@ -2,6 +2,7 @@ import { lazy } from "react";
 //User Page Route
 import HomePage from "../pages/user/Blog";
 import SignUpPage from "../pages/user/sign-up/SignUp";
+import MagazinePage from '../pages/user/upload/upload.component'
 import AdminDashboard from "../pages/admin/layouts/Default";
 const routeHome = [
   {
@@ -14,6 +15,11 @@ const routeHome = [
     exact: true,
     Component: SignUpPage,
   },
+  {
+    path:'/magazine',
+    exact:true,
+    Component:MagazinePage
+  }
 ];
 const routeAdminStaff = [
   {
