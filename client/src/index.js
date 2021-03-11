@@ -6,6 +6,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './Store/store';
 import './assets/scss/index.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "./shards-dashboard/styles/shards-dashboards.1.1.0.min.css";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
