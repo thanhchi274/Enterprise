@@ -8,10 +8,10 @@ import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import { useHistory } from 'react-router-dom'
-import { selectCurrentUser } from "../../Store/user/user.selector";
+import { selectCurrentUser } from "../../../Store/user/user.selector";
 import { createStructuredSelector } from "reselect";
 import { connect } from 'react-redux';
-import { signOutStart } from "../../Store/user/user.action";
+import { signOutStart } from "../../../Store/user/user.action";
 const useStyles = makeStyles((theme) => ({
   toolbar: {
     borderBottom: `1px solid ${theme.palette.divider}`,

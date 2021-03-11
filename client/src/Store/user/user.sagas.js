@@ -2,13 +2,13 @@ import { takeLatest, all, call, put,select } from "redux-saga/effects";
 import UserActionTypes from "./user.type";
 import { getUserExtraRef,
    cloudStorage
-  } from '../../services/firebase.utils';
+  } from '../../utils/firebase.utils';
 import { selectCurrentUser } from '../user/user.selector';
 import {
   auth,
   createUserProfileDocument,
   getCurrentUser
-} from "../../services/firebase.utils";
+} from "../../utils/firebase.utils";
 import { signInSuccess, signInFailure, signOutSuccess, signOutFailure, signUpSuccess, signUpFailure, updateUserSuccess, uploadDataFailure, setExtraDataUserInFirebase } from "./user.action";
 import axios from "axios";
 import _ from 'lodash'
