@@ -21,8 +21,6 @@ class MainSidebar extends React.Component {
       menuVisible: false,
       sidebarNavItems: getSidebarItems()
     };
-
-    this.onChange = this.onChange.bind(this);
   }
 
   componentWillMount() {

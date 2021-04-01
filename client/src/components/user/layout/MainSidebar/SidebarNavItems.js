@@ -3,25 +3,25 @@ import { Nav } from "shards-react";
 
 import SidebarNavItem from "./SidebarNavItem";
 
-import getSidebarItems from "../../../../data/sidebar-nav-items"
+import getNavItems from "../../../../data/sidebar-nav-items"
 
 class SidebarNavItems extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      navItems: getSidebarItems()
+      navItems: getNavItems()
     };
 
     this.onChange = this.onChange.bind(this);
   }
 
   componentWillMount() {
-
+   this.onChange()
   }
 
   componentWillUnmount() {
-
+    this.onChange()
   }
 
   onChange() {

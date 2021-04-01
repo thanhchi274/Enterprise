@@ -1,0 +1,15 @@
+.input-group-prepend {
+    display: flex !important;
+}
+
+.d-md-inline-block {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.hover {
+    &:hover {
+        cursor: pointer;
+    }
+}

@@ -2,13 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Container, Row, Col } from "shards-react";
 
-import PageTitle from "./../components/common/PageTitle";
-import SmallStats from "./../components/common/SmallStats";
-import UsersOverview from "./../components/blog/UsersOverview";
-import UsersByDevice from "./../components/blog/UsersByDevice";
-import NewDraft from "./../components/blog/NewDraft";
-import Discussions from "./../components/blog/Discussions";
-import TopReferrals from "./../components/common/TopReferrals";
+import PageTitle from "./../components/user/common/PageTitle";
+import SmallStats from "./../components/user/common/SmallStats";
+import UsersOverview from "./../components/user/blog/UsersOverview";
+import UsersByDevice from "./../components/user/blog/UsersByDevice";
+import NewDraft from "./../components/user/blog/NewDraft";
+import Discussions from "./../components/user/blog/Discussions";
+import TopReferrals from "./../components/user/common/TopReferrals";
 
 const BlogOverview = ({ smallStats }) => (
   <Container fluid className="main-content-container px-4">
@@ -38,28 +38,8 @@ const BlogOverview = ({ smallStats }) => (
 
     <Row>
       {/* Users Overview */}
-      <Col lg="8" md="12" sm="12" className="mb-4">
+      <Col sm="12" className="mb-4">
         <UsersOverview />
-      </Col>
-
-      {/* Users by Device */}
-      <Col lg="4" md="6" sm="12" className="mb-4">
-        <UsersByDevice />
-      </Col>
-
-      {/* New Draft */}
-      <Col lg="4" md="6" sm="12" className="mb-4">
-        <NewDraft />
-      </Col>
-
-      {/* Discussions */}
-      <Col lg="5" md="12" sm="12" className="mb-4">
-        <Discussions />
-      </Col>
-
-      {/* Top Referrals */}
-      <Col lg="3" md="12" sm="12" className="mb-4">
-        <TopReferrals />
       </Col>
     </Row>
   </Container>

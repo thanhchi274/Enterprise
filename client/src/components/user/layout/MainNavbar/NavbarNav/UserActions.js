@@ -10,6 +10,9 @@ import {
   NavLink
 } from "shards-react";
 
+//Images
+import user_avatar from "./../../../../../assets/images/avatars/0.jpg"
+
 export default class UserActions extends React.Component {
   constructor(props) {
     super(props);
@@ -33,7 +36,7 @@ export default class UserActions extends React.Component {
         <DropdownToggle caret tag={NavLink} className="text-nowrap px-3">
           <img
             className="user-avatar rounded-circle mr-2"
-            src={require("../../../../../assets/images/avatars/0.jpg")}
+            src={user_avatar}
             alt="User Avatar"
           />{" "}
           <span className="d-none d-md-inline-block">Sierra Brooks</span>

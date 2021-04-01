@@ -10,7 +10,7 @@ import {
 } from "shards-react";
 
 //Images
-import user_avatar from "./../../images/avatars/0.jpg"
+import user_avatar from "../../../assets/images/avatars/0.jpg"
 
 const UserDetails = ({ userDetails }) => (
   <Card small className="mb-4 pt-3">

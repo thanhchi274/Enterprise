@@ -12,7 +12,11 @@ import {
   Button
 } from "shards-react";
 
-import PageTitle from "../components/common/PageTitle";
+import PageTitle from "../components/user/common/PageTitle";
+
+//Image
+import backgroundImage from "../assets/images/content-management/1.jpeg";
+import authorAvatar from "../assets/images/avatars/1.jpg"
 
 class BlogPosts extends React.Component {
   constructor(props) {
@@ -22,44 +26,44 @@ class BlogPosts extends React.Component {
       // First list of posts.
       PostsListOne: [
         {
-          backgroundImage: require("../images/content-management/1.jpeg"),
+          backgroundImage,
           category: "Business",
           categoryTheme: "dark",
           author: "Anna Kunis",
-          authorAvatar: require("../images/avatars/1.jpg"),
+          authorAvatar,
           title: "Conduct at an replied removal an amongst",
           body:
             "However venture pursuit he am mr cordial. Forming musical am hearing studied be luckily. But in for determine what would see...",
           date: "28 February 2019"
         },
         {
-          backgroundImage: require("../images/content-management/2.jpeg"),
+          backgroundImage,
           category: "Travel",
           categoryTheme: "info",
           author: "James Jamerson",
-          authorAvatar: require("../images/avatars/2.jpg"),
+          authorAvatar,
           title: "Off tears are day blind smile alone had ready",
           body:
             "Is at purse tried jokes china ready decay an. Small its shy way had woody downs power. To denoting admitted speaking learning my...",
           date: "29 February 2019"
         },
         {
-          backgroundImage: require("../images/content-management/3.jpeg"),
+          backgroundImage,
           category: "Technology",
           categoryTheme: "royal-blue",
           author: "Jimmy Jackson",
-          authorAvatar: require("../images/avatars/2.jpg"),
+          authorAvatar,
           title: "Difficult in delivered extensive at direction",
           body:
             "Is at purse tried jokes china ready decay an. Small its shy way had woody downs power. To denoting admitted speaking learning my...",
           date: "29 February 2019"
         },
         {
-          backgroundImage: require("../images/content-management/4.jpeg"),
+          backgroundImage,
           category: "Business",
           categoryTheme: "warning",
           author: "John James",
-          authorAvatar: require("../images/avatars/3.jpg"),
+          authorAvatar,
           title: "It so numerous if he may outlived disposal",
           body:
             "How but sons mrs lady when. Her especially are unpleasant out alteration continuing unreserved ready road market resolution...",
@@ -70,11 +74,11 @@ class BlogPosts extends React.Component {
       // Second list of posts.
       PostsListTwo: [
         {
-          backgroundImage: require("../images/content-management/5.jpeg"),
+          backgroundImage,
           category: "Travel",
           categoryTheme: "info",
           author: "Anna Ken",
-          authorAvatar: require("../images/avatars/0.jpg"),
+          authorAvatar,
           title:
             "Attention he extremity unwilling on otherwise cars backwards yet",
           body:
@@ -82,11 +86,11 @@ class BlogPosts extends React.Component {
           date: "29 February 2019"
         },
         {
-          backgroundImage: require("../images/content-management/6.jpeg"),
+          backgroundImage,
           category: "Business",
           categoryTheme: "dark",
           author: "John James",
-          authorAvatar: require("../images/avatars/1.jpg"),
+          authorAvatar,
           title:
             "Totally words widow one downs few age every seven if miss part by fact",
           body:
@@ -99,7 +103,7 @@ class BlogPosts extends React.Component {
       PostsListThree: [
         {
           author: "John James",
-          authorAvatar: require("../images/avatars/1.jpg"),
+          authorAvatar,
           title: "Had denoting properly jointure which well books beyond",
           body:
             "In said to of poor full be post face snug. Introduced imprudence see say unpleasing devonshire acceptance son. Exeter longer wisdom work...",
@@ -107,7 +111,7 @@ class BlogPosts extends React.Component {
         },
         {
           author: "John James",
-          authorAvatar: require("../images/avatars/2.jpg"),
+          authorAvatar,
           title: "Husbands ask repeated resolved but laughter debating",
           body:
             "It abode words began enjoy years no do ﻿no. Tried spoil as heart visit blush or. Boy possible blessing sensible set but margaret interest. Off tears...",
@@ -115,7 +119,7 @@ class BlogPosts extends React.Component {
         },
         {
           author: "John James",
-          authorAvatar: require("../images/avatars/3.jpg"),
+          authorAvatar,
           title:
             "Instantly gentleman contained belonging exquisite now direction",
           body:
@@ -127,7 +131,7 @@ class BlogPosts extends React.Component {
       // Fourth list of posts.
       PostsListFour: [
         {
-          backgroundImage: require("../images/content-management/7.jpeg"),
+          backgroundImage,
           author: "Alene Trenton",
           authorUrl: "#",
           category: "News",
@@ -138,7 +142,7 @@ class BlogPosts extends React.Component {
           date: "29 February 2019"
         },
         {
-          backgroundImage: require("../images/content-management/8.jpeg"),
+          backgroundImage,
           author: "Chris Jamie",
           authorUrl: "#",
           category: "News",
@@ -149,7 +153,7 @@ class BlogPosts extends React.Component {
           date: "29 February 2019"
         },
         {
-          backgroundImage: require("../images/content-management/9.jpeg"),
+          backgroundImage,
           author: "Monica Jordan",
           authorUrl: "#",
           category: "News",
@@ -160,7 +164,7 @@ class BlogPosts extends React.Component {
           date: "29 February 2019"
         },
         {
-          backgroundImage: require("../images/content-management/10.jpeg"),
+          backgroundImage,
           author: "Monica Jordan",
           authorUrl: "#",
           category: "News",
