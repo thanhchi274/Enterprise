@@ -6,11 +6,11 @@ import {
   Button,
   ListGroup,
   ListGroupItem,
-  Progress
+  Progress,
 } from "shards-react";
 
 //Images
-import user_avatar from "../../../assets/images/avatars/0.jpg"
+import user_avatar from "../../../assets/images/avatars/0.jpg";
 
 const UserDetails = ({ userDetails }) => (
   <Card small className="mb-4 pt-3">
@@ -30,21 +30,6 @@ const UserDetails = ({ userDetails }) => (
       </Button>
     </CardHeader>
     <ListGroup flush>
-      <ListGroupItem className="px-4">
-        <div className="progress-wrapper">
-          <strong className="text-muted d-block mb-2">
-            {userDetails.performanceReportTitle}
-          </strong>
-          <Progress
-            className="progress-sm"
-            value={userDetails.performanceReportValue}
-          >
-            <span className="progress-value">
-              {userDetails.performanceReportValue}%
-            </span>
-          </Progress>
-        </div>
-      </ListGroupItem>
       <ListGroupItem className="p-4">
         <strong className="text-muted d-block mb-2">
           {userDetails.metaTitle}
@@ -59,7 +44,7 @@ UserDetails.propTypes = {
   /**
    * The user details object.
    */
-  userDetails: PropTypes.object
+  userDetails: PropTypes.object,
 };
 
 UserDetails.defaultProps = {
@@ -71,8 +56,8 @@ UserDetails.defaultProps = {
     performanceReportValue: 74,
     metaTitle: "Description",
     metaValue:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio eaque, quidem, commodi soluta qui quae minima obcaecati quod dolorum sint alias, possimus illum assumenda eligendi cumque?"
-  }
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio eaque, quidem, commodi soluta qui quae minima obcaecati quod dolorum sint alias, possimus illum assumenda eligendi cumque?",
+  },
 };
 
 export default UserDetails;

@@ -23,7 +23,7 @@ class MainSidebar extends React.Component {
     };
   }
 
-  componentWillMount() {
+  componentWillReceiveProps() {
     this.setState({
       ...this.state,
       menuVisible: this.props.menuVisible,
