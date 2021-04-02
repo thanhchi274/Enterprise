@@ -145,3 +145,9 @@ a {
 .author-page-title {
   margin-bottom: 15px;
 }
+
+.hover_item_table {
+  &:hover {
+    background-color: rgb(240, 240, 240) !important;
+  }
+}

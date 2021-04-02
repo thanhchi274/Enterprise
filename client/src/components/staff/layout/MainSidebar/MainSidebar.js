@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectMenuVisible } from "../../../../Store/UI/UI.selector";
 
-import {routeUser} from "../../../../data/sidebar-nav-items"
+import {routeStaff} from "../../../../data/sidebar-nav-items"
 
 class MainSidebar extends React.Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class MainSidebar extends React.Component {
 
     this.state = {
       menuVisible: false,
-      sidebarNavItems: routeUser
+      sidebarNavItems: routeStaff
     };
   }
 
@@ -27,7 +27,7 @@ class MainSidebar extends React.Component {
     this.setState({
       ...this.state,
       menuVisible: this.props.menuVisible,
-      sidebarNavItems: routeUser
+      sidebarNavItems: routeStaff
     })
   }
 

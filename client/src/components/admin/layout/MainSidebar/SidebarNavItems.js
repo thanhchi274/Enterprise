@@ -3,14 +3,14 @@ import { Nav } from "shards-react";
 
 import SidebarNavItem from "./SidebarNavItem";
 
-import {routeUser} from "../../../../data/sidebar-nav-items"
+import {routeAdmin} from "../../../../data/sidebar-nav-items"
 
 class SidebarNavItems extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      navItems: routeUser
+      navItems: routeAdmin
     };
 
     this.onChange = this.onChange.bind(this);

@@ -3,58 +3,52 @@ import PropTypes from "prop-types";
 import { Container, Row, Col } from "shards-react";
 
 import PageTitle from "../components/common/PageTitle";
-import SmallStats from "../components/common/SmallStats";
-import UsersOverview from "../components/admin/blog/UsersOverview";
-import PostsByCategory from "../components/admin/blog/PostsByCategory";
+import DetailAndComment from "../components/staff/blog/DetailAndComment";
+import PendingPosts from "../components/staff/blog/PendingPosts";
+import TopReferrals from "./../components/common/TopReferrals";
+import TimeTable from "../components/staff/blog/TimeTable";
 
-const BlogOverview = ({ smallStats }) => (
-  <Container fluid className="main-content-container px-4">
-    {/* Page Header */}
-    <Row noGutters className="page-header py-4">
-      <PageTitle className="text-sm-left mb-3" />
-    </Row>
+const StaffManage = () => {
+  const [isATimeSelected, setSelectedATime] = React.useState(false);
+  return (
+    <Container fluid className="main-content-container px-4">
+      {/* Page Header */}
+      <Row noGutters className="page-header py-4">
+        <PageTitle
+          sm="4"
+          title="Post Management"
+          subtitle="Management"
+          className="text-sm-left"
+        />
+      </Row>
 
-    {/* Small Stats Blocks */}
-    <Row>
-      {smallStats.map((stats, idx) => (
-        <Col className="col-lg mb-4" key={idx} {...stats.attrs}>
-          <SmallStats
-            id={`small-stats-${idx}`}
-            variation="1"
-            chartData={stats.datasets}
-            chartLabels={stats.chartLabels}
-            label={stats.label}
-            value={stats.value}
-            percentage={stats.percentage}
-            increase={stats.increase}
-            decrease={stats.decrease}
-          />
-        </Col>
-      ))}
-    </Row>
+      <TimeTable setSelectedATime={setSelectedATime}/>
 
-    <Row>
-      {/* Users Overview */}
-      <Col lg="8" md="12" sm="12" className="mb-4">
-        <UsersOverview />
-      </Col>
+      {isATimeSelected && (
+        <Row>
+          {/* Discussions */}
+          <Col lg="8" md="8" sm="12" className="mb-4">
+            <PendingPosts />
+          </Col>
 
-      {/* Users by Device */}
-      <Col lg="4" md="6" sm="12" className="mb-4">
-        <PostsByCategory />
-      </Col>
-    </Row>
-  </Container>
-);
+          {/* Detail And Comment */}
+          <Col lg="4" md="4" sm="12" className="mb-4">
+            <DetailAndComment />
+          </Col>
+        </Row>
+      )}
+    </Container>
+  );
+};
 
-BlogOverview.propTypes = {
+StaffManage.propTypes = {
   /**
    * The small stats dataset.
    */
   smallStats: PropTypes.array,
 };
 
-BlogOverview.defaultProps = {
+StaffManage.defaultProps = {
   smallStats: [
     {
       label: "Users",
@@ -93,7 +87,7 @@ BlogOverview.defaultProps = {
     {
       label: "Comments",
       value: "8,147",
- 
+
       chartLabels: [null, null, null, null, null, null, null],
       attrs: { md: "4", sm: "6" },
       datasets: [
@@ -127,4 +121,4 @@ BlogOverview.defaultProps = {
   ],
 };
 
-export default BlogOverview;
+export default StaffManage;

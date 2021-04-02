@@ -6,7 +6,7 @@ import {
   Row,
 } from "shards-react";
 
-import PageTitle from "../components/user/common/PageTitle";
+import PageTitle from "../components/common/PageTitle";
 import PostListOne from "../components/user/post/PostListOne";
 import PostListTwo from "../components/user/post/PostListTwo";
 //Image

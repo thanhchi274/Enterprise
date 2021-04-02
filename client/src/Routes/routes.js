@@ -2,55 +2,72 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 
 // Layout Types
-import { DefaultLayout } from "../layouts";
-
+import  DefaultLayoutUser  from "../layouts/staff/Default";
+import  DefaultLayoutAdmin  from "../layouts/admin/Default";
+import  DefaultLayoutStaff  from "../layouts/staff/Default";
 // Route Views
 import BlogOverview from "../views/BlogOverview";
 import UserProfileLite from "../views/UserProfileLite";
 import AddNewPost from "../views/AddNewPost";
 import Errors from "../views/Errors";
 import BlogPosts from "../views/BlogPosts";
-import AdminDashboard from "../pages/admin/layouts/Default";
+import StaffProfileLite from '../views/StaffProfileLite'
+import StaffManage from '../views/StaffManage'
 
 const routeHome = [
   {
     path: "/",
     exact: true,
-    layout: DefaultLayout,
-    component: () => <Redirect to="/blog-overview" />
-  },
-  {
-    path: "/blog-overview",
-    layout: DefaultLayout,
-    component: BlogOverview
+    layout: DefaultLayoutUser,
+    component: () => <Redirect to="/blog-posts" />,
   },
   {
     path: "/user-profile-lite",
-    layout: DefaultLayout,
-    component: UserProfileLite
+    layout: DefaultLayoutUser,
+    component: UserProfileLite,
   },
   {
     path: "/add-new-post",
-    layout: DefaultLayout,
-    component: AddNewPost
+    layout: DefaultLayoutUser,
+    component: AddNewPost,
   },
   {
     path: "/errors",
-    layout: DefaultLayout,
-    component: Errors
+    layout: DefaultLayoutUser,
+    component: Errors,
   },
   {
     path: "/blog-posts",
-    layout: DefaultLayout,
-    component: BlogPosts
-  }
-];
-
-const routeAdminStaff = [
-  {
-    path: "/admin",
-    exact: true,
-    Component: AdminDashboard,
+    layout: DefaultLayoutUser,
+    component: BlogPosts,
   },
 ];
-export { routeHome, routeAdminStaff };
+
+const routeAdmin = [
+  {
+    path: "/",
+    layout: DefaultLayoutAdmin,
+    component: BlogOverview,
+  },
+];
+
+const routeStaff = [
+  {
+    path: "/",
+    exact: true,
+    layout: DefaultLayoutStaff,
+    component: () => <Redirect to="/staff-manage" />,
+  },
+  {
+    path: "/staff-manage",
+    layout: DefaultLayoutStaff,
+    component: StaffManage,
+  },
+  {
+    path: "/staff-profile-lite",
+    layout: DefaultLayoutStaff,
+    component: StaffProfileLite
+
+  }
+]
+export { routeHome, routeAdmin,  routeStaff};
