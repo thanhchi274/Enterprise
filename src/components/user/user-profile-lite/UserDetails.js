@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import PropTypes from "prop-types";
 import {
   Card,
@@ -11,39 +11,41 @@ import {
 
 //Images
 import user_avatar from "../../../assets/images/avatars/0.jpg";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "../../../Store/user/user.selector";
 
-const UserDetails = ({ userDetails }) => (
+const UserDetails = ({ userDetails, currentUser }) => (
   <Card small className="mb-4 pt-3">
     <CardHeader className="border-bottom text-center">
       <div className="mb-3 mx-auto">
         <img
           className="rounded-circle"
           src={userDetails.avatar}
-          alt={userDetails.name}
+          alt={currentUser.displayName?currentUser.displayName:currentUser.email}
           width="110"
         />
       </div>
-      <h4 className="mb-0">{userDetails.name}</h4>
-      <span className="text-muted d-block mb-2">{userDetails.jobTitle}</span>
+      {console.log(currentUser.providerData[0].displayName)}
+      <h4 className="mb-0">{currentUser.displayName||currentUser.providerData[0].displayName||currentUser.email}</h4>
     </CardHeader>
   </Card>
 );
 
 UserDetails.propTypes = {
-  /**
-   * The user details object.
-   */
   userDetails: PropTypes.object,
 };
 
 UserDetails.defaultProps = {
   userDetails: {
-    name: "Sierra Brooks",
-    avatar: user_avatar,
-    jobTitle: "Project Manager",
-    performanceReportTitle: "Workload",
-    performanceReportValue: 74,
+    avatar: user_avatar
   },
 };
+const mapStateToProps = createStructuredSelector({
+  currentUser:selectCurrentUser
+})
 
-export default UserDetails;
+const mapDispatchToProps = {
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserDetails);

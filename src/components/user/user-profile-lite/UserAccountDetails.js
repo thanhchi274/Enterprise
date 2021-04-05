@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import PropTypes from "prop-types";
 import {
   Card,
@@ -14,8 +14,33 @@ import {
   FormTextarea,
   Button
 } from "shards-react";
-
-const UserAccountDetails = ({ title }) => (
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "../../../Store/user/user.selector";
+import {updateUserProfileStart} from '../../../Store/user/user.action'
+const UserAccountDetails = ({ title,currentUser,updateUserProfileStart}) => {
+  const [userCredentials, setUserCredentials] = useState({
+    firstName:"", lastName:""
+  })
+  const {firstName, lastName} = userCredentials
+  const handleChange = (event) => {
+    const { value, name } = event.target;
+    setUserCredentials({...userCredentials,
+      [name]: value,
+    });
+  };
+  const handleSubmit = async event => {
+    event.preventDefault();
+    let displayName = firstName +" "+ lastName
+    if(firstName===""||lastName===""){
+      alert('Please fill all it to continue')
+    }
+    else {
+      updateUserProfileStart(displayName)
+      setUserCredentials({  firstName:"", lastName:"" });
+    }
+  };
+return(
   <Card small className="mb-4">
     <CardHeader className="border-bottom">
       <h6 className="m-0">{title}</h6>
@@ -24,26 +49,26 @@ const UserAccountDetails = ({ title }) => (
       <ListGroupItem className="p-3">
         <Row>
           <Col>
-            <Form>
+            <Form onSubmit={handleSubmit}>
               <Row form>
-                {/* First Name */}
                 <Col sm="6" md="6" lg="6" className="form-group">
                   <label htmlFor="feFirstName">First Name</label>
                   <FormInput
                     id="feFirstName"
                     placeholder="First Name"
-                    value="Sierra"
-                    onChange={() => {}}
+                    name="firstName"
+                    value={firstName}
+                    onChange={handleChange}
                   />
                 </Col>
-                {/* Last Name */}
                 <Col sm="6" md="6" lg="6" className="form-group">
                   <label htmlFor="feLastName">Last Name</label>
                   <FormInput
                     id="feLastName"
                     placeholder="Last Name"
-                    value="Brooks"
-                    onChange={() => {}}
+                    name='lastName'
+                    value={lastName}
+                    onChange={handleChange}
                   />
                 </Col>
               </Row>
@@ -55,32 +80,11 @@ const UserAccountDetails = ({ title }) => (
                     type="email"
                     id="feEmail"
                     placeholder="Email Address"
-                    value="sierra@example.com"
+                    value={currentUser.email}
                     disabled
                   />
                 </Col>
-                {/* Password */}
-                <Col md="6" className="form-group">
-                  <label htmlFor="fePassword">Password</label>
-                  <FormInput
-                    type="password"
-                    id="fePassword"
-                    placeholder="Password"
-                    value="EX@MPL#P@$$w0RD"
-                    onChange={() => {}}
-                    autoComplete="current-password"
-                  />
-                </Col>
               </Row>
-              <FormGroup>
-                <label htmlFor="feAddress">Address</label>
-                <FormInput
-                  id="feAddress"
-                  placeholder="Address"
-                  value="1234 Main St."
-                  onChange={() => {}}
-                />
-              </FormGroup>
               <Button theme="accent">Update Account</Button>
             </Form>
           </Col>
@@ -89,7 +93,7 @@ const UserAccountDetails = ({ title }) => (
     </ListGroup>
   </Card>
 );
-
+}
 UserAccountDetails.propTypes = {
   /**
    * The component's title.
@@ -100,5 +104,12 @@ UserAccountDetails.propTypes = {
 UserAccountDetails.defaultProps = {
   title: "Account Details"
 };
+const mapStateToProps = createStructuredSelector({
+  currentUser:selectCurrentUser
+})
 
-export default UserAccountDetails;
+const mapDispatchToProps =(dispatch)=> ({
+  updateUserProfileStart: (data)=>dispatch(updateUserProfileStart(data))
+})
+
+export default connect(mapStateToProps,mapDispatchToProps) (UserAccountDetails);

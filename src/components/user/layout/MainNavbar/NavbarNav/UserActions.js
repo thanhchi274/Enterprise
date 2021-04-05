@@ -34,13 +34,8 @@ class UserActions extends React.Component {
   render() {
     let {currentUser,signOutStart}= this.props
     return (
-      <NavItem tag={Dropdown} caret toggle={this.toggleUserActions}>
-        <DropdownToggle caret tag={NavLink} className="text-nowrap px-3">
-          <img
-            className="user-avatar rounded-circle mr-2"
-            src={user_avatar}
-            alt={currentUser.email}
-          />{" "}
+      <NavItem className="d-flex align-items-center" tag={Dropdown} caret toggle={this.toggleUserActions}>
+        <DropdownToggle caret tag={NavLink} className="text-nowrap px-3 d-flex align-items-center">
           <span className="d-none d-md-inline-block"> {currentUser.displayName? currentUser.displayName: currentUser.email}</span>
         </DropdownToggle>
         <Collapse tag={DropdownMenu} right small open={this.state.visible}>

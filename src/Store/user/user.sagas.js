@@ -1,15 +1,14 @@
 import { takeLatest, all, call, put,select } from "redux-saga/effects";
 import UserActionTypes from "./user.type";
 import { getUserExtraRef,
-   cloudStorage
+   cloudStorage,auth
   } from '../../utils/firebase.utils';
 import { selectCurrentUser } from '../user/user.selector';
 import {
-  auth,
   createUserProfileDocument,
   getCurrentUser
 } from "../../utils/firebase.utils";
-import { signInSuccess, signInFailure, signOutSuccess, signOutFailure, signUpSuccess, signUpFailure, updateUserSuccess, uploadDataFailure, setExtraDataUserInFirebase } from "./user.action";
+import { signInSuccess, signInFailure, signOutSuccess, signOutFailure, signUpSuccess, signUpFailure, uploadDataSuccess, uploadDataFailure, setExtraDataUserInFirebase,updateProfileSuccess,updateProfileFailure  } from "./user.action";
 import axios from "axios";
 import _, { toString } from 'lodash'
 import { toast } from "material-react-toastify";
@@ -75,7 +74,7 @@ export function* updateDataAsync({files}){
         }
         const extraDataUserRef = yield getUserExtraRef(currentUser.id);
         yield extraDataUserRef.update(userUploadData);
-        yield put(updateUserSuccess())
+        yield put(uploadDataSuccess())
         yield alert('Success Upload')
       }
       if(files.length===3){
@@ -99,7 +98,7 @@ export function* updateDataAsync({files}){
         const extraDataUserRef = yield getUserExtraRef(currentUser.id);
         yield extraDataUserRef.update(userUploadData);
         yield alert('Success Upload')
-        yield put(updateUserSuccess())
+        yield put(uploadDataSuccess())
       }
     }
      catch (error) {
@@ -133,6 +132,32 @@ export function* signInAfterSignUp({payload:{user, additionalData}}){
 yield getSnapshotFromAuth(user, additionalData);
 
 }
+export function* onUpdateProfileStart(){
+  yield takeLatest(UserActionTypes.UPDATE_PROFILE_START, updateProfileAsync);
+}
+export function* updateProfileAsync({payload}){
+  let user =yield auth.currentUser;
+yield console.log(user)
+yield user.updateProfile({
+  displayName: payload,
+}).then(function() {
+  alert('Update Success')
+}).catch(function(error) {
+  // An error happened.
+  alert(error)
+});
+  // yield console.log(payload)
+  // try {
+  //   yield console.log(payload)
+  //   const updateData  = yield auth.currentUser.updateProfile({
+  //     displayName: payload
+  //   })
+  //   const successUpdate = yield updateData.then((res)=>  console.log(res))
+  //   yield put(updateProfileSuccess(successUpdate))
+  // } catch (error) {
+  //   yield put(updateProfileFailure(error))
+  // }
+}
 export function* signUp({payload:{email, password, displayName}}) {
 try {
   const {user} = yield auth.createUserWithEmailAndPassword(email, password);
@@ -147,16 +172,7 @@ export function* onSignUpStart(){
 export function* onSignUpSuccess(){
   yield takeLatest(UserActionTypes.SIGN_UP_SUCCESS, signInAfterSignUp)
 }
-// export function* onUserDataChange() {
-//   yield takeLatest(
-//     [
-//       UserActionTypes.UPDATE_USER_PROFILE_START
-//     ],
-//     updateUserProfileAsync
-//   );
-// }
 export function* userSagas() {
-  yield all([ call(onEmailSignInStart), call(onCheckUserSessions), call(onSignOutStart),call(onSignUpStart) ,call(onSignUpSuccess), call(onUploadDataStart)
-    //  call(onUserDataChange)
+  yield all([ call(onEmailSignInStart), call(onCheckUserSessions), call(onSignOutStart),call(onSignUpStart) ,call(onSignUpSuccess), call(onUploadDataStart), call(onUpdateProfileStart)
     ]);
 }

@@ -51,3 +51,14 @@ export const setExtraDataUserInFirebase = (extraData) => ({
   type: UserActionTypes.SET_EXTRA_DATA_FIREBASE,
   payload: extraData,
 });
+export const updateUserProfileStart = (userCredentials) => ({
+  type:UserActionTypes.UPDATE_PROFILE_START,
+  payload:userCredentials
+})
+export const updateProfileSuccess = () => ({
+  type:UserActionTypes.UPDATE_PROFILE_SUCCESS,
+})
+export const updateProfileFailure = (error) => ({
+  type:UserActionTypes.UPDATE_PROFILE_FAILURE,
+  payload:error
+})

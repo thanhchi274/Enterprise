@@ -35,13 +35,9 @@ class UserActions extends React.Component {
 
   render() {
     return (
-      <NavItem tag={Dropdown} caret toggle={this.toggleUserActions}>
+      <NavItem tag={Dropdown} className="d-flex align-items-center" caret toggle={this.toggleUserActions}>
         <DropdownToggle caret tag={NavLink} className="text-nowrap px-3">
-          <img
-            className="user-avatar rounded-circle mr-2"
-            src={user_avatar}
-            alt="User Avatar"
-          />{" "}
+
           <span className="d-none d-md-inline-block">Sierra Brooks</span>
         </DropdownToggle>
         <Collapse tag={DropdownMenu} right small open={this.state.visible}>
