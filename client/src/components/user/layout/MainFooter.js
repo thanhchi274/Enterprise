@@ -44,7 +44,7 @@ MainFooter.propTypes = {
 
 MainFooter.defaultProps = {
   contained: false,
-  copyright: "Copyright © 2018 DesignRevision",
+  copyright: "Copyright © 2018 MagazineGreenwich",
   menuItems: [
     {
       title: "Home",

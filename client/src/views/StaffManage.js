@@ -26,12 +26,9 @@ const StaffManage = () => {
 
       {isATimeSelected && (
         <Row>
-          {/* Discussions */}
           <Col lg="8" md="8" sm="12" className="mb-4">
             <PendingPosts />
           </Col>
-
-          {/* Detail And Comment */}
           <Col lg="4" md="4" sm="12" className="mb-4">
             <DetailAndComment />
           </Col>

@@ -27,7 +27,7 @@ const UserAccountDetails = ({ title }) => (
             <Form>
               <Row form>
                 {/* First Name */}
-                <Col md="6" className="form-group">
+                <Col sm="6" md="6" lg="6" className="form-group">
                   <label htmlFor="feFirstName">First Name</label>
                   <FormInput
                     id="feFirstName"
@@ -37,7 +37,7 @@ const UserAccountDetails = ({ title }) => (
                   />
                 </Col>
                 {/* Last Name */}
-                <Col md="6" className="form-group">
+                <Col sm="6" md="6" lg="6" className="form-group">
                   <label htmlFor="feLastName">Last Name</label>
                   <FormInput
                     id="feLastName"
@@ -56,8 +56,7 @@ const UserAccountDetails = ({ title }) => (
                     id="feEmail"
                     placeholder="Email Address"
                     value="sierra@example.com"
-                    onChange={() => {}}
-                    autoComplete="email"
+                    disabled
                   />
                 </Col>
                 {/* Password */}
@@ -82,41 +81,6 @@ const UserAccountDetails = ({ title }) => (
                   onChange={() => {}}
                 />
               </FormGroup>
-              <Row form>
-                {/* City */}
-                <Col md="6" className="form-group">
-                  <label htmlFor="feCity">City</label>
-                  <FormInput
-                    id="feCity"
-                    placeholder="City"
-                    onChange={() => {}}
-                  />
-                </Col>
-                {/* State */}
-                <Col md="4" className="form-group">
-                  <label htmlFor="feInputState">State</label>
-                  <FormSelect id="feInputState">
-                    <option>Choose...</option>
-                    <option>...</option>
-                  </FormSelect>
-                </Col>
-                {/* Zip Code */}
-                <Col md="2" className="form-group">
-                  <label htmlFor="feZipCode">Zip</label>
-                  <FormInput
-                    id="feZipCode"
-                    placeholder="Zip"
-                    onChange={() => {}}
-                  />
-                </Col>
-              </Row>
-              <Row form>
-                {/* Description */}
-                <Col md="12" className="form-group">
-                  <label htmlFor="feDescription">Description</label>
-                  <FormTextarea id="feDescription" rows="5" />
-                </Col>
-              </Row>
               <Button theme="accent">Update Account</Button>
             </Form>
           </Col>

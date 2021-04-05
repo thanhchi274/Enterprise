@@ -1,24 +1,16 @@
 /* eslint jsx-a11y/anchor-is-valid: 0 */
 
 import React from "react";
-import {
-  Container,
-  Row,
-} from "shards-react";
-
+import { Container, Row } from "shards-react";
 import PageTitle from "../components/common/PageTitle";
 import PostListOne from "../components/user/post/PostListOne";
 import PostListTwo from "../components/user/post/PostListTwo";
-//Image
 import backgroundImage from "../assets/images/content-management/1.jpeg";
 import authorAvatar from "../assets/images/avatars/1.jpg";
-
 class BlogPosts extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      // First list of posts.
       PostsListOne: [
         {
           backgroundImage,
@@ -64,32 +56,89 @@ class BlogPosts extends React.Component {
             "How but sons mrs lady when. Her especially are unpleasant out alteration continuing unreserved ready road market resolution...",
           date: "29 February 2019",
         },
-      ],
-
-      // Second list of posts.
-      PostsListTwo: [
         {
           backgroundImage,
-          category: "Travel",
-          categoryTheme: "info",
-          author: "Anna Ken",
+          category: "Technology",
+          categoryTheme: "royal-blue",
+          author: "Jimmy Jackson",
           authorAvatar,
-          title:
-            "Attention he extremity unwilling on otherwise cars backwards yet",
+          title: "Difficult in delivered extensive at direction",
           body:
-            "Conviction up partiality as delightful is discovered. Yet jennings resolved disposed exertion you off. Left did fond drew fat head poor jet pan flying over...",
+            "Is at purse tried jokes china ready decay an. Small its shy way had woody downs power. To denoting admitted speaking learning my...",
           date: "29 February 2019",
         },
         {
           backgroundImage,
           category: "Business",
-          categoryTheme: "dark",
+          categoryTheme: "warning",
           author: "John James",
           authorAvatar,
-          title:
-            "Totally words widow one downs few age every seven if miss part by fact",
+          title: "It so numerous if he may outlived disposal",
           body:
-            "Discovered had get considered projection who favourable. Necessary up knowledge it tolerably. Unwilling departure education to admitted speaking...",
+            "How but sons mrs lady when. Her especially are unpleasant out alteration continuing unreserved ready road market resolution...",
+          date: "29 February 2019",
+        },{
+          backgroundImage,
+          category: "Technology",
+          categoryTheme: "royal-blue",
+          author: "Jimmy Jackson",
+          authorAvatar,
+          title: "Difficult in delivered extensive at direction",
+          body:
+            "Is at purse tried jokes china ready decay an. Small its shy way had woody downs power. To denoting admitted speaking learning my...",
+          date: "29 February 2019",
+        },
+        {
+          backgroundImage,
+          category: "Business",
+          categoryTheme: "warning",
+          author: "John James",
+          authorAvatar,
+          title: "It so numerous if he may outlived disposal",
+          body:
+            "How but sons mrs lady when. Her especially are unpleasant out alteration continuing unreserved ready road market resolution...",
+          date: "29 February 2019",
+        },{
+          backgroundImage,
+          category: "Technology",
+          categoryTheme: "royal-blue",
+          author: "Jimmy Jackson",
+          authorAvatar,
+          title: "Difficult in delivered extensive at direction",
+          body:
+            "Is at purse tried jokes china ready decay an. Small its shy way had woody downs power. To denoting admitted speaking learning my...",
+          date: "29 February 2019",
+        },
+        {
+          backgroundImage,
+          category: "Business",
+          categoryTheme: "warning",
+          author: "John James",
+          authorAvatar,
+          title: "It so numerous if he may outlived disposal",
+          body:
+            "How but sons mrs lady when. Her especially are unpleasant out alteration continuing unreserved ready road market resolution...",
+          date: "29 February 2019",
+        },{
+          backgroundImage,
+          category: "Technology",
+          categoryTheme: "royal-blue",
+          author: "Jimmy Jackson",
+          authorAvatar,
+          title: "Difficult in delivered extensive at direction",
+          body:
+            "Is at purse tried jokes china ready decay an. Small its shy way had woody downs power. To denoting admitted speaking learning my...",
+          date: "29 February 2019",
+        },
+        {
+          backgroundImage,
+          category: "Business",
+          categoryTheme: "warning",
+          author: "John James",
+          authorAvatar,
+          title: "It so numerous if he may outlived disposal",
+          body:
+            "How but sons mrs lady when. Her especially are unpleasant out alteration continuing unreserved ready road market resolution...",
           date: "29 February 2019",
         },
       ],
@@ -97,34 +146,20 @@ class BlogPosts extends React.Component {
   }
 
   render() {
-    const {
-      PostsListOne,
-      PostsListTwo,
-    } = this.state;
-
+    const { PostsListOne } = this.state;
     return (
       <Container fluid className="main-content-container px-4">
-        {/* Page Header */}
         <Row noGutters className="page-header py-4">
           <PageTitle
             sm="4"
-            title="Blog Posts"
-            subtitle="Components"
+            title="Magazine"
+            subtitle="Your Post"
             className="text-sm-left"
           />
         </Row>
-
-        {/* First Row of Posts */}
         <Row>
           {PostsListOne.map((post, idx) => (
-            <PostListOne post={post} key={idx}/>
-          ))}
-        </Row>
-
-        {/* Second Row of Posts */}
-        <Row>
-          {PostsListTwo.map((post, idx) => (
-            <PostListTwo post={post} key={idx}/>
+            <PostListOne post={post} key={idx} />
           ))}
         </Row>
       </Container>

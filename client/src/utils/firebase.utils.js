@@ -49,17 +49,6 @@ export const getUserExtraRef =async userId => {
     return snapShot.docs[0].ref;
   }
 }
-export const getWishListUserRef = async userId => {
-  const wishListRef = firestore.collection('wishList').where('userId', '==', userId);
-  const snapShot = await wishListRef.get();
-  if (snapShot.empty) {
-    const wishListDocRef = firestore.collection('wishList').doc();
-    await wishListDocRef.set({ userId, wishList: [] });
-    return wishListDocRef;
-  } else {
-    return snapShot.docs[0].ref;
-  }
-};
 export const addCollectionAndDocuments = async (collectionKey, objectToAdd)=>{
   const collectionRef =firestore.collection(collectionKey);
   const batch = firestore.batch()

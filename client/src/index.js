@@ -9,7 +9,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./shards-dashboard/styles/shards-dashboards.1.1.0.min.css";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
 ReactDOM.render(
   <Provider store={store}>
   <BrowserRouter>

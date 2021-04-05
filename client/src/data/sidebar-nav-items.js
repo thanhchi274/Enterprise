@@ -1,24 +1,24 @@
 export const routeUser = [
   {
-    title: "Blog Posts",
+    title: "Student HomePage",
     htmlBefore: '<i class="material-icons">vertical_split</i>',
-    to: "/blog-posts",
+    to: "/",
   },
   {
-    title: "Add New Post",
+    title: "Student | Add New Post",
     htmlBefore: '<i class="material-icons">note_add</i>',
-    to: "/add-new-post",
+    to: "/new-post",
   },
   {
-    title: "User Profile",
+    title: "Student Profile",
     htmlBefore: '<i class="material-icons">person</i>',
-    to: "/user-profile-lite",
+    to: "/user-profile",
   },
 ];
 
 export const routeAdmin = [
   {
-    title: "Blog Dashboard",
+    title: "Admin Dashboard",
     to: "/blog-overview",
     htmlBefore: '<i class="material-icons">edit</i>',
     htmlAfter: "",
@@ -27,7 +27,7 @@ export const routeAdmin = [
 
 export const routeStaff = [
   {
-    title: "Staff manage",
+    title: "Staff Dashboard",
     to: "/staff-manage",
     htmlBefore: '<i class="material-icons">edit</i>',
     htmlAfter: "",
