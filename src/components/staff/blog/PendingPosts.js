@@ -120,15 +120,11 @@ const PendingPosts = ({
                 </a>
                 <span className="text-mutes">- {post.date}</span>
               </div>
-
-              {/* Content :: Body */}
               <p className="m-0 my-1 mb-2 text-muted">
                 <i>
                   {post.comment ? `Comment: ${post.comment}` : "No comment"}
                 </i>
               </p>
-
-              {/* Content :: Actions */}
               <div
                 className="blog-comments__actions"
                 style={{ float: "right" }}

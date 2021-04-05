@@ -26,7 +26,8 @@ const StaffManage = ({data,fetchMagazinePostStaffStart}) => {
           className="text-sm-left"
         />
       </Row>
-      <TimeTable setSelectedATime={setSelectedATime}/>
+      <TimeTable setSelectedATime={setSelectedATime} onToggle={isATimeSelected}/>
+      {console.log(isATimeSelected)}
       {isATimeSelected && (
         <Row>
           <Col lg="8" md="8" sm="12" className="mb-4">

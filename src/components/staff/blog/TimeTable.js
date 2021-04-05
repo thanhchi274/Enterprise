@@ -12,15 +12,22 @@ const timeArray = [
     comments: null,
   },
   {
-    date:new Date().toLocaleDateString('en-US'),
+    date:'12-11-2022',
     start: "7:20",
     end: "21:00",
     pendingPosts: 30,
     comments: 15,
   },
+  {
+    date:new Date().toLocaleDateString('en-US'),
+    start: "7:30",
+    end: "11:00",
+    pendingPosts: 20,
+    comments: 15,
+  },
 ];
 
-const TimeTable = ({ setSelectedATime }) => {
+const TimeTable = ({ setSelectedATime,onToggle }) => {
   const [array, setArray] = React.useState(null);
   const [schedule, setSchedule] = React.useState(null);
 
@@ -84,7 +91,7 @@ const TimeTable = ({ setSelectedATime }) => {
           element.style.backgroundColor = "white";
         }
       }
-      setSelectedATime(true);
+      setSelectedATime(!onToggle);
     }
   };
   return (
