@@ -9,6 +9,7 @@ import user_avatar from "./../../../../../assets/images/avatars/0.jpg";
 import { connect } from 'react-redux'
 import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "../../../../../Store/user/user.selector";
+import { signOutStart } from "./../../../../../Store/user/user.action";
  class UserActions extends React.Component {
   constructor(props) {
     super(props);
@@ -39,7 +40,7 @@ import { selectCurrentUser } from "../../../../../Store/user/user.selector";
         </Link>
         <DropdownMenu right small open={this.state.visible}>
           <DropdownItem divider />
-          <Link to="/" className="text-danger">
+          <Link to="/" onClick={signOutStart} className="text-danger">
             <i className="material-icons text-danger">&#xE879;</i> Logout
           </Link>
         </DropdownMenu>
@@ -50,4 +51,7 @@ import { selectCurrentUser } from "../../../../../Store/user/user.selector";
 const mapStateToProps = createStructuredSelector ({
   currentUser:selectCurrentUser
 })
-export default connect(mapStateToProps, null)(UserActions)
+const mapDispatchToProps = (dispatch) => ({
+  signOutStart: () => dispatch(signOutStart()),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(UserActions)

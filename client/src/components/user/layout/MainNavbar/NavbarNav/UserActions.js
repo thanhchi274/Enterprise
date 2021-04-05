@@ -13,6 +13,7 @@ import {
 import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "../../../../../Store/user/user.selector";
 import user_avatar from "./../../../../../assets/images/avatars/0.jpg"
+import { signOutStart } from "./../../../../../Store/user/user.action";
 class UserActions extends React.Component {
   constructor(props) {
     super(props);
@@ -31,7 +32,7 @@ class UserActions extends React.Component {
   }
 
   render() {
-    let {currentUser}= this.props
+    let {currentUser,signOutStart}= this.props
     return (
       <NavItem tag={Dropdown} caret toggle={this.toggleUserActions}>
         <DropdownToggle caret tag={NavLink} className="text-nowrap px-3">
@@ -50,7 +51,7 @@ class UserActions extends React.Component {
             <i className="material-icons">&#xE2C7;</i> Posts
           </DropdownItem>
           <DropdownItem divider />
-          <DropdownItem tag={Link} to="/" className="text-danger">
+          <DropdownItem tag={Link} to="/" onClick={signOutStart} className="text-danger">
             <i className="material-icons text-danger">&#xE879;</i> Logout
           </DropdownItem>
         </Collapse>
@@ -61,4 +62,7 @@ class UserActions extends React.Component {
 const mapStateToProps = createStructuredSelector ({
   currentUser:selectCurrentUser
 })
-export default connect(mapStateToProps, null)(UserActions)
+const mapDispatchToProps = (dispatch) => ({
+  signOutStart: () => dispatch(signOutStart()),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(UserActions)

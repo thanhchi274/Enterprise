@@ -9,11 +9,14 @@ import {
   NavItem,
   NavLink
 } from "shards-react";
-
 //Images
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "../../../../../Store/user/user.selector";
 import user_avatar from "./../../../../../assets/images/avatars/0.jpg"
+import { signOutStart } from "./../../../../../Store/user/user.action";
+import { connect } from "react-redux";
 
-export default class UserActions extends React.Component {
+class UserActions extends React.Component {
   constructor(props) {
     super(props);
 
@@ -46,7 +49,7 @@ export default class UserActions extends React.Component {
             <i className="material-icons">&#xE7FD;</i> Profile
           </DropdownItem>
           <DropdownItem divider />
-          <DropdownItem tag={Link} to="/" className="text-danger">
+          <DropdownItem tag={Link} to="/" onClick={signOutStart} className="text-danger">
             <i className="material-icons text-danger">&#xE879;</i> Logout
           </DropdownItem>
         </Collapse>
@@ -54,3 +57,10 @@ export default class UserActions extends React.Component {
     );
   }
 }
+const mapStateToProps = createStructuredSelector ({
+  currentUser:selectCurrentUser
+})
+const mapDispatchToProps = (dispatch) => ({
+  signOutStart: () => dispatch(signOutStart()),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(UserActions)
