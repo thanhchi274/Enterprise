@@ -106,7 +106,8 @@ const App = ({
                 currentUser ? <Redirect to="/" /> : <SignInPage />
               }
             />
-             {/* <Route path="*" component={() => "404 NOT FOUND"} /> */}
+             {/* <Route path="*" component={() => "404 NOT FOUND"} />
+             <Route path="*" component={() => "404 NOT FOUND"} /> */}
             <Route exact={true} path="/register" component={SignUp}></Route>
           </Suspense>
         </ErrorBoundary>

@@ -8,6 +8,7 @@ import ProfilePage from "../views/UserProfile";
 import AddNewPost from "../views/AddNewPost";
 import Errors from "../views/Errors";
 import BlogPosts from "../views/BlogPosts";
+import TermsAndConditionsPage from '../views/Term&Condition'
 import StaffProfileLite from "../views/StaffProfileLite";
 import StaffManage from "../views/StaffManage";
 const routeHome = [
@@ -32,6 +33,12 @@ const routeHome = [
     layout: UserLayout,
     component: Errors,
   },
+  {
+    path:'/terms-and-conditions',
+    exact:true,
+    layout: UserLayout,
+    component: TermsAndConditionsPage
+  }
 ];
 
 const routeAdmin = [

@@ -28,11 +28,11 @@ export const createUserProfileDocument =  async (userAuth, additionData) => {
   return userRef;
 }
 export const getStudentPostByID = async userId => {
-  const cartsRef = firestore.collection('post').where('userId', '==', userId);
+  const cartsRef = firestore.collection('StudentPost').where('userId', '==', userId);
   const snapShot = await cartsRef.get();
   if (snapShot.empty) {
-    const cartDocRef = firestore.collection('carts').doc();
-    await cartDocRef.set({ userId, cartItems: [] });
+    const cartDocRef = firestore.collection('StudentPost').doc();
+    await cartDocRef.set({ userId, studentPost: [] });
     return cartDocRef;
   } else {
     return snapShot.docs[0].ref;
@@ -43,7 +43,7 @@ export const getUserExtraRef =async userId => {
   const snapShot = await dataRef.get()
   if (snapShot.empty) {
     const extraDataDocRef = firestore.collection('extra_data').doc();
-    await extraDataDocRef.set({ userId, userCredentials: [] });
+    await extraDataDocRef.set({ userId });
     return extraDataDocRef;
   } else {
     return snapShot.docs[0].ref;

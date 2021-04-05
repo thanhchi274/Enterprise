@@ -11,7 +11,7 @@ import {
 } from "../../utils/firebase.utils";
 import { signInSuccess, signInFailure, signOutSuccess, signOutFailure, signUpSuccess, signUpFailure, updateUserSuccess, uploadDataFailure, setExtraDataUserInFirebase } from "./user.action";
 import axios from "axios";
-import _ from 'lodash'
+import _, { toString } from 'lodash'
 import { toast } from "material-react-toastify";
 export function* getSnapshotFromAuth(userAuth,additionalData) {
   try {
@@ -56,22 +56,53 @@ export function* onUploadDataStart(){
 }
 export function* updateDataAsync({files}){
   const currentUser = yield select(selectCurrentUser);
+  console.log(files)
+  const timeNow= yield new Date().toLocaleDateString('de-DE')
   if (currentUser) {
     try {
-      if(files.length===1){
-        yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[0].name).put(files[0])
+      if(files.length===2){
+        yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[1].title).child(files[0].name).put(files[0])
+        const itemDownload = yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[1].title).child(files[0].name)
+        const itemUrl = yield itemDownload.getDownloadURL().then(url=>url)
+        let userUploadData = {
+          id:currentUser.id,
+          link:itemUrl,
+          title:files[1].title,
+          createAt:toString(timeNow),
+          status:"Submitted",
+          author:files[1].author,
+          start:files[1].startDate,
+          end:files[1].endDate
+        }
+        const extraDataUserRef = yield getUserExtraRef(currentUser.id);
+        yield extraDataUserRef.update(userUploadData);
         yield alert('Success Upload')
       }
-      if(files.length===2){
-        yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[0].name).put(files[0])
-        yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[1].name).put(files[1])
+      if(files.length===3){
+        yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[2].title).child(files[0].name).put(files[0])
+        yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[2].title).child(files[1].name).put(files[1])
         yield alert('Success Upload')
       }
     }
      catch (error) {
+      yield console.log(error)
       yield toast.error(`Update Error, please try again!`)
       yield put(uploadDataFailure(error))
       // yield window.location.reload()
+      switch (error.code) {
+        case 'storage/object-not-found':
+          yield console.log("File doesn't exist")
+          break;
+        case 'storage/unauthorized':
+         yield console.log("User doesn't have permission to access the object")
+          break;
+        case 'storage/canceled':
+         yield console.log("User canceled the upload")
+          break;
+        case 'storage/unknown':
+        yield  console.log("Unknown error occurred, inspect the server response")
+          break;
+      }
     }
   }
 }

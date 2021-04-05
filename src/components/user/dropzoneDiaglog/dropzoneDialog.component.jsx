@@ -3,12 +3,14 @@ import {DropzoneDialog} from 'material-ui-dropzone'
 import Button from '@material-ui/core/Button';
 import {uploadDataStart} from '../../../Store/user/user.action'
 import { connect } from 'react-redux';
+import { createStructuredSelector } from "reselect";
+import {selectCurrentUser} from '../../../Store/user/user.selector'
 class DropZone extends Component {
     constructor(props) {
         super(props);
         this.state = {
             open: false,
-            files: []
+            files: [],
         };
     }
     handleClose() {
@@ -19,8 +21,8 @@ class DropZone extends Component {
     handleSave(files) {
         this.setState({
             files: files,
-            open: false
-        },()=> this.props.uploadDataStart(files));
+            open: false,
+        },()=> this.props.uploadDataStart([...files,{title:this.props.data.title, author:this.props.data.author, startDate: this.props.data.date, endDate: this.props.data.endDate}]));
     }
     handleOpen() {
         this.setState({
@@ -28,10 +30,12 @@ class DropZone extends Component {
         });
     }
     render() {
+        console.log(this.props.data)
+        let {data}= this.props
         return (
             <div>
                 <Button onClick={this.handleOpen.bind(this)}>
-                  Add Files and Images
+                  Upload
                 </Button>
                 <DropzoneDialog
                     open={this.state.open}
@@ -46,8 +50,10 @@ class DropZone extends Component {
         );
     }
 }
-
+const mapStateToProps = createStructuredSelector ({
+    currentUser:selectCurrentUser
+})
 const mapDispatchToProps = (dispatch) => ({
           uploadDataStart: (data) => dispatch(uploadDataStart(data))
 });
-export default connect(null, mapDispatchToProps)(DropZone)
+export default connect(mapStateToProps, mapDispatchToProps)(DropZone)

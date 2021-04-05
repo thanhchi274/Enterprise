@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Row, Col } from "shards-react";
 import DragDropZone from '../components/user/dropzoneDiaglog/dropzoneDialog.component'
 import PageTitle from "../components/common/PageTitle";
-import Editor from "../components/user/new-post/Editor";
+// import Editor from "../components/user/new-post/Editor";
 import SidebarActions from "../components/user/new-post/SidebarActions";
 const AddNewPost = () => (
   <Container fluid className="main-content-container px-4 pb-4">
@@ -11,9 +11,6 @@ const AddNewPost = () => (
     </Row>
     <Row>
     <DragDropZone/>
-      <Col lg="9" md="12">
-        <Editor />
-      </Col>
       <Col lg="3" md="12">
         <SidebarActions />
       </Col>

@@ -3,11 +3,6 @@ export const routeUser = [
     title: "Student HomePage",
     htmlBefore: '<i class="material-icons">vertical_split</i>',
     to: "/",
-  },
-  {
-    title: "Student | Add New Post",
-    htmlBefore: '<i class="material-icons">note_add</i>',
-    to: "/new-post",
   }
 ];
 
