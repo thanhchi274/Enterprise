@@ -49,6 +49,17 @@ export const getUserExtraRef =async userId => {
     return snapShot.docs[0].ref;
   }
 }
+export const getMagazineDataRef =async userId => {
+  const dataRef = firestore.collection('magazinePost')
+  const snapShot = await dataRef.get()
+  if (snapShot.empty) {
+    const extraDataDocRef = firestore.collection('magazinePost').doc();
+    await extraDataDocRef.set({ userId });
+    return extraDataDocRef;
+  } else {
+    return snapShot.docs[0].ref;
+  }
+}
 export const addCollectionAndDocuments = async (collectionKey, objectToAdd)=>{
   const collectionRef =firestore.collection(collectionKey);
   const batch = firestore.batch()

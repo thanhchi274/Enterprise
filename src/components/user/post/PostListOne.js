@@ -20,7 +20,7 @@ const PostListOne = ({ post }) => {
       <Card small className="card-post card-post--1">
         <div
           className="card-post__image"
-          style={{ backgroundImage: `url(${post.backgroundImage})` }}
+          style={{ backgroundImage: `url(${post.backgoundImage})` }}
         >
           <Badge
             pill
@@ -32,7 +32,7 @@ const PostListOne = ({ post }) => {
             <a
               href="#"
               className="card-post__author-avatar card-post__author-avatar--small"
-              style={{ backgroundImage: `url('${post.authorAvatar}')` }}
+              style={{ backgroundImage: `url('${post.backgoundImage}')` }}
             >
               Written by {post.author}
             </a>
@@ -49,9 +49,12 @@ const PostListOne = ({ post }) => {
           {agreeTerm?<DragDropZone data={post}/>:null}
           <span className="text-muted">{post.date}</span>
           </div>
-        <form onClick={handleAgreeTerm}>
-          <input type="checkbox" defaultValue={agreeTerm}  />
-          <label htmlFor="vehicle1"> Agree with <a href="/terms-and-conditions">Terms & Conditions</a></label><br />
+        <form onClick={handleAgreeTerm} className='d-flex my-3 justify-content-between'>
+
+          <input  type="checkbox" defaultValue={agreeTerm} />
+          <span>
+          Agree with
+          <a href="/terms-and-conditions"> Terms & Conditions</a><br /></span>
         </form>
 
         </CardBody>

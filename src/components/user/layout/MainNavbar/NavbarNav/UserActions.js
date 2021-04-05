@@ -12,7 +12,6 @@ import {
 } from "shards-react";
 import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "../../../../../Store/user/user.selector";
-import user_avatar from "./../../../../../assets/images/avatars/0.jpg"
 import { signOutStart } from "./../../../../../Store/user/user.action";
 class UserActions extends React.Component {
   constructor(props) {
@@ -36,7 +35,7 @@ class UserActions extends React.Component {
     return (
       <NavItem className="d-flex align-items-center" tag={Dropdown} caret toggle={this.toggleUserActions}>
         <DropdownToggle caret tag={NavLink} className="text-nowrap px-3 d-flex align-items-center">
-          <span className="d-none d-md-inline-block"> {currentUser.displayName? currentUser.displayName: currentUser.email}</span>
+          <span className="d-none d-md-inline-block"> {currentUser.displayName|| currentUser.email|| currentUser.providerData[0].displayName}</span>
         </DropdownToggle>
         <Collapse tag={DropdownMenu} right small open={this.state.visible}>
           <DropdownItem tag={Link} to="user-profile">

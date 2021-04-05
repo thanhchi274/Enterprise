@@ -18,13 +18,13 @@ export const routeAdmin = [
 export const routeStaff = [
   {
     title: "Staff Dashboard",
-    to: "/staff-manage",
+    to: "/staff",
     htmlBefore: '<i class="material-icons">edit</i>',
     htmlAfter: "",
   },
   {
-    title: "Staff profile",
-    to: "/staff-profile-lite",
+    title: "Staff Profile",
+    to: "/staff-profile",
     htmlBefore: '<i class="material-icons">person</i>',
     htmlAfter: "",
   },

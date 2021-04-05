@@ -143,20 +143,8 @@ yield user.updateProfile({
 }).then(function() {
   alert('Update Success')
 }).catch(function(error) {
-  // An error happened.
   alert(error)
 });
-  // yield console.log(payload)
-  // try {
-  //   yield console.log(payload)
-  //   const updateData  = yield auth.currentUser.updateProfile({
-  //     displayName: payload
-  //   })
-  //   const successUpdate = yield updateData.then((res)=>  console.log(res))
-  //   yield put(updateProfileSuccess(successUpdate))
-  // } catch (error) {
-  //   yield put(updateProfileFailure(error))
-  // }
 }
 export function* signUp({payload:{email, password, displayName}}) {
 try {

@@ -12,6 +12,8 @@ import SignInPage from "./pages/user/sign-in/SignIn";
 import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./shards-dashboard/styles/shards-dashboards.1.1.0.min.css";
+import StaffList from './staff.json'
+import _ from 'lodash'
 //Toast
 import { Container } from "./utils/toast";
 
@@ -41,7 +43,7 @@ const showMenuHome = (routes,currentUser) => {
 const showMenuAdmin = (routes,currentUser) => {
   if (routes && routes.length > 0) {
     return routes.map((route, index) => {
-      return currentUser!==null?(
+      return currentUser!==null || currentUser.email!=="anarapham274@gmail.com"||currentUser.email!=="thonguyen2903100100@gmail.com"?(
         <Route
           key={index}
           path={route.path}
@@ -63,7 +65,7 @@ const showMenuAdmin = (routes,currentUser) => {
 const showMenuStaff = (routes,currentUser) => {
   if (routes && routes.length > 0) {
     return routes.map((route, index) => {
-      return currentUser!==null?(
+      return (StaffList.includes(currentUser.email)===true&&currentUser!==null)?(
         <Route
           key={index}
           path={route.path}
@@ -77,7 +79,7 @@ const showMenuStaff = (routes,currentUser) => {
           })}
         />
       ):<Redirect
-      to="/sign-in"
+      to="/"
     />;
     });
   }
@@ -90,6 +92,7 @@ const App = ({
   useEffect(()=>{
     checkUserSession()
   },[checkUserSession])
+
   return (
     <>
       <Switch>

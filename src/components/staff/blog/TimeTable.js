@@ -1,72 +1,18 @@
 import React from "react";
-
 import { Row, Col, Card, CardHeader, CardBody, Button } from "shards-react";
-
 import TimePicker from "./TimePicker";
-
 import { notifyError } from "../../../utils/toast";
-
 import { LACK_START_END_TIME, END_OVER_START } from "../../../const/errors";
-
 const timeArray = [
   {
-    date: new Date(new Date().setDate(new Date().getDate() + 2))
-      .toLocaleString()
-      .split(",")[0],
+    date: new Date().toLocaleDateString('en-US'),
     start: null,
     end: null,
     pendingPosts: null,
     comments: null,
   },
   {
-    date: new Date(new Date().setDate(new Date().getDate() + 1))
-      .toLocaleString()
-      .split(",")[0],
-    start: null,
-    end: null,
-    pendingPosts: null,
-    comments: null,
-  },
-  {
-    date: new Date(new Date().setDate(new Date().getDate()))
-      .toLocaleString()
-      .split(",")[0],
-    start: null,
-    end: null,
-    pendingPosts: null,
-    comments: null,
-  },
-  {
-    date: new Date(new Date().setDate(new Date().getDate() - 1))
-      .toLocaleString()
-      .split(",")[0],
-    start: "7:30",
-    end: "19:30",
-    pendingPosts: 20,
-    comments: 20,
-  },
-  {
-    date: new Date(new Date().setDate(new Date().getDate() - 2))
-      .toLocaleString()
-      .split(",")[0],
-    start: "7:00",
-    end: "20:00",
-    pendingPosts: 15,
-    comments: 10,
-  },
-  {
-    date: new Date(new Date().setDate(new Date().getDate() - 3))
-      .toLocaleString()
-      .split(",")[0],
-    start: "8:00",
-    end: "19:00",
-    pendingPosts: 11,
-    comments: 4,
-  },
-  {
-    date: new Date(new Date().setDate(new Date().getDate() - 4))
-      .toLocaleString()
-      .split(",")[0],
+    date:new Date().toLocaleDateString('en-US'),
     start: "7:20",
     end: "21:00",
     pendingPosts: 30,
@@ -85,7 +31,6 @@ const TimeTable = ({ setSelectedATime }) => {
   React.useEffect(() => {
     if (schedule && schedule.start && schedule.end && schedule.date) {
       var newArray = array.filter((item) => item.date !== schedule.date);
-
       newArray.push({
         date: schedule.date,
         start: schedule.start.split(" ")[0],
@@ -131,21 +76,17 @@ const TimeTable = ({ setSelectedATime }) => {
   const handleChooseItemTable = (date, start) => {
     if (start) {
       const allItemTable = document.getElementsByClassName("hover_item_table");
-
       for (let index = 0; index < allItemTable.length; index++) {
         const element = allItemTable[index];
-
         if (element.id === date) {
           element.style.backgroundColor = "rgb(240, 240, 240)";
         } else {
           element.style.backgroundColor = "white";
         }
       }
-
       setSelectedATime(true);
     }
   };
-
   return (
     <Row style={{ overflowX: "auto" }}>
       <Col>
@@ -185,7 +126,9 @@ const TimeTable = ({ setSelectedATime }) => {
                     className={item.start && "hover_item_table"}
                     onClick={() => handleChooseItemTable(item.date, item.start)}
                   >
-                    <td>{item.date}</td>
+                    <td>
+               <input type="date" id="start" name="trip-start" defaultValue= {item.date} min="2010-01-01" max="2021-12-31" />
+                    </td>
                     <td>
                       {item.start ? (
                         item.start
@@ -218,7 +161,7 @@ const TimeTable = ({ setSelectedATime }) => {
                           className="mb-2 mr-1"
                           onClick={(e) => handleSetSchedule(e, item.date)}
                         >
-                          Set Time
+                        New Event
                         </Button>
                       ) : (
                         <>

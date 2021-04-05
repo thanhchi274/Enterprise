@@ -58,12 +58,7 @@ const routeStaff = [
     component: StaffManage,
   },
   {
-    path: "/staff-manage",
-    layout: StaffLayout,
-    component: StaffManage,
-  },
-  {
-    path: "/staff-profile-lite",
+    path: "/staff-profile",
     layout: StaffLayout,
     component: StaffProfileLite,
   },

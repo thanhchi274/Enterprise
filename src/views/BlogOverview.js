@@ -6,15 +6,14 @@ import PageTitle from "../components/common/PageTitle";
 import SmallStats from "../components/common/SmallStats";
 import UsersOverview from "../components/admin/blog/UsersOverview";
 import PostsByCategory from "../components/admin/blog/PostsByCategory";
-
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import {selectCurrentUser} from '../Store/user/user.selector'
 const BlogOverview = ({ smallStats }) => (
   <Container fluid className="main-content-container px-4">
-    {/* Page Header */}
     <Row noGutters className="page-header py-4">
       <PageTitle className="text-sm-left mb-3" />
     </Row>
-
-    {/* Small Stats Blocks */}
     <Row>
       {smallStats.map((stats, idx) => (
         <Col className="col-lg mb-4" key={idx} {...stats.attrs}>
@@ -126,5 +125,12 @@ BlogOverview.defaultProps = {
     },
   ],
 };
+const mapStateToProps =createStructuredSelector({
+  currentUser:selectCurrentUser
+})
 
-export default BlogOverview;
+const mapDispatchToProps = {
+  
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (BlogOverview);
