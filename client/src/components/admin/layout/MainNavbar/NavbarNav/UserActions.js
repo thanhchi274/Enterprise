@@ -1,16 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {
-  Dropdown,
-  DropdownMenu,
-  DropdownItem,
-} from "shards-react";
+import { Dropdown, DropdownMenu, DropdownItem } from "shards-react";
 import user_avatar from "./../../../../../assets/images/avatars/0.jpg";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "../../../../../Store/user/user.selector";
 import { signOutStart } from "./../../../../../Store/user/user.action";
- class UserActions extends React.Component {
+class UserActions extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,13 +19,13 @@ import { signOutStart } from "./../../../../../Store/user/user.action";
       visible: !this.state.visible,
     });
   }
-  componentDidUpdate(){
-    console.log(this.props)
+  componentDidUpdate() {
+    console.log(this.props);
   }
   render() {
-    console.log(this.props)
+    console.log(this.props);
     return (
-      <Dropdown  caret toggle={this.toggleUserActions}>
+      <Dropdown caret toggle={this.toggleUserActions}>
         <Link className="text-nowrap px-3">
           <img
             className="user-avatar rounded-circle mr-2"
@@ -48,10 +44,10 @@ import { signOutStart } from "./../../../../../Store/user/user.action";
     );
   }
 }
-const mapStateToProps = createStructuredSelector ({
-  currentUser:selectCurrentUser
-})
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
 const mapDispatchToProps = (dispatch) => ({
   signOutStart: () => dispatch(signOutStart()),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(UserActions)
+export default connect(mapStateToProps, mapDispatchToProps)(UserActions);
