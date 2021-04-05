@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   Dropdown,
@@ -9,11 +10,10 @@ import {
   NavItem,
   NavLink
 } from "shards-react";
-
-//Images
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "../../../../../Store/user/user.selector";
 import user_avatar from "./../../../../../assets/images/avatars/0.jpg"
-
-export default class UserActions extends React.Component {
+class UserActions extends React.Component {
   constructor(props) {
     super(props);
 
@@ -31,18 +31,19 @@ export default class UserActions extends React.Component {
   }
 
   render() {
+    let {currentUser}= this.props
     return (
       <NavItem tag={Dropdown} caret toggle={this.toggleUserActions}>
         <DropdownToggle caret tag={NavLink} className="text-nowrap px-3">
           <img
             className="user-avatar rounded-circle mr-2"
             src={user_avatar}
-            alt="User Avatar"
+            alt={currentUser.email}
           />{" "}
-          <span className="d-none d-md-inline-block">Sierra Brooks</span>
+          <span className="d-none d-md-inline-block"> {currentUser.displayName? currentUser.displayName: currentUser.email}</span>
         </DropdownToggle>
         <Collapse tag={DropdownMenu} right small open={this.state.visible}>
-          <DropdownItem tag={Link} to="user-profile-lite">
+          <DropdownItem tag={Link} to="user-profile">
             <i className="material-icons">&#xE7FD;</i> Profile
           </DropdownItem>
           <DropdownItem tag={Link} to="blog-posts">
@@ -57,3 +58,7 @@ export default class UserActions extends React.Component {
     );
   }
 }
+const mapStateToProps = createStructuredSelector ({
+  currentUser:selectCurrentUser
+})
+export default connect(mapStateToProps, null)(UserActions)

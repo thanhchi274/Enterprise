@@ -1,13 +1,9 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Navbar, NavbarBrand } from "shards-react";
 import { connect } from "react-redux";
 import { setMenuVisible } from "../../../../Store/UI/UI.action";
-//Images
-import logo from "../../../../assets/images/shards-dashboards-logo.svg";
-
+import logo from "../../../../assets/images/magazine-system-logo.svg";
 const SidebarMainNavbar = ({ hideLogoText, setMenuVisible }) => {
-
   return (
     <div className="main-navbar">
       <Navbar
@@ -25,19 +21,18 @@ const SidebarMainNavbar = ({ hideLogoText, setMenuVisible }) => {
               className="d-inline-block align-top mr-1"
               style={{ maxWidth: "25px" }}
               src={logo}
-              alt="Shards Dashboard"
+              alt="Magazine System"
             />
             {!hideLogoText && (
               <span
                 className="d-none d-md-inline ml-1"
                 style={{ marginLeft: "5px" }}
               >
-                Shards Dashboard
+                Magazine System
               </span>
             )}
           </div>
         </NavbarBrand>
-        {/* eslint-disable-next-line */}
         <a
           className="toggle-sidebar d-sm-inline d-md-none d-lg-none"
           onClick={setMenuVisible}

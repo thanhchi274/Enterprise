@@ -27,8 +27,8 @@ export const createUserProfileDocument =  async (userAuth, additionData) => {
   }
   return userRef;
 }
-export const getUserCartRef = async userId => {
-  const cartsRef = firestore.collection('carts').where('userId', '==', userId);
+export const getStudentPostByID = async userId => {
+  const cartsRef = firestore.collection('post').where('userId', '==', userId);
   const snapShot = await cartsRef.get();
   if (snapShot.empty) {
     const cartDocRef = firestore.collection('carts').doc();

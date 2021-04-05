@@ -8,12 +8,7 @@ export const routeUser = [
     title: "Student | Add New Post",
     htmlBefore: '<i class="material-icons">note_add</i>',
     to: "/new-post",
-  },
-  {
-    title: "Student Profile",
-    htmlBefore: '<i class="material-icons">person</i>',
-    to: "/user-profile",
-  },
+  }
 ];
 
 export const routeAdmin = [

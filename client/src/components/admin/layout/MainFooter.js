@@ -18,23 +18,14 @@ const MainFooter = ({ contained, menuItems, copyright }) => (
 );
 
 MainFooter.propTypes = {
-  /**
-   * Whether the content is contained, or not.
-   */
   contained: PropTypes.bool,
-  /**
-   * The menu items array.
-   */
   menuItems: PropTypes.array,
-  /**
-   * The copyright info.
-   */
   copyright: PropTypes.string,
 };
 
 MainFooter.defaultProps = {
   contained: false,
-  copyright: "Copyright © 2018 MagazineGreenwich",
+  copyright: "Copyright © 2021 Magazine System",
 };
 
 export default MainFooter;

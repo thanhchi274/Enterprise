@@ -8,13 +8,6 @@ const MainFooter = ({ contained, menuItems, copyright }) => (
     <Container fluid={contained}>
       <Row style={{ justifyContent: "space-between" }}>
         <Nav style={{ width: "auto" }}>
-          {menuItems.map((item, idx) => (
-            <NavItem key={idx}>
-              <NavLink tag={Link} to={item.to}>
-                {item.title}
-              </NavLink>
-            </NavItem>
-          ))}
         </Nav>
         <span
           className="copyright ml-auto my-auto mr-2"
@@ -28,37 +21,9 @@ const MainFooter = ({ contained, menuItems, copyright }) => (
 );
 
 MainFooter.propTypes = {
-  /**
-   * Whether the content is contained, or not.
-   */
   contained: PropTypes.bool,
-  /**
-   * The menu items array.
-   */
   menuItems: PropTypes.array,
-  /**
-   * The copyright info.
-   */
   copyright: PropTypes.string,
-};
-
-MainFooter.defaultProps = {
-  contained: false,
-  copyright: "Copyright © 2018 MagazineGreenwich",
-  menuItems: [
-    {
-      title: "Home",
-      to: "#",
-    },
-    {
-      title: "About",
-      to: "#",
-    },
-    {
-      title: "Blog",
-      to: "#",
-    },
-  ],
 };
 
 export default MainFooter;

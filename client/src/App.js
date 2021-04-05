@@ -16,10 +16,10 @@ import "./shards-dashboard/styles/shards-dashboards.1.1.0.min.css";
 import { Container } from "./utils/toast";
 
 const SignUp = lazy(() => import("./pages/user/sign-up/SignUp"));
-const showMenuHome = (routes) => {
+const showMenuHome = (routes,currentUser) => {
   if (routes && routes.length > 0) {
     return routes.map((route, index) => {
-      return (
+      return currentUser!==null?(
         <Route
           key={index}
           path={route.path}
@@ -32,14 +32,16 @@ const showMenuHome = (routes) => {
             );
           })}
         />
-      );
+      ) :<Redirect
+      to="/sign-in"
+    />;
     });
   }
 };
-const showMenuAdmin = (routes) => {
+const showMenuAdmin = (routes,currentUser) => {
   if (routes && routes.length > 0) {
     return routes.map((route, index) => {
-      return (
+      return currentUser!==null?(
         <Route
           key={index}
           path={route.path}
@@ -52,14 +54,16 @@ const showMenuAdmin = (routes) => {
             );
           })}
         />
-      );
+      ):<Redirect
+      to="/sign-in"
+    />;
     });
   }
 };
-const showMenuStaff = (routes) => {
+const showMenuStaff = (routes,currentUser) => {
   if (routes && routes.length > 0) {
     return routes.map((route, index) => {
-      return (
+      return currentUser!==null?(
         <Route
           key={index}
           path={route.path}
@@ -72,28 +76,29 @@ const showMenuStaff = (routes) => {
             );
           })}
         />
-      );
+      ):<Redirect
+      to="/sign-in"
+    />;
     });
   }
 };
 
 const App = ({
-  // checkUserSession,
+  checkUserSession,
   currentUser,
 }) => {
   useEffect(()=>{
     checkUserSession()
   },[checkUserSession])
-  console.log(currentUser);
   return (
     <>
       <Switch>
         <ErrorBoundary>
           <Container />
           <Suspense fallback={<Spinner />}>
-            {showMenuHome(routeHome)}
-            {showMenuAdmin(routeAdmin)}
-            {showMenuStaff(routeStaff)}
+            {showMenuHome(routeHome,currentUser)}
+            {showMenuAdmin(routeAdmin,currentUser)}
+            {showMenuStaff(routeStaff,currentUser)}
             <Route
               exact
               path="/sign-in"
@@ -101,6 +106,7 @@ const App = ({
                 currentUser ? <Redirect to="/" /> : <SignInPage />
               }
             />
+             {/* <Route path="*" component={() => "404 NOT FOUND"} /> */}
             <Route exact={true} path="/register" component={SignUp}></Route>
           </Suspense>
         </ErrorBoundary>
