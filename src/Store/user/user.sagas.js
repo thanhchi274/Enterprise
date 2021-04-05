@@ -56,7 +56,6 @@ export function* onUploadDataStart(){
 }
 export function* updateDataAsync({files}){
   const currentUser = yield select(selectCurrentUser);
-  console.log(files)
   const timeNow= yield new Date().toLocaleDateString('de-DE')
   if (currentUser) {
     try {
@@ -76,16 +75,34 @@ export function* updateDataAsync({files}){
         }
         const extraDataUserRef = yield getUserExtraRef(currentUser.id);
         yield extraDataUserRef.update(userUploadData);
+        yield put(updateUserSuccess())
         yield alert('Success Upload')
       }
       if(files.length===3){
         yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[2].title).child(files[0].name).put(files[0])
         yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[2].title).child(files[1].name).put(files[1])
+        const itemDownload1 = yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[2].title).child(files[0].name)
+        const itemDownload2 = yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[2].title).child(files[1].name)
+        const itemUrl1 = yield itemDownload1.getDownloadURL().then(url=>url)
+        const itemUrl2 = yield itemDownload2.getDownloadURL().then(url=>url)
+        let userUploadData = {
+          id:currentUser.id,
+          link:itemUrl1,
+          link2:itemUrl2,
+          title:files[2].title,
+          createAt:toString(timeNow),
+          status:"Submitted",
+          author:files[2].author,
+          start:files[2].startDate,
+          end:files[2].endDate
+        }
+        const extraDataUserRef = yield getUserExtraRef(currentUser.id);
+        yield extraDataUserRef.update(userUploadData);
         yield alert('Success Upload')
+        yield put(updateUserSuccess())
       }
     }
      catch (error) {
-      yield console.log(error)
       yield toast.error(`Update Error, please try again!`)
       yield put(uploadDataFailure(error))
       // yield window.location.reload()
