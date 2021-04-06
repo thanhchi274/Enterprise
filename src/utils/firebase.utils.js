@@ -2,6 +2,7 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 import "firebase/storage"
+import "firebase/functions"
 const configToDB = {
   apiKey: "AIzaSyBxkMxAkuRKDKH-v5SEyu--Bpd5VT_EJhY",
   authDomain: "enterprise-comp1640.firebaseapp.com",
@@ -39,11 +40,22 @@ export const getStudentPostByID = async userId => {
   }
 };
 export const getUserExtraRef =async userId => {
-  const dataRef = firestore.collection('extra_data').where('userId', '==', userId)
+  const dataRef = firestore.collection('magazinePost').where('userId', '==', userId)
+  const snapShot = await dataRef.get()
+  if (snapShot.empty) {
+    const extraDataDocRef = firestore.collection('magazinePost').doc();
+    await extraDataDocRef.set({ userId });
+    return extraDataDocRef;
+  } else {
+    return snapShot.docs[0].ref;
+  }
+}
+export const getUserDataRef =async postId => {
+  const dataRef = firestore.collection('extra_data').doc(postId)
   const snapShot = await dataRef.get()
   if (snapShot.empty) {
     const extraDataDocRef = firestore.collection('extra_data').doc();
-    await extraDataDocRef.set({ userId });
+    await extraDataDocRef.set({ postId });
     return extraDataDocRef;
   } else {
     return snapShot.docs[0].ref;

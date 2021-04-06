@@ -1,7 +1,7 @@
 import { takeLatest, all, call, put,select } from "redux-saga/effects";
 // import UserActionTypes from "./user.type";
 import DataActionTypes from './data.type'
-import { getMagazineDataRef,firestore,
+import { getMagazineDataRef,firestore,getUserDataRef,
    cloudStorage,auth
   } from '../../utils/firebase.utils';
 import { selectCurrentUser } from '../user/user.selector';
@@ -22,7 +22,6 @@ export function* getMagazinePostDataAsync(){
     let populateData = data=>{
       MagazineData.push(data);
     }
-    // .where("author", "==", "Thanh Chi")
     yield firestore.collection("magazinePost").get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         populateData({...doc.data(), "id":doc.id})
@@ -49,15 +48,24 @@ export function* getMagazinePostDataStaffAsync(){
         populateData({...doc.data(), "id":doc.id})
       });
   });
-  yield console.log(MagazineData)
     yield put(fetchMagazinePostStaffSuccess(MagazineData))
     yield MagazineData=[]
   } catch (error) {
     yield put(fetchMagazinePostFailure(error))
   }
 }
+export function* approvePost(data){
+  yield takeLatest(DataActionTypes.APPROVE_POST, updateStatusPost)
+}
+export function* updateStatusPost({payload}){
+  const extraDataUserRef =  firestore.collection('magazinePost').doc(payload.id).get();
+  const result = yield extraDataUserRef.then(res=>res.data())
+  console.log(result)
+  // console.log(extraDataUserRef)
+  // yield extraDataUserRef.update(userUploadData);
 
+}
 export function* dataSagas() {
-  yield all([ call(getMagazinePostDataStart),call(getMagazinePostDataStartStaff)
+  yield all([ call(getMagazinePostDataStart),call(getMagazinePostDataStartStaff), call(approvePost)
     ]);
 }

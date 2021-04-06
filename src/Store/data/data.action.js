@@ -4,7 +4,6 @@ export const setPendingPost = (data) => ({
   type: DataTypes.SET_PENDING_POST,
   payload: data
 });
-
 export const setComment = (data) => ({
     type: DataTypes.SET_COMMENT,
     payload: data
@@ -26,4 +25,8 @@ export const fetchMagazinePostStaffSuccess=(data)=>({
 export const fetchMagazinePostFailure=(error)=>({
   type:DataTypes.FETCH_MAGAZINE_FAILURE,
   payload: error
+})
+export const approvePost = (data)=>({
+  type:DataTypes.APPROVE_POST,
+  payload: data
 })

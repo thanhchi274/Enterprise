@@ -137,7 +137,6 @@ export function* onUpdateProfileStart(){
 }
 export function* updateProfileAsync({payload}){
   let user =yield auth.currentUser;
-yield console.log(user)
 yield user.updateProfile({
   displayName: payload,
 }).then(function() {

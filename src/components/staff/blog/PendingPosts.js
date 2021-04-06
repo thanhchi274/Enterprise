@@ -14,13 +14,14 @@ import {
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectComment,selectMagazinePost } from "../../../Store/data/data.selector";
-import { setPendingPost } from "../../../Store/data/data.action";
+import { setPendingPost,approvePost } from "../../../Store/data/data.action";
 import PostModal from "../post/PostModal";
 const PendingPosts = ({
   title,
   pendingPosts,
   setPendingPost,
   postWithComment,
+  approvePost,
   data
 }) => {
   const [posts, setPosts] = React.useState(null);
@@ -33,14 +34,11 @@ const PendingPosts = ({
   }, []);
 
   React.useEffect(() => {
-    //Update comment in post when user click comment button
     if (postWithComment && posts) {
       const newPendingPosts = posts.filter(
         (item) => item.post.title !== postWithComment.post.title
       );
-
       newPendingPosts.unshift(postWithComment);
-
       setPosts(newPendingPosts);
     }
   }, [postWithComment]);
@@ -50,15 +48,18 @@ const PendingPosts = ({
     setPostDetails(post);
     setOpen(true);
   };
-
+  const handleApprove  =(e,item)=>{
+    e.preventDefault();
+    approvePost(item)
+  }
   const handleCloseModal = () => {
     setOpen(false);
   };
 
-  const handleClickPost = (e, post) => {
-    e.preventDefault();
-    setPendingPost(post);
-  };
+  // const handleClickPost = (e, post) => {
+  //   e.preventDefault();
+  //   setPendingPost(post);
+  // };
 
   const handleViewAll = (e) => {
     e.preventDefault();
@@ -97,7 +98,7 @@ const PendingPosts = ({
           <div
             key={idx}
             className="blog-comments__item d-flex p-3"
-            onClick={(e) => handleClickPost(e, post)}
+            // onClick={(e) => handleClickPost(e, post)}
           >
             {/* Avatar */}
             <div className="blog-comments__avatar mr-3">
@@ -130,7 +131,7 @@ const PendingPosts = ({
                 style={{ float: "right" }}
               >
                 <ButtonGroup size="sm">
-                  <Button theme="white">
+                  <Button theme="white" onClick={(e)=>handleApprove(e,post)}>
                     <span className="text-success">
                       <i className="material-icons">check</i>
                     </span>{" "}
@@ -192,6 +193,7 @@ const mapStateToProps = createStructuredSelector({
   data:selectMagazinePost
 });
 const mapDispatchToProps = (dispatch) => ({
-  setPendingPost: (data) => dispatch(setPendingPost(data)),
+  // setPendingPost: (data) => dispatch(setPendingPost(data)),
+  approvePost:(data)=> dispatch(approvePost(data))
 });
 export default connect(mapStateToProps, mapDispatchToProps)(PendingPosts);

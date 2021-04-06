@@ -13,6 +13,7 @@ import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./shards-dashboard/styles/shards-dashboards.1.1.0.min.css";
 import StaffList from './staff.json'
+import AdminList from './admin.json'
 import _ from 'lodash'
 //Toast
 import { Container } from "./utils/toast";
@@ -43,7 +44,7 @@ const showMenuHome = (routes,currentUser) => {
 const showMenuAdmin = (routes,currentUser) => {
   if (routes && routes.length > 0) {
     return routes.map((route, index) => {
-      return currentUser!==null || currentUser.email!=="anarapham274@gmail.com"||currentUser.email!=="thonguyen2903100100@gmail.com"?(
+      return(currentUser&&AdminList.includes(currentUser.email)===true)?(
         <Route
           key={index}
           path={route.path}
@@ -65,7 +66,7 @@ const showMenuAdmin = (routes,currentUser) => {
 const showMenuStaff = (routes,currentUser) => {
   if (routes && routes.length > 0) {
     return routes.map((route, index) => {
-      return (StaffList.includes(currentUser.email)===true&&currentUser!==null)?(
+      return (currentUser&&StaffList.includes(currentUser.email)===true)?(
         <Route
           key={index}
           path={route.path}
