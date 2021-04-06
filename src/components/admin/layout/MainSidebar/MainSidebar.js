@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectMenuVisible } from "../../../../Store/UI/UI.selector";
 
-import { routeAdmin } from "../../../../data/sidebar-nav-items";
+import {routeAdmin} from "../../../../data/sidebar-nav-items"
 
 class MainSidebar extends React.Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class MainSidebar extends React.Component {
 
     this.state = {
       menuVisible: false,
-      sidebarNavItems: routeAdmin,
+      sidebarNavItems: routeAdmin
     };
   }
 
@@ -27,8 +27,8 @@ class MainSidebar extends React.Component {
     this.setState({
       ...this.state,
       menuVisible: this.props.menuVisible,
-      sidebarNavItems: routeAdmin,
-    });
+      sidebarNavItems: routeAdmin
+    })
   }
 
   render() {
@@ -45,9 +45,10 @@ class MainSidebar extends React.Component {
         className={classes}
         lg={{ size: 2 }}
         md={{ size: 3 }}
-        style={{ height: "auto", boxShadow: "none" }}
       >
         <SidebarMainNavbar hideLogoText={this.props.hideLogoText} />
+        <SidebarSearch />
+        <SidebarNavItems />
       </Col>
     );
   }
@@ -57,11 +58,11 @@ MainSidebar.propTypes = {
   /**
    * Whether to hide the logo text, or not.
    */
-  hideLogoText: PropTypes.bool,
+  hideLogoText: PropTypes.bool
 };
 
 MainSidebar.defaultProps = {
-  hideLogoText: false,
+  hideLogoText: false
 };
 
 const mapStateToProps = createStructuredSelector({

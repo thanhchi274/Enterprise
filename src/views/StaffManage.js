@@ -15,7 +15,7 @@ const StaffManage = ({data,fetchMagazinePostStaffStart}) => {
   useEffect(() => {
     fetchMagazinePostStaffStart()
   }, [fetchMagazinePostStaffStart])
-
+  console.log(fetchMagazinePostStaffStart)
   return (
     <Container fluid className="main-content-container px-4">
       <Row noGutters className="page-header py-4">
@@ -26,8 +26,7 @@ const StaffManage = ({data,fetchMagazinePostStaffStart}) => {
           className="text-sm-left"
         />
       </Row>
-      <TimeTable setSelectedATime={setSelectedATime} onToggle={isATimeSelected}/>
-      {console.log(isATimeSelected)}
+      <TimeTable setSelectedATime={setSelectedATime}/>
       {isATimeSelected && (
         <Row>
           <Col lg="8" md="8" sm="12" className="mb-4">

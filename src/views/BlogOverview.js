@@ -4,8 +4,8 @@ import { Container, Row, Col } from "shards-react";
 
 import PageTitle from "../components/common/PageTitle";
 import SmallStats from "../components/common/SmallStats";
-import UsersOverview from "../components/admin/blog/UsersOverview";
-import PostsByCategory from "../components/admin/blog/PostsByCategory";
+import UsersOverview from "../components/manager/blog/UsersOverview";
+import PostsByCategory from "../components/manager/blog/PostsByCategory";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import {selectCurrentUser} from '../Store/user/user.selector'
@@ -38,7 +38,7 @@ const BlogOverview = ({ smallStats }) => (
         <UsersOverview />
       </Col>
 
-      {/* Users by Device */}
+      {/* Posts by Category */}
       <Col lg="4" md="6" sm="12" className="mb-4">
         <PostsByCategory />
       </Col>

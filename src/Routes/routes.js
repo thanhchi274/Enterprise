@@ -2,21 +2,26 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import UserLayout from "../layouts/user/UserLayout";
 import AdminLayout from "../layouts/admin/Default";
+import GuestLayout from "../layouts/guest/Default";
+import ManagerLayout from "../layouts/manager/Default";
 import StaffLayout from "../layouts/staff/Default";
 import BlogOverview from "../views/BlogOverview";
 import ProfilePage from "../views/UserProfile";
 import AddNewPost from "../views/AddNewPost";
+import Home from "../views/Home";
 import Errors from "../views/Errors";
 import BlogPosts from "../views/BlogPosts";
-import TermsAndConditionsPage from '../views/Term&Condition'
+import TermsAndConditionsPage from "../views/Term&Condition";
 import StaffProfileLite from "../views/StaffProfileLite";
 import StaffManage from "../views/StaffManage";
-const routeHome = [
+import SetClosureDates from "../views/SetClosureDates";
+
+const routeStudent = [
   {
-    path: "/",
+    path: "/blog-posts",
     exact: true,
     layout: UserLayout,
-    component: BlogPosts,
+    component: () => <BlogPosts role="student" />,
   },
   {
     path: "/user-profile",
@@ -34,18 +39,42 @@ const routeHome = [
     component: Errors,
   },
   {
-    path:'/terms-and-conditions',
-    exact:true,
+    path: "/terms-and-conditions",
+    exact: true,
     layout: UserLayout,
-    component: TermsAndConditionsPage
-  }
+    component: TermsAndConditionsPage,
+  },
 ];
 
 const routeAdmin = [
   {
-    path: "/admin",
-    exact: true.valueOf,
+    path: "/set-closure-dates",
+    exact: true,
     layout: AdminLayout,
+    component: SetClosureDates,
+  },
+];
+
+const routeGuest = [
+  {
+    path: "/",
+    exact: true,
+    layout: GuestLayout,
+    component: Home,
+  },
+];
+
+const routeManager = [
+  {
+    path: "/all-posts",
+    exact: true,
+    layout: ManagerLayout,
+    component: () => <BlogPosts role="manager" />,
+  },
+  {
+    path: "/statistic",
+    exact: true,
+    layout: ManagerLayout,
     component: BlogOverview,
   },
 ];
@@ -63,4 +92,4 @@ const routeStaff = [
     component: StaffProfileLite,
   },
 ];
-export { routeHome, routeAdmin, routeStaff };
+export { routeStudent, routeAdmin, routeStaff, routeManager, routeGuest };

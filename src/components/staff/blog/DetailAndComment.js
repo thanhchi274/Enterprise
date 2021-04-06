@@ -54,7 +54,7 @@ const DetailAndComment = ({ title, pendingPost, setCommentRedux }) => {
           {/* Title */}
           <FormGroup>
             <FormInput
-              placeholder={post ? post.post?.title : "Post Title"}
+              placeholder={post ? post.title : "Post Title"}
               disabled
             />
           </FormGroup>

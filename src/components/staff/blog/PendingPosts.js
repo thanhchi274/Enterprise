@@ -36,7 +36,7 @@ const PendingPosts = ({
   React.useEffect(() => {
     if (postWithComment && posts) {
       const newPendingPosts = posts.filter(
-        (item) => item.post.title !== postWithComment.post.title
+        (item) => item.title !== postWithComment.title || item.body !== postWithComment.body
       );
       newPendingPosts.unshift(postWithComment);
       setPosts(newPendingPosts);
@@ -56,10 +56,10 @@ const PendingPosts = ({
     setOpen(false);
   };
 
-  // const handleClickPost = (e, post) => {
-  //   e.preventDefault();
-  //   setPendingPost(post);
-  // };
+  const handleClickPost = (e, post) => {
+    e.preventDefault();
+    setPendingPost(post);
+  };
 
   const handleViewAll = (e) => {
     e.preventDefault();
@@ -98,7 +98,7 @@ const PendingPosts = ({
           <div
             key={idx}
             className="blog-comments__item d-flex p-3"
-            // onClick={(e) => handleClickPost(e, post)}
+            onClick={(e) => handleClickPost(e, post)}
           >
             {/* Avatar */}
             <div className="blog-comments__avatar mr-3">
@@ -193,7 +193,7 @@ const mapStateToProps = createStructuredSelector({
   data:selectMagazinePost
 });
 const mapDispatchToProps = (dispatch) => ({
-  // setPendingPost: (data) => dispatch(setPendingPost(data)),
+  setPendingPost: (data) => dispatch(setPendingPost(data)),
   approvePost:(data)=> dispatch(approvePost(data))
 });
 export default connect(mapStateToProps, mapDispatchToProps)(PendingPosts);

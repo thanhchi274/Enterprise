@@ -1,21 +1,56 @@
 import React from "react";
+import ReactTooltip from "react-tooltip";
+import { useHistory } from "react-router-dom";
 
-const PostDetails = ({ post }) => {
+import { connect } from "react-redux";
+import { setEditPost } from "../../../Store/data/data.action";
+
+const PostDetails = ({ post, handleCloseModal, setEditPost, role }) => {
+  const history = useHistory();
+
+  const handleEditPost = (e) => {
+    e.preventDefault();
+
+    handleCloseModal();
+
+    history.push("/new-post");
+
+    setTimeout(() => {
+      setEditPost(post);
+    }, 500);
+  };
+
   return (
     <div>
       {post && post.backgroundImage && (
         <div
           className="blog-post-hero"
           style={{
-            backgroundImage: `url(${post.backgroundImage})`,
+            backgroundImage: `url(${post.link})`,
           }}
         ></div>
       )}
+      <ReactTooltip />
       <main className="container_post_details">
         <div className="card-padding">
           <h2 className="blog__title">
             {!post && <div style={{ textAlign: "center" }}>Post Not found</div>}
-            {post && <a>{post.title}</a>}
+            {post && (
+              <a>
+                {post.title}{" "}
+                {role === "student" && (
+                  <a href="#" onClick={handleEditPost}>
+                    <i
+                      className="material-icons"
+                      style={{ fontSize: "25px" }}
+                      data-tip="Edit"
+                    >
+                      create
+                    </i>
+                  </a>
+                )}
+              </a>
+            )}
           </h2>
           {post && (
             <div>
@@ -48,4 +83,7 @@ const PostDetails = ({ post }) => {
   );
 };
 
-export default PostDetails;
+const mapDispatchToProps = (dispatch) => ({
+  setEditPost: (data) => dispatch(setEditPost(data)),
+});
+export default connect(null, mapDispatchToProps)(PostDetails);

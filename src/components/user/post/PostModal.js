@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PostModal = ({ open, handleCloseModal, post }) => {
+const PostModal = ({ open, handleCloseModal, post, role }) => {
     const classes = useStyles();
 
   return (
@@ -42,7 +42,7 @@ const PostModal = ({ open, handleCloseModal, post }) => {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <PostDetails post={post}/>
+            <PostDetails post={post} handleCloseModal={handleCloseModal} role={role}/>
           </div>
         </Fade>
       </Modal>

@@ -5,12 +5,20 @@ import { Card, CardBody, Form, FormInput } from "shards-react";
 import "react-quill/dist/quill.snow.css";
 import "../../../assets/quill.css";
 
-const Editor = () => (
+const Editor = ({ editPost }) => (
   <Card small className="mb-3">
     <CardBody>
       <Form className="add-new-post">
-        <FormInput size="lg" className="mb-3" placeholder="Your Post Title" />
-        <ReactQuill className="add-new-post__editor mb-1" />
+        <FormInput
+          size="lg"
+          className="mb-3"
+          placeholder="Your Post Title"
+          defaultValue={editPost ? editPost.title : ""}
+        />
+        <ReactQuill
+          className="add-new-post__editor mb-1"
+          defaultValue={editPost ? editPost.body : ""}
+        />
       </Form>
     </CardBody>
   </Card>

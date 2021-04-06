@@ -3,30 +3,25 @@ import { Nav } from "shards-react";
 
 import SidebarNavItem from "./SidebarNavItem";
 
-import {routeAdmin} from "../../../../data/sidebar-nav-items"
+import { routeAdmin } from "../../../../data/sidebar-nav-items";
 
 class SidebarNavItems extends React.Component {
   constructor(props) {
-    super(props)
-
+    super(props);
     this.state = {
-      navItems: routeAdmin
+      navItems: routeAdmin,
     };
-
     this.onChange = this.onChange.bind(this);
   }
-
   componentWillMount() {
-   this.onChange()
+    this.onChange();
   }
 
   componentWillUnmount() {
-    this.onChange()
+    this.onChange();
   }
 
-  onChange() {
-
-  }
+  onChange() {}
 
   render() {
     const { navItems: items } = this.state;
@@ -39,7 +34,7 @@ class SidebarNavItems extends React.Component {
           ))}
         </Nav>
       </div>
-    )
+    );
   }
 }
 

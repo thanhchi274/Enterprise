@@ -11,4 +11,12 @@ export const selectComment = createSelector(
   [selectData],
   (selectData) => selectData.postWithComment
 );
-export const selectMagazinePost = createSelector([selectData], data=>data?data.magazinePost:[])
+export const selectMagazinePost = createSelector(
+  [selectData],
+  (data) => data.magazinePost
+);
+
+export const selectEditPost = createSelector(
+  [selectData],
+  (selectData) => selectData.editPost
+);
