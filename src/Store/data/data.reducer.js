@@ -6,15 +6,24 @@ const INITIAL_STATE = {
   magazinePost: null,
   isLoading: true,
   error: undefined,
+  closureDates:null
 };
 const dataReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case DataTypes.FETCH_MAGAZINE_START_BY_STAFF:
     case DataTypes.FETCH_MAGAZINE_START:
+    case DataTypes.FETCH_CLOSURE_DATE_START:
+    case DataTypes.UPDATE_CLOSURE_DATE_START:
       return {
         ...state,
         isLoading: true,
       };
+      case DataTypes.FETCH_CLOSURE_DATE_SUCCESS:
+        return{
+          ...state,
+          closureDates:action.payload,
+          isLoading: false,
+        }
     case DataTypes.FETCH_MAGAZINE_SUCCESS_BY_STAFF:
     case DataTypes.FETCH_MAGAZINE_SUCCESS:
       return {
@@ -22,7 +31,9 @@ const dataReducer = (state = INITIAL_STATE, action) => {
         magazinePost: action.payload,
         isLoading: false,
       };
+    case DataTypes.FETCH_CLOSURE_DATE_FAILURE:
     case DataTypes.FETCH_MAGAZINE_FAILURE:
+    case DataTypes.UPDATE_CLOSURE_DATE_FAILURE:
       return {
         ...state,
         error: action.payload,

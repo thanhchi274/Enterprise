@@ -18,12 +18,12 @@ const styleManager = {
 
 const BlogPosts = ({ fetchMagazinePostStart, data, role }) => {
   useEffect(() => {
+    console.log(role)
     fetchMagazinePostStart();
   }, [fetchMagazinePostStart]);
-  
   return (
     <Container fluid className="main-content-container px-4">
-      <Row noGutters className="page-header py-4" style={role === "manager" && styleManager}>
+      <Row noGutters className="page-header py-4" style={styleManager}>
         <PageTitle
           sm="4"
           title="Magazine"

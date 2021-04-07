@@ -35,7 +35,7 @@ function Header(props) {
   const { sections, title,currentUser,signOutStart } = props;
   const handleOnClick =(e)=>{
     console.log(history)
-    history.push('/sign-in')
+    history.push('/')
   }
   return (
     <React.Fragment>

@@ -6,19 +6,14 @@ import { Button } from "shards-react";
 const DownloadAllPost = ({ allPosts }) => {
   const handleDownZip = (e) => {
     e.preventDefault();
-
     const zip = JSZip();
-
     for (const post of allPosts) {
       zip.file(post.title + "-" + post.author + "-" + post.createAt, post.body);
     }
-
     zip.generateAsync({ type: "blob" }).then(function (content) {
-      // see FileSaver.js
       FileSaver.saveAs(content, "example.zip");
     });
   };
-
   return (
     <Button
       outline

@@ -1,25 +1,6 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Row, Col, Card, CardHeader, CardBody, Button } from "shards-react";
-
-const timeArray = [
-  {
-    id: 1,
-    year: 2022,
-    closureDates: [],
-  },
-  {
-    id: 2,
-    year: 2021,
-    closureDates: ["4/4/2021", "14/4/2021"],
-  },
-  {
-    id: 3,
-    year: 2020,
-    closureDates: ["4/4/2020", "14/4/2020"],
-  },
-];
-
-const DateTable = ({ setSelectedATime, setYear }) => {
+const DateTable = ({ setSelectedATime,closureData, setYear }) => {
   const handleChooseItemTable = (id, year) => {
     const allItemTable = document.getElementsByClassName("hover_item_table");
     var hasValidElement = false;
@@ -38,6 +19,9 @@ const DateTable = ({ setSelectedATime, setYear }) => {
       setYear();
     }
   };
+  const handleSetSchedule = (event)=>{
+    console.log(event)
+  }
   return (
     <Row style={{ overflowX: "auto" }}>
       <Col>
@@ -61,7 +45,7 @@ const DateTable = ({ setSelectedATime, setYear }) => {
                 </tr>
               </thead>
               <tbody>
-                {timeArray?.map((item, idx) => (
+                {closureData?.map((item, idx) => (
                   <tr
                     key={idx}
                     id={item.id}
@@ -82,7 +66,7 @@ const DateTable = ({ setSelectedATime, setYear }) => {
                             style={{ display: "flex", alignItems: "center" }}
                           >
                             - {date}{" "}
-                            {item.year < new Date().getFullYear() && (
+                            {item.year <= new Date().getFullYear() && (
                               <Button
                                 size="sm"
                                 theme="primary"
@@ -91,7 +75,7 @@ const DateTable = ({ setSelectedATime, setYear }) => {
                                   marginLeft: "10px",
                                   marginBottom: "0",
                                 }}
-                                // onClick={(e) => handleSetSchedule(e, item.date)}
+                                onClick={(e) => handleSetSchedule(e, item.date)}
                               >
                                 Export report
                               </Button>

@@ -19,7 +19,10 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import { notifyError } from "../../../utils/toast";
 import { OLD_DATE } from "../../../const/errors";
 import { FormGroup } from "@material-ui/core";
-
+import {updateClosureDateStart} from '../../../Store/data/data.action'
+import {selectClosureDates} from '../../../Store/data/data.selector'
+import { createStructuredSelector } from "reselect";
+import { connect } from "react-redux";
 const nameMapper = {
   ar: "Arabic",
   bg: "Bulgarian",
@@ -69,7 +72,8 @@ const nameMapper = {
   zhTW: "Chinese Traditional",
 };
 
-const TimeRangePicker = ({ title, year }) => {
+const TimeRangePicker = ({ title, year,updateClosureDateStart }) => {
+  console.log('Hello'+year)
   const localeOptions = Object.keys(locales)
     .map((key) => ({
       value: key,
@@ -83,15 +87,16 @@ const TimeRangePicker = ({ title, year }) => {
 
   const handleChooseDate = (date) => {
     const dateObject = new Date(date);
-
-    if (dateObject.getFullYear() >= year) {
+    const dateYear = dateObject.getFullYear();
+    if (dateYear >= year && closureDates.includes(dateObject.toLocaleDateString("en-US"))===false) {
       if (dateObject >= new Date()) {
         setClosureDates([
           ...closureDates,
           dateObject.toLocaleDateString("en-US"),
         ]);
         setDate(date);
-      } else {
+      }
+       else {
         notifyError(OLD_DATE);
       }
     } else {
@@ -105,31 +110,33 @@ const TimeRangePicker = ({ title, year }) => {
     if (closureDates.length > 0) {
       for (let index = 0; index < closureDates.length; index++) {
         const element = closureDates[index];
-
         result += `${newline}-${element}`;
       }
       return result;
-    } else {
+    }
+    else {
       return "Chosen dates ...";
     }
   };
 
-  const handleReset = (e) => {
-    e.preventDefault();
-
-    setClosureDates([]);
+  const handleReset = async(e) => {
+    e.preventDefault()
+    await Promise.all([
+      (async()=>setClosureDates([]))(),
+      (async()=> updateClosureDateStart([]))()
+  ])
   };
 
   const handleSave = (e) => {
     e.preventDefault();
+    console.log(e)
+    updateClosureDateStart(closureDates)
   };
-
   return (
     <Card small className="blog-comments">
       <CardHeader className="border-bottom">
         <h6 className="m-0">{title}</h6>
       </CardHeader>
-
       <CardBody className="p-0" id="body_reports">
         <div style={{ display: "flex", flexFlow: "column nowrap" }}>
           <select
@@ -191,7 +198,15 @@ TimeRangePicker.propTypes = {
 };
 
 TimeRangePicker.defaultProps = {
-  title: "Date Picker",
+  title: "Closure Data Picker",
 };
 
-export default TimeRangePicker;
+const mapStateToProps = (state) => ({
+  
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  updateClosureDateStart: (data) => dispatch(updateClosureDateStart(data)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TimeRangePicker);

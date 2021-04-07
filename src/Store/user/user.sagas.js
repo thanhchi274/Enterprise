@@ -8,6 +8,7 @@ import {
   createUserProfileDocument,
   getCurrentUser
 } from "../../utils/firebase.utils";
+import {useHistory} from 'react-router-dom'
 import { signInSuccess, signInFailure, signOutSuccess, signOutFailure, signUpSuccess, signUpFailure, uploadDataSuccess, uploadDataFailure, setExtraDataUserInFirebase,updateProfileSuccess,updateProfileFailure  } from "./user.action";
 import axios from "axios";
 import _, { toString } from 'lodash'
@@ -26,6 +27,7 @@ export function* signInWithEmail({ payload: { email, password } }) {
   try {
     const { user } = yield auth.signInWithEmailAndPassword(email, password);
     yield getSnapshotFromAuth(user);
+    yield useHistory.push('/blog-posts')
   } catch (err) {
     yield put(signInFailure(err));
   }

@@ -1,21 +1,15 @@
 import React from "react";
-import { Container, Row, Col } from "shards-react";
-
+import { Container, Row, Col,Card, CardBody, Form, FormInput } from "shards-react";
+import SideBarActions from '../components/user/new-post/SidebarActions'
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectEditPost } from "../Store/data/data.selector";
 import { setEditPost } from "../Store/data/data.action";
-
 import PageTitle from "../components/common/PageTitle";
-import Editor from "../components/user/new-post/Editor";
-import SidebarActions from "../components/user/new-post/SidebarActions";
-import SidebarCategory from "../components/user/new-post/SidebarCategories";
-
 const AddNewPost = ({ editPost, setEditPost }) => {
   React.useEffect(() => {
     return setEditPost();
   }, []);
-
   return (
     <Container fluid className="main-content-container px-4 pb-4">
       {/* Page Header */}
@@ -27,17 +21,21 @@ const AddNewPost = ({ editPost, setEditPost }) => {
           className="text-sm-left"
         />
       </Row>
-
       <Row>
-        {/* Editor */}
-        <Col lg="9" md="12">
-          <Editor editPost={editPost} />
-        </Col>
-
-        {/* Sidebar Widgets */}
-        <Col lg="3" md="12">
-          <SidebarCategory />
-          <SidebarActions editPost={editPost} />
+        <Col lg="12" md="12">
+        <Card small className="mb-3">
+            <CardBody>
+              <Form className="add-new-post">
+                <FormInput
+                  size="lg"
+                  className="mb-3"
+                  placeholder="Your Post Title"
+                  defaultValue={editPost ? editPost.title : ""}
+                />
+                <SideBarActions/>
+              </Form>
+            </CardBody>
+          </Card>
         </Col>
       </Row>
     </Container>

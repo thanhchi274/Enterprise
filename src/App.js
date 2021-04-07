@@ -33,7 +33,7 @@ const showMenuHome = (routes, currentUser) => {
           key={index}
           path={route.path}
           exact={route.exact}
-          component={withTracker((props) => {
+          component={ withTracker(props => {
             return (
               <route.layout {...props}>
                 <route.component {...props} />
@@ -42,7 +42,10 @@ const showMenuHome = (routes, currentUser) => {
           })}
         />
       ) : (
-        <Redirect to="/sign-in" />
+        <Redirect
+        key={index}
+        to="/"
+      />
       );
     });
   }
@@ -64,7 +67,10 @@ const showMenuAdmin = (routes, currentUser) => {
           })}
         />
       ) : (
-        <Redirect to="/sign-in" />
+        <Redirect
+        key={index}
+        to="/"
+      />
       );
     });
   }
@@ -86,7 +92,10 @@ const showMenuStaff = (routes, currentUser) => {
           })}
         />
       ) : (
-        <Redirect to="/" />
+        <Redirect
+        key={index}
+        to="/"
+      />
       );
     });
   }
@@ -109,7 +118,10 @@ const showMenuManager = (routes, currentUser) => {
           })}
         />
       ) : (
-        <Redirect to="/" />
+        <Redirect
+        key={index}
+        to="/"
+      />
       );
     });
   }
@@ -118,7 +130,7 @@ const showMenuManager = (routes, currentUser) => {
 const showMenuGuest = (routes, currentUser) => {
   if (routes && routes.length > 0) {
     return routes.map((route, index) => {
-      return currentUser && StaffList.includes(currentUser.email) === true ? (
+      return currentUser ? (
         <Route
           key={index}
           path={route.path}
@@ -132,7 +144,14 @@ const showMenuGuest = (routes, currentUser) => {
           })}
         />
       ) : (
-        <Redirect to="/" />
+        <Route
+        exact
+        key={index}
+        path="/"
+        render={() =>
+          <SignInPage />
+        }
+      />
       );
     });
   }
@@ -156,12 +175,11 @@ const App = ({ checkUserSession, currentUser }) => {
             {showMenuGuest(routeGuest, currentUser)}
             <Route
               exact
-              path="/sign-in"
+              path="/"
               render={() =>
-                currentUser ? <Redirect to="/" /> : <SignInPage />
+                currentUser ? <Redirect to="/blog-posts" /> : <SignInPage />
               }
-            />
-            {/* <Route path="*" component={() => "404 NOT FOUND"} />
+            />            {/* <Route path="*" component={() => "404 NOT FOUND"} />
              <Route path="*" component={() => "404 NOT FOUND"} /> */}
             <Route exact={true} path="/register" component={SignUp}></Route>
           </Suspense>

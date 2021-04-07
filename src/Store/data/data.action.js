@@ -26,11 +26,32 @@ export const fetchMagazinePostFailure = (error) => ({
   type: DataTypes.FETCH_MAGAZINE_FAILURE,
   payload: error,
 });
+export const fetchClosureDateStart = ()=> ({
+  type: DataTypes.FETCH_CLOSURE_DATE_START
+})
+export const fetchClosureDateSuccess = (data)=> ({
+  type: DataTypes.FETCH_CLOSURE_DATE_SUCCESS,
+  payload:data
+})
+export const fetchClosureDateFailure = (error)=> ({
+  type: DataTypes.FETCH_CLOSURE_DATE_FAILURE,
+  payload:error
+})
 export const approvePost = (data) => ({
   type: DataTypes.APPROVE_POST,
   payload: data,
 });
-
+export const updateClosureDateStart=(data)=>({
+  type: DataTypes.UPDATE_CLOSURE_DATE_START,
+  payload: data
+})
+export const updateClosureDateSuccess=()=>({
+  type: DataTypes.UPDATE_CLOSURE_DATE_SUCCESS,
+})
+export const updateClosureDateFailure=(error)=>({
+  type: DataTypes.UPDATE_CLOSURE_DATE_FAILURE,
+  payload: error
+})
 export const setEditPost = (data) => ({
   type: DataTypes.SET_EDIT_POST,
   payload: data,

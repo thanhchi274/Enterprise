@@ -21,7 +21,7 @@ const routeStudent = [
     path: "/blog-posts",
     exact: true,
     layout: UserLayout,
-    component: () => <BlogPosts role="student" />,
+    component: () => <BlogPosts role="student"/>,
   },
   {
     path: "/user-profile",

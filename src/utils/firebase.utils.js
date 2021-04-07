@@ -61,6 +61,17 @@ export const getUserDataRef =async postId => {
     return snapShot.docs[0].ref;
   }
 }
+export const getClosureDataRef =async () => {
+  const dataRef = firestore.collection("closure_date")
+  const snapShot = await dataRef.get()
+  if (snapShot.empty) {
+    const extraDataDocRef = firestore.collection('closure_date').doc();
+    await extraDataDocRef.set({});
+    return extraDataDocRef;
+  } else {
+    return snapShot.data();
+  }
+}
 export const getMagazineDataRef =async userId => {
   const dataRef = firestore.collection('magazinePost')
   const snapShot = await dataRef.get()

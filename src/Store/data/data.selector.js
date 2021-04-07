@@ -20,3 +20,4 @@ export const selectEditPost = createSelector(
   [selectData],
   (selectData) => selectData.editPost
 );
+export const selectClosureDates = createSelector([selectData],data=>data?data.closureDates:null)

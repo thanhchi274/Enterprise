@@ -16,6 +16,8 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from "reselect";
 import {emailSignInStart} from '../../../Store/user/user.action'
 import {useHistory} from 'react-router-dom'
+import {selectCurrentUser} from '../../../Store/user/user.selector'
+import {Redirect} from 'react-router-dom'
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -49,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignIn=({emailSignInStart})=> {
+const SignIn=({emailSignInStart,currentUser})=> {
   const [userCredentials,setCredentials] =useState({email:'', password:''})
   const classes = useStyles();
   let history = useHistory()
@@ -65,7 +67,7 @@ const SignIn=({emailSignInStart})=> {
       [name]: value.trim(),
     });
   };
-  return (
+  return currentUser?(
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -125,9 +127,13 @@ const SignIn=({emailSignInStart})=> {
         <Copyright />
       </Box>
     </Container>
-  );
+  ):<Redirect to='blog-sports'/>;
 }
+const mapStateToProps = createStructuredSelector ({
+  currentUser:selectCurrentUser
+})
+
 const mapDispatchToProps =dispatch =>({
   emailSignInStart:(email, password)=>dispatch(emailSignInStart({email, password})),
 })
-export default connect(null, mapDispatchToProps)(SignIn)
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
