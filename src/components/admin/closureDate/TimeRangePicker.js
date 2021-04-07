@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import PropTypes from "prop-types";
 import {
   Card,
@@ -72,8 +72,7 @@ const nameMapper = {
   zhTW: "Chinese Traditional",
 };
 
-const TimeRangePicker = ({ title, year,updateClosureDateStart }) => {
-  console.log('Hello'+year)
+const TimeRangePicker = ({ title, year,updateClosureDateStart,closureData}) => {
   const localeOptions = Object.keys(locales)
     .map((key) => ({
       value: key,
@@ -84,7 +83,9 @@ const TimeRangePicker = ({ title, year,updateClosureDateStart }) => {
   const [locale, setLocale] = React.useState("ja");
   const [date, setDate] = useState(null);
   const [closureDates, setClosureDates] = React.useState([]);
-
+  useEffect(() => {
+    setClosureDates(closureData.closureDates)
+  }, [])
   const handleChooseDate = (date) => {
     const dateObject = new Date(date);
     const dateYear = dateObject.getFullYear();

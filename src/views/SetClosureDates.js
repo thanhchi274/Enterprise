@@ -29,7 +29,7 @@ const SetClosureDates = ({closureData,fetchClosureDateStart}) => {
           <DateTable closureData={closureData} setYear={setYear}/>
         </Col>
         <Col lg="4" md="4" sm="12" className="mb-4">
-          {year && <TimeRangePicker year={year}/>}
+          {year && <TimeRangePicker closureData={closureData[2]}  year={year}/>}
         </Col>
       </Row>
     </Container>
