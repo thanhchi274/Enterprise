@@ -42,7 +42,7 @@ export function* getMagazinePostDataStaffAsync(){
     let populateData = data=>{
       MagazineData.push(data);
     }
-    yield firestore.collection("magazinePost").where("author", "==", "Thanh Chi").get().then((querySnapshot) => {
+    yield firestore.collection("magazinePost").get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         console.log(doc.data())
         populateData({...doc.data(), "id":doc.id})

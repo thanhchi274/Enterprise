@@ -1,16 +1,36 @@
-import React from "react";
-import { Container, Row, Col,Card, CardBody, Form, FormInput } from "shards-react";
-import SideBarActions from '../components/user/new-post/SidebarActions'
+import React, { useEffect } from "react";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  CardBody,
+  Form,
+  FormInput,
+} from "shards-react";
+import SideBarActions from "../components/user/new-post/SidebarActions";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { selectEditPost } from "../Store/data/data.selector";
+import {
+  selectEditPost,
+  selectClosureDates,
+} from "../Store/data/data.selector";
 import { setEditPost } from "../Store/data/data.action";
+import { fetchClosureDateStart } from "../Store/data/data.action";
 import PageTitle from "../components/common/PageTitle";
-const AddNewPost = ({ editPost, setEditPost }) => {
-  React.useEffect(() => {
+const AddNewPost = ({
+  editPost,
+  setEditPost,
+  event,
+  fetchClosureDateStart,
+}) => {
+  useEffect(() => {
+    fetchClosureDateStart();
+  }, [fetchClosureDateStart]);
+  useEffect(() => {
     return setEditPost();
   }, []);
-  return (
+  return event ? (
     <Container fluid className="main-content-container px-4 pb-4">
       {/* Page Header */}
       <Row noGutters className="page-header py-4">
@@ -23,29 +43,41 @@ const AddNewPost = ({ editPost, setEditPost }) => {
       </Row>
       <Row>
         <Col lg="12" md="12">
-        <Card small className="mb-3">
+          <Card small className="mb-3">
             <CardBody>
               <Form className="add-new-post">
-                <FormInput
+                {/* <FormInput
                   size="lg"
                   className="mb-3"
                   placeholder="Your Post Title"
                   defaultValue={editPost ? editPost.title : ""}
-                />
-                <SideBarActions/>
+                /> */}
+                {event.map((item, index) => {
+                  let sortTime = item.closureDates.sort((a,b)=>a>b?-1:0)
+                  return parseInt(item.year) === new Date().getFullYear()?
+                  sortTime.map((item, index) => {
+                    return (
+                      <SideBarActions data={item} />
+                    )})
+               :null;
+                })}
               </Form>
             </CardBody>
           </Card>
         </Col>
       </Row>
     </Container>
+  ) : (
+    <p>Is Loading</p>
   );
 };
 
 const mapStateToProps = createStructuredSelector({
+  event: selectClosureDates,
   editPost: selectEditPost,
 });
 const mapDispatchToProps = (dispatch) => ({
   setEditPost: (data) => dispatch(setEditPost(data)),
+  fetchClosureDateStart: (data) => dispatch(fetchClosureDateStart(data)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(AddNewPost);

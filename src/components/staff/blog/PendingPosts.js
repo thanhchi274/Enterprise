@@ -102,7 +102,7 @@ const PendingPosts = ({
           >
             {/* Avatar */}
             <div className="blog-comments__avatar mr-3">
-              <img src={post.backgoundImage} alt={post.author} />
+              <img src={'https://picsum.photos/200/300'} alt={post.author} />
             </div>
 
             {/* Content */}

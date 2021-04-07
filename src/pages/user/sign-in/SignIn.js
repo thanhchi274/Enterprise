@@ -127,7 +127,7 @@ const SignIn=({emailSignInStart,currentUser})=> {
         <Copyright />
       </Box>
     </Container>
-  ):<Redirect to='blog-sports'/>;
+  ):<Redirect to='blog-posts'/>;
 }
 const mapStateToProps = createStructuredSelector ({
   currentUser:selectCurrentUser

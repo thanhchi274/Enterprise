@@ -18,33 +18,33 @@ const PostListOne = ({ post }) => {
       <Card small className="card-post card-post--1">
         <div
           className="card-post__image"
-          style={{ backgroundImage: `url(${post.backgoundImage})` }}
+          style={{ backgroundImage: `url(${'https://picsum.photos/200/300'})` }}
         >
           <Badge
             pill
-            className={`card-post__category bg-${post.categoryTheme}`}
+            className={`card-post__category}`}
           >
-            {post.category}
+            {post.createAt}
           </Badge>
           <div className="card-post__author d-flex">
             <a
               href="#"
               className="card-post__author-avatar card-post__author-avatar--small"
-              style={{ backgroundImage: `url('${post.backgoundImage}')` }}
+              style={{ backgroundImage: `url('${'https://picsum.photos/200/300'}')` }}
             >
-              Written by {post.author}
+              Written by {post.end}
             </a>
           </div>
         </div>
         <CardBody>
           <h5 className="card-title">
             <a href="#" className="text-fiord-blue" onClick={handleOpenModal}>
-              {post.title}
+              {post.status}
             </a>
           </h5>
-          <p className="card-text d-inline-block mb-3">{post.body}</p>
+          <p className="card-text d-inline-block mb-3">{post.end}</p>
           <div className="d-flex justify-content-between align-items-center">
-            <span className="text-muted">{post.date}</span>
+            <span className="text-muted">{post.end}</span>
           </div>
         </CardBody>
       </Card>

@@ -24,7 +24,7 @@ class DropZone extends Component {
         this.setState({
             files: files,
             open: false,
-        },()=> this.props.uploadDataStart([...files,{title:this.props.data.title, author:this.props.data.author, startDate: this.props.data.date, endDate: this.props.data.endDate}]));
+        },()=> this.props.uploadDataStart([...files,{endDate: this.props.data}]));
     }
     handleOpen() {
         this.setState({
@@ -32,11 +32,11 @@ class DropZone extends Component {
         });
     }
     render() {
-        console.log(this.props.data)
+        console.log(this.props)
         let {data}= this.props
         return (
             <div>
-                <Button   theme="accent"
+                <Button theme="accent"
               size="sm"
               className="ml-auto"
               id="btn_publish" onClick={this.handleOpen.bind(this)}>

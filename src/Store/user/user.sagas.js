@@ -61,40 +61,35 @@ export function* updateDataAsync({files}){
   if (currentUser) {
     try {
       if(files.length===2){
-        yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[1].title).child(files[0].name).put(files[0])
-        const itemDownload = yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[1].title).child(files[0].name)
+        yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[0].name).put(files[0])
+        const itemDownload = yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[0].name)
         const itemUrl = yield itemDownload.getDownloadURL().then(url=>url)
         let userUploadData = {
           id:currentUser.id,
           link:itemUrl,
-          title:files[1].title,
           createAt:toString(timeNow),
           status:"Submitted",
-          author:files[1].author,
-          start:files[1].startDate,
           end:files[1].endDate
         }
         const extraDataUserRef = yield getUserExtraRef(currentUser.id);
         yield extraDataUserRef.update(userUploadData);
+        yield console.log(userUploadData)
         yield put(uploadDataSuccess())
         yield alert('Success Upload')
       }
       if(files.length===3){
-        yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[2].title).child(files[0].name).put(files[0])
-        yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[2].title).child(files[1].name).put(files[1])
-        const itemDownload1 = yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[2].title).child(files[0].name)
-        const itemDownload2 = yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[2].title).child(files[1].name)
+        yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[2].endDate).child(files[0].name).put(files[0])
+        yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[2].endDate).child(files[1].name).put(files[1])
+        const itemDownload1 = yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[2].endDate).child(files[0].name)
+        const itemDownload2 = yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[2].endDate).child(files[1].name)
         const itemUrl1 = yield itemDownload1.getDownloadURL().then(url=>url)
         const itemUrl2 = yield itemDownload2.getDownloadURL().then(url=>url)
         let userUploadData = {
           id:currentUser.id,
           link:itemUrl1,
           link2:itemUrl2,
-          title:files[2].title,
           createAt:toString(timeNow),
           status:"Submitted",
-          author:files[2].author,
-          start:files[2].startDate,
           end:files[2].endDate
         }
         const extraDataUserRef = yield getUserExtraRef(currentUser.id);
