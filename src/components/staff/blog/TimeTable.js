@@ -1,8 +1,11 @@
 import React from "react";
 import { Row, Col, Card, CardHeader, CardBody, Button } from "shards-react";
-import TimePicker from "./TimePicker";
 import { notifyError } from "../../../utils/toast";
 import { LACK_START_END_TIME, END_OVER_START } from "../../../const/errors";
+import { createStructuredSelector } from "reselect";
+import { selectClosureDates } from "../../../Store/data/data.selector";
+import { connect } from 'react-redux'
+
 const timeArray = [
   {
     id: 1,
@@ -22,7 +25,8 @@ const timeArray = [
   },
 ];
 
-const TimeTable = ({ setSelectedATime }) => {
+const TimeTable = ({ setSelectedATime,ClosureData }) => {
+  console.log(ClosureData)
   const handleChooseItemTable = (id) => {
     const allItemTable = document.getElementsByClassName("hover_item_table");
     for (let index = 0; index < allItemTable.length; index++) {
@@ -47,12 +51,6 @@ const TimeTable = ({ setSelectedATime }) => {
               <thead className="bg-light">
                 <tr>
                   <th scope="col" className="border-0">
-                    ID
-                  </th>
-                  <th scope="col" className="border-0">
-                    Start date
-                  </th>
-                  <th scope="col" className="border-0">
                     Closure date
                   </th>
                   <th scope="col" className="border-0">
@@ -67,21 +65,24 @@ const TimeTable = ({ setSelectedATime }) => {
                 </tr>
               </thead>
               <tbody>
-                {timeArray?.map((item, idx) => (
-                  <tr
-                    key={idx}
-                    id={item.id}
-                    className="hover_item_table"
-                    onClick={() => handleChooseItemTable(item.id)}
-                  >
-                    <td>{item.id}</td>
-                    <td>{item.start}</td>
-                    <td>{item.end}</td>
-                    <td>{item.pendingPosts ? item.pendingPosts : "0"}</td>
-                    <td>{item.approvedPosts ? item.approvedPosts : "0"}</td>
-                    <td>{item.comments ? item.comments : "0"}</td>
-                  </tr>
-                ))}
+              {ClosureData.map((item, index) => {
+                  let sortTime = item.closureDates.sort((a,b)=>a>b?-1:0)
+                  return parseInt(item.year) === new Date().getFullYear()?
+                  sortTime.map((item, index) => {
+                    return (
+                      <tr
+                      key={index}
+                      className="hover_item_table"
+                      onClick={() => handleChooseItemTable(item.id)}
+                      >
+                      <td>{item}</td>
+                      <td>{item.pendingPosts ? item.pendingPosts : "0"}</td>
+                      <td>{item.approvedPosts ? item.approvedPosts : "0"}</td>
+                      <td>{item.comments ? item.comments : "0"}</td>
+                      </tr>
+                    )})
+               :null;
+                })}
               </tbody>
             </table>
           </CardBody>
@@ -90,5 +91,12 @@ const TimeTable = ({ setSelectedATime }) => {
     </Row>
   );
 };
+const mapStateToProps =createStructuredSelector ({
+ ClosureData:selectClosureDates
+})
 
-export default TimeTable;
+const mapDispatchToProps = {
+  
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TimeTable);

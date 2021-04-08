@@ -15,7 +15,6 @@ const StaffManage = ({data,fetchMagazinePostStaffStart}) => {
   useEffect(() => {
     fetchMagazinePostStaffStart()
   }, [fetchMagazinePostStaffStart])
-  console.log(fetchMagazinePostStaffStart)
   return (
     <Container fluid className="main-content-container px-4">
       <Row noGutters className="page-header py-4">

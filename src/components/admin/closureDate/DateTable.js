@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import { Row, Col, Card, CardHeader, CardBody, Button } from "shards-react";
 const DateTable = ({ setSelectedATime,closureData, setYear }) => {
+  console.log(closureData)
   const handleChooseItemTable = (id, year) => {
     const allItemTable = document.getElementsByClassName("hover_item_table");
     var hasValidElement = false;

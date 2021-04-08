@@ -6,7 +6,6 @@ import {
   Card,
   CardBody,
   Form,
-  FormInput,
 } from "shards-react";
 import SideBarActions from "../components/user/new-post/SidebarActions";
 import { connect } from "react-redux";
@@ -19,7 +18,6 @@ import { setEditPost } from "../Store/data/data.action";
 import { fetchClosureDateStart } from "../Store/data/data.action";
 import PageTitle from "../components/common/PageTitle";
 const AddNewPost = ({
-  editPost,
   setEditPost,
   event,
   fetchClosureDateStart,
@@ -46,12 +44,6 @@ const AddNewPost = ({
           <Card small className="mb-3">
             <CardBody>
               <Form className="add-new-post">
-                {/* <FormInput
-                  size="lg"
-                  className="mb-3"
-                  placeholder="Your Post Title"
-                  defaultValue={editPost ? editPost.title : ""}
-                /> */}
                 {event.map((item, index) => {
                   let sortTime = item.closureDates.sort((a,b)=>a>b?-1:0)
                   return parseInt(item.year) === new Date().getFullYear()?

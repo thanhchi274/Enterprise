@@ -44,7 +44,6 @@ export function* getMagazinePostDataStaffAsync(){
     }
     yield firestore.collection("magazinePost").get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        console.log(doc.data())
         populateData({...doc.data(), "id":doc.id})
       });
   });

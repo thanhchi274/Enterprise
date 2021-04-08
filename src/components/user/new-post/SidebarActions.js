@@ -24,7 +24,6 @@ const SidebarActions = ({ editPost, data }) => {
                     className="d-flex my-3"
                     style={{ alignItems: "center" }}
                   >
-
                     <input
                       type="checkbox"
                       defaultValue={agreeTerm}
