@@ -1,9 +1,10 @@
 import { takeLatest, all, call, put,select } from "redux-saga/effects";
 import UserActionTypes from "./user.type";
 import { getUserExtraRef,
-   cloudStorage,auth
+   cloudStorage,auth, firestore
   } from '../../utils/firebase.utils';
 import { selectCurrentUser } from '../user/user.selector';
+import {selectMagazinePost} from '../data/data.selector'
 import {
   createUserProfileDocument,
   getCurrentUser
@@ -57,7 +58,8 @@ export function* onUploadDataStart(){
 }
 export function* updateDataAsync({files}){
   const currentUser = yield select(selectCurrentUser);
-  const timeNow= yield new Date().toLocaleDateString('de-DE')
+  const currentData = yield select(selectMagazinePost)
+  const timeNow= yield new Date().toUTCString()
   if (currentUser) {
     try {
       if(files.length===2){
@@ -71,9 +73,8 @@ export function* updateDataAsync({files}){
           status:"Submitted",
           end:files[1].endDate
         }
-        const extraDataUserRef = yield getUserExtraRef(currentUser.id);
-        yield extraDataUserRef.update(userUploadData);
-        yield console.log(userUploadData)
+        const extraDataUserRef = yield firestore.collection('magazinePost').add(userUploadData);
+        // let data =  [...currentData, { ...userUploadData}]
         yield put(uploadDataSuccess())
         yield alert('Success Upload')
       }
@@ -92,8 +93,8 @@ export function* updateDataAsync({files}){
           status:"Submitted",
           end:files[2].endDate
         }
-        const extraDataUserRef = yield getUserExtraRef(currentUser.id);
-        yield extraDataUserRef.update(userUploadData);
+        const extraDataUserRef = yield firestore.collection('magazinePost');
+        yield extraDataUserRef.add(userUploadData);
         yield alert('Success Upload')
         yield put(uploadDataSuccess())
       }
@@ -155,6 +156,12 @@ export function* onSignUpStart(){
 }
 export function* onSignUpSuccess(){
   yield takeLatest(UserActionTypes.SIGN_UP_SUCCESS, signInAfterSignUp)
+}
+export function* approvePost(){
+
+}
+export function* rejectPost(){
+  
 }
 export function* userSagas() {
   yield all([ call(onEmailSignInStart), call(onCheckUserSessions), call(onSignOutStart),call(onSignUpStart) ,call(onSignUpSuccess), call(onUploadDataStart), call(onUpdateProfileStart)

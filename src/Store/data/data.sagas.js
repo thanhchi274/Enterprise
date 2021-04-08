@@ -17,21 +17,24 @@ export function* getMagazinePostDataStart(){
           yield takeLatest(DataActionTypes.FETCH_MAGAZINE_START, getMagazinePostDataAsync)
 }
 export function* getMagazinePostDataAsync(){
-  try {
-    let MagazineData = []
-    let populateData = data=>{
-      MagazineData.push(data);
+  let currentUser = yield select(selectCurrentUser)
+  if(currentUser){
+    try{
+      let MagazineData = []
+      let populateData = data=>{
+        MagazineData.push(data);
+      }
+      yield console.log(currentUser.id)
+      yield firestore.collection("magazinePost").where('id', '==', currentUser.id).get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          populateData({...doc.data(), "id":doc.id})
+        });
+    });
+      yield put(fetchMagazinePostSuccess(MagazineData))
+      yield MagazineData=[]
+    } catch (error) {
+      yield put(fetchMagazinePostFailure(error))
     }
-    yield firestore.collection("magazinePost").get().then((querySnapshot) => {
-      console.log(querySnapshot.size);
-      querySnapshot.forEach((doc) => {
-        populateData({...doc.data(), "id":doc.id})
-      });
-  });
-    yield put(fetchMagazinePostSuccess(MagazineData))
-    yield MagazineData=[]
-  } catch (error) {
-    yield put(fetchMagazinePostFailure(error))
   }
 }
 export function* getMagazinePostDataStartStaff(){

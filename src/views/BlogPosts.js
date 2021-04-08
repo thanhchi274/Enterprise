@@ -18,7 +18,7 @@ const styleManager = {
 
 const BlogPosts = ({ fetchMagazinePostStart, data, role }) => {
   useEffect(() => {
-    console.log(role)
+
     fetchMagazinePostStart();
   }, [fetchMagazinePostStart]);
   return (
