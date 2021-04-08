@@ -40,7 +40,7 @@ const TimeRangePicker = ({ title, year,updateClosureDateStart,closureData}) => {
   const [date, setDate] = useState(null);
   const [closureDates, setClosureDates] = React.useState([]);
   useEffect(() => {
-    setClosureDates(closureData.closureDates)
+    setClosureDates(closureData[2].closureDates)
   }, [])
   const handleChooseDate = (date) => {
     const dateObject = new Date(date);

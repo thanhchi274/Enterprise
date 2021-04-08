@@ -45,7 +45,7 @@ const AddNewPost = ({
             <CardBody>
               <Form className="add-new-post">
                 {event.map((item, index) => {
-                  let sortTime = item.closureDates.sort((a,b)=>a>b?-1:0)
+                  let sortTime = item.closureDates.sort((a,b)=>new Date(a).toDateString()>new Date(b).toDateString()?-1:1)
                   return parseInt(item.year) === new Date().getFullYear()?
                   sortTime.map((item, index) => {
                     return (

@@ -37,7 +37,6 @@ class UserActions extends React.Component {
     return (
       <NavItem tag={Dropdown} className="d-flex align-items-center" caret toggle={this.toggleUserActions}>
         <DropdownToggle caret tag={NavLink} className="text-nowrap px-3">
-
           <span className="d-none d-md-inline-block">Sierra Brooks</span>
         </DropdownToggle>
         <Collapse tag={DropdownMenu} right small open={this.state.visible}>

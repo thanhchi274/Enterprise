@@ -6,7 +6,8 @@ const INITIAL_STATE = {
   magazinePost: null,
   isLoading: true,
   error: undefined,
-  closureDates:null
+  closureDates:null,
+  faulty:null
 };
 const dataReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -14,10 +15,17 @@ const dataReducer = (state = INITIAL_STATE, action) => {
     case DataTypes.FETCH_MAGAZINE_START:
     case DataTypes.FETCH_CLOSURE_DATE_START:
     case DataTypes.UPDATE_CLOSURE_DATE_START:
+    case DataTypes.FETCH_EACH_EVENT_START:
       return {
         ...state,
         isLoading: true,
       };
+      case DataTypes.FETCH_EACH_EVENT_SUCCESS:
+        return{
+          ...state,
+          isLoading:false,
+          faulty:action.payload
+        }
       case DataTypes.FETCH_CLOSURE_DATE_SUCCESS:
         return{
           ...state,
@@ -34,6 +42,7 @@ const dataReducer = (state = INITIAL_STATE, action) => {
     case DataTypes.FETCH_CLOSURE_DATE_FAILURE:
     case DataTypes.FETCH_MAGAZINE_FAILURE:
     case DataTypes.UPDATE_CLOSURE_DATE_FAILURE:
+    case DataTypes.FETCH_EACH_EVENT_FAILURE:
       return {
         ...state,
         error: action.payload,

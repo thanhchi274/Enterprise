@@ -8,9 +8,9 @@ import PendingPosts from "../components/staff/blog/PendingPosts";
 import TimeTable from "../components/staff/blog/TimeTable";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { selectMagazinePost } from "../Store/data/data.selector";
+import { selectMagazinePost,selectEachEvent} from "../Store/data/data.selector";
 import { fetchMagazinePostStaffStart } from "../Store/data/data.action";
-const StaffManage = ({data,fetchMagazinePostStaffStart}) => {
+const StaffManage = ({data,fetchMagazinePostStaffStart,event}) => {
   const [isATimeSelected, setSelectedATime] = React.useState(false);
   useEffect(() => {
     fetchMagazinePostStaffStart()
@@ -25,11 +25,11 @@ const StaffManage = ({data,fetchMagazinePostStaffStart}) => {
           className="text-sm-left"
         />
       </Row>
-      <TimeTable setSelectedATime={setSelectedATime}/>
+      <TimeTable isATimeSelected={isATimeSelected} setSelectedATime={setSelectedATime}/>
       {isATimeSelected && (
         <Row>
           <Col lg="8" md="8" sm="12" className="mb-4">
-            <PendingPosts/>
+            <PendingPosts data={event}/>
           </Col>
           <Col lg="4" md="4" sm="12" className="mb-4">
             <DetailAndComment />
@@ -40,6 +40,7 @@ const StaffManage = ({data,fetchMagazinePostStaffStart}) => {
   );
 };
 const mapStateToProps = createStructuredSelector ({
+  event:selectEachEvent,
   data:selectMagazinePost
 })
 

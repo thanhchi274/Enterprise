@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import PropTypes from "prop-types";
 import {
   Card,
@@ -13,8 +13,11 @@ import {
 
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { selectComment,selectMagazinePost } from "../../../Store/data/data.selector";
-import { setPendingPost,approvePost } from "../../../Store/data/data.action";
+import {
+  selectComment,
+  selectMagazinePost,
+} from "../../../Store/data/data.selector";
+import { setPendingPost, approvePost } from "../../../Store/data/data.action";
 import PostModal from "../post/PostModal";
 const PendingPosts = ({
   title,
@@ -22,21 +25,23 @@ const PendingPosts = ({
   setPendingPost,
   postWithComment,
   approvePost,
-  data
+  data,
 }) => {
   const [posts, setPosts] = React.useState(null);
   const [open, setOpen] = React.useState(false);
   const [postDetails, setPostDetails] = React.useState(null);
   const [viewAll, setViewAll] = React.useState(false);
-
-  React.useEffect(() => {
+  useEffect(() => {
+    console.log(data);
     setPosts(data);
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (postWithComment && posts) {
       const newPendingPosts = posts.filter(
-        (item) => item.title !== postWithComment.title || item.body !== postWithComment.body
+        (item) =>
+          item.title !== postWithComment.title ||
+          item.body !== postWithComment.body
       );
       newPendingPosts.unshift(postWithComment);
       setPosts(newPendingPosts);
@@ -48,10 +53,10 @@ const PendingPosts = ({
     setPostDetails(post);
     setOpen(true);
   };
-  const handleApprove  =(e,item)=>{
+  const handleApprove = (e, item) => {
     e.preventDefault();
-    approvePost(item)
-  }
+    approvePost(item);
+  };
   const handleCloseModal = () => {
     setOpen(false);
   };
@@ -63,23 +68,17 @@ const PendingPosts = ({
 
   const handleViewAll = (e) => {
     e.preventDefault();
-
     const bodyElement = document.getElementById("body_pending_posts");
-
     bodyElement.style.height = "auto";
     bodyElement.style.overflowY = "inherit";
-
     setViewAll(true);
   };
 
   const handleViewHide = (e) => {
     e.preventDefault();
-
     const bodyElement = document.getElementById("body_pending_posts");
-
     bodyElement.style.height = "500px";
     bodyElement.style.overflowY = "scroll";
-
     setViewAll(false);
   };
 
@@ -100,28 +99,20 @@ const PendingPosts = ({
             className="blog-comments__item d-flex p-3"
             onClick={(e) => handleClickPost(e, post)}
           >
-            {/* Avatar */}
             <div className="blog-comments__avatar mr-3">
-              <img src={'https://picsum.photos/200/300'} alt={post.author} />
+              <img src={"https://picsum.photos/200/300"} alt={'abc'} />
             </div>
-
-            {/* Content */}
             <div
               className="blog-comments__content"
               style={{ marginLeft: "10px", width: "100%" }}
             >
-              {/* Content :: Title */}
-              <div className="blog-comments__meta text-mutes">
-                <a className="text-secondary" href="#">
-                  {post.author}
-                </a>{" "}
-                on{" "}
-                <a className="text-secondary" href="#">
-                  {post.title}
-                </a>
-                <span className="text-mutes">- {post.date}</span>
+              <div className="blog-comments__meta d-flex justify-content-between px-2">
+                <p className="text-secondary" href="#">
+                  {post.userId}
+                </p>
+                <p className="text-mutes">{new Date(post.createAt).toLocaleDateString()}</p>
               </div>
-              <p className="m-0 my-1 mb-2 text-muted">
+              <p className="m-0 mb-2 text-muted">
                 <i>
                   {post.comment ? `Comment: ${post.comment}` : "No comment"}
                 </i>
@@ -131,7 +122,7 @@ const PendingPosts = ({
                 style={{ float: "right" }}
               >
                 <ButtonGroup size="sm">
-                  <Button theme="white" onClick={(e)=>handleApprove(e,post)}>
+                  <Button theme="white" onClick={(e) => handleApprove(e, post)}>
                     <span className="text-success">
                       <i className="material-icons">check</i>
                     </span>{" "}
@@ -164,11 +155,11 @@ const PendingPosts = ({
           <Col className="text-center view-report">
             {!viewAll ? (
               <Button theme="white" type="submit" onClick={handleViewAll}>
-                View All Pending Posts
+                Hide Pending Posts
               </Button>
             ) : (
               <Button theme="white" type="submit" onClick={handleViewHide}>
-                Hide Pending Posts
+                  View All Pending Posts
               </Button>
             )}
           </Col>
@@ -190,10 +181,9 @@ PendingPosts.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   postWithComment: selectComment,
-  data:selectMagazinePost
 });
 const mapDispatchToProps = (dispatch) => ({
   setPendingPost: (data) => dispatch(setPendingPost(data)),
-  approvePost:(data)=> dispatch(approvePost(data))
+  approvePost: (data) => dispatch(approvePost(data)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(PendingPosts);

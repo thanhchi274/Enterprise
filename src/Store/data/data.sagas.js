@@ -1,7 +1,7 @@
 import { takeLatest, all, call, put,select } from "redux-saga/effects";
 // import UserActionTypes from "./user.type";
 import DataActionTypes from './data.type'
-import { getMagazineDataRef,firestore,getUserDataRef,
+import { getMagazineDataRef,firestore,getUserDataRef,functions,
    cloudStorage,auth,getClosureDataRef
   } from '../../utils/firebase.utils';
 import { selectCurrentUser } from '../user/user.selector';
@@ -11,7 +11,7 @@ import {
 } from "../../utils/firebase.utils";
 import axios from "axios";
 import _, { toString } from 'lodash'
-import {fetchMagazinePostSuccess,fetchMagazinePostFailure,fetchMagazinePostStaffSuccess,fetchClosureDateSuccess,fetchClosureDateFailure,updateClosureDateSuccess,updateClosureDateFailure} from './data.action'
+import {fetchMagazinePostSuccess,fetchMagazinePostFailure,fetchMagazinePostStaffSuccess,fetchClosureDateSuccess,fetchClosureDateFailure,updateClosureDateSuccess,updateClosureDateFailure,fetchEachEventSuccess,fetchEachEventFailure} from './data.action'
 import { toast } from "material-react-toastify";
 export function* getMagazinePostDataStart(){
           yield takeLatest(DataActionTypes.FETCH_MAGAZINE_START, getMagazinePostDataAsync)
@@ -23,6 +23,7 @@ export function* getMagazinePostDataAsync(){
       MagazineData.push(data);
     }
     yield firestore.collection("magazinePost").get().then((querySnapshot) => {
+      console.log(querySnapshot.size);
       querySnapshot.forEach((doc) => {
         populateData({...doc.data(), "id":doc.id})
       });
@@ -101,7 +102,27 @@ export function* updateClosureDateAsync({payload}){
     yield alert('Update Fail')
   }
 }
+export function* fetchEachEventStart(){
+  yield takeLatest(DataActionTypes.FETCH_EACH_EVENT_START,fetchEachEventAsync)
+}
+export function* fetchEachEventAsync({payload}) {
+  let eachEventData = []
+  let populateData = data=>{
+    eachEventData.push(data);
+  }
+  try {
+    yield firestore.collection("magazinePost").where('end','==',payload).get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        populateData(doc.data())
+      });
+  });
+ yield put(fetchEachEventSuccess(eachEventData))
+ yield eachEventData=[]
+  } catch (error) {
+    yield put(fetchEachEventFailure(error))
+  }
+}
 export function* dataSagas() {
-  yield all([ call(getMagazinePostDataStart),call(getMagazinePostDataStartStaff), call(approvePost), call(fetchClosureDateStart), call(updateClosureDateStart)
+  yield all([ call(getMagazinePostDataStart),call(getMagazinePostDataStartStaff), call(approvePost), call(fetchClosureDateStart), call(updateClosureDateStart), call(fetchEachEventStart)
     ])
 }

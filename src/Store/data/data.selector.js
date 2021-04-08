@@ -21,3 +21,4 @@ export const selectEditPost = createSelector(
   (selectData) => selectData.editPost
 );
 export const selectClosureDates = createSelector([selectData],data=>data?data.closureDates:null)
+export const selectEachEvent = createSelector([selectData],data=>data?data.faulty:null)
