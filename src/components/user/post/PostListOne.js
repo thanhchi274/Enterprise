@@ -15,9 +15,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 const PostListOne = ({ post, role }) => {
-  useEffect(() => {
-    console.log(post);
-  });
   const classes = useStyles();
   return (
     <Col lg="3" md="6" sm="12" className="mb-4">

@@ -54,16 +54,6 @@ const routeAdmin = [
     component: SetClosureDates,
   },
 ];
-
-const routeGuest = [
-  {
-    path: "/",
-    exact: true,
-    layout: GuestLayout,
-    component: Home,
-  },
-];
-
 const routeManager = [
   {
     path: "/all-posts",
@@ -92,4 +82,4 @@ const routeStaff = [
     component: StaffProfileLite,
   },
 ];
-export { routeStudent, routeAdmin, routeStaff, routeManager, routeGuest };
+export { routeStudent, routeAdmin, routeStaff, routeManager };

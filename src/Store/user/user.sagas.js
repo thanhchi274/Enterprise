@@ -9,26 +9,46 @@ import {
   createUserProfileDocument,
   getCurrentUser
 } from "../../utils/firebase.utils";
-import {useHistory} from 'react-router-dom'
 import { signInSuccess, signInFailure, signOutSuccess, signOutFailure, signUpSuccess, signUpFailure, uploadDataSuccess, uploadDataFailure, setExtraDataUserInFirebase,updateProfileSuccess,updateProfileFailure  } from "./user.action";
 import axios from "axios";
 import _, { toString } from 'lodash'
 import { toast } from "material-react-toastify";
 export function* getSnapshotFromAuth(userAuth,additionalData) {
   try {
+    let userRole = []
+    let populateData = data=>{
+      userRole.push(data);
+    }
+    let adminRole = [];
+    let populateAdminData=data=>{
+      adminRole.push(data)
+    }
     const userRef = yield call(createUserProfileDocument, userAuth, additionalData);
     const userSnapShot = yield userRef.get();
-    const providerData = [...userAuth.providerData]
+    let userEmail = userSnapShot.data().email
+    yield firestore.collection('user_data').where('email','==',userEmail).get().then((querySnapshot) =>
+      {
+        return querySnapshot.forEach((doc) => { return populateData(doc.data())
+      });
+    })
+    const providerData = [...userAuth.providerData, userRole[0]]
     yield put(signInSuccess({ id: userSnapShot.id, ...userSnapShot.data(), providerData }));
+    yield userRole = []
   } catch (err) {
     yield put(signInFailure({ err }));
+  }
+}
+export function* getUserRolesFromAuth(userEmail){
+  try {
+  } catch (error) {
+    
   }
 }
 export function* signInWithEmail({ payload: { email, password } }) {
   try {
     const { user } = yield auth.signInWithEmailAndPassword(email, password);
     yield getSnapshotFromAuth(user);
-    yield useHistory.push('/blog-posts')
+    yield window.location.reload()
   } catch (err) {
     yield put(signInFailure(err));
   }
@@ -37,6 +57,7 @@ export function* signOut(){
   try {
     yield auth.signOut()
     yield put(signOutSuccess())
+    yield window.location.reload()
   } catch (error) {
     yield put(signOutFailure(error))
   }

@@ -33,7 +33,7 @@ class UserActions extends React.Component {
 
   render() {
     let {currentUser,signOutStart}= this.props
-    return currentUser?(
+    return (
       <NavItem className="d-flex align-items-center" tag={Dropdown} caret toggle={this.toggleUserActions}>
         <DropdownToggle caret tag={NavLink} className="text-nowrap px-3 d-flex align-items-center">
           <span className="d-none d-md-inline-block"> {currentUser.displayName|| currentUser.email|| currentUser.providerData[0].displayName}</span>
@@ -48,7 +48,7 @@ class UserActions extends React.Component {
           </DropdownItem>
         </Collapse>
       </NavItem>
-    ):<Spinner />;
+    );
   }
 }
 const mapStateToProps = createStructuredSelector ({

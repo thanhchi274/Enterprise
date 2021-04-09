@@ -5,20 +5,18 @@ import { Container, Row } from "shards-react";
 import PageTitle from "../components/common/PageTitle";
 import PostListOne from "../components/user/post/PostListOne";
 import DownloadAllPost from "../components/manager/post/DownloadAllPost";
-
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { fetchMagazinePostStart } from "../Store/data/data.action";
 import { selectMagazinePost } from "../Store/data/data.selector";
-
+import {selectCurrentUser} from '../Store/user/user.selector';
+import {Redirect} from 'react-router-dom'
 const styleManager = {
   display: "flex",
   justifyContent: "space-between",
 }
-
-const BlogPosts = ({ fetchMagazinePostStart, data, role }) => {
+const BlogPosts = ({ fetchMagazinePostStart, data, role,user}) => {
   useEffect(() => {
-
     fetchMagazinePostStart();
   }, [fetchMagazinePostStart]);
   return (
@@ -41,9 +39,10 @@ const BlogPosts = ({ fetchMagazinePostStart, data, role }) => {
           : null}
       </Row>
     </Container>
-  );
+  )
 };
 const mapStateToProps = createStructuredSelector({
+  user:selectCurrentUser,
   data: selectMagazinePost,
 });
 const mapDispatchToProps = {

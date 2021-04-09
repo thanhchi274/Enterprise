@@ -53,10 +53,8 @@ function Header(props) {
         <IconButton>
           <SearchIcon />
         </IconButton>
-        {currentUser?<Button>{currentUser.displayName? currentUser.displayName:currentUser.email}</Button>:<Button variant="outlined" onClick={(e)=>handleOnClick(e)} size="small">
-          SIGN IN
-        </Button>}
-        {currentUser?<Button  variant="outlined" size="small" onClick={signOutStart}  >SIGN OUT</Button>:null}
+        {<Button>{currentUser.displayName? currentUser.displayName:currentUser.email}</Button>}
+        {<Button  variant="outlined" size="small" onClick={signOutStart}  >SIGN OUT</Button>}
       </Toolbar>
       <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
         {sections.map((section) => (

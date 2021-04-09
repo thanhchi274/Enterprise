@@ -3,8 +3,6 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -13,22 +11,8 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
 import { emailSignInStart } from "../../../Store/user/user.action";
-import { useHistory } from "react-router-dom";
 import { Card } from "shards-react";
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link to="/" color="inherit" href="https://material-ui.com/">
-        Enterprise Web Development
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -56,7 +40,6 @@ const Login = ({ emailSignInStart, setLoginOrSignUp }) => {
     password: "",
   });
   const classes = useStyles();
-  let history = useHistory();
   const { email, password } = userCredentials;
   const handleSubmit = async (event) => {
     event.preventDefault();

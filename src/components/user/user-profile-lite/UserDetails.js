@@ -26,8 +26,8 @@ const UserDetails = ({ userDetails, currentUser }) => (
           width="110"
         />
       </div>
-      {console.log(currentUser.providerData[0].displayName)}
       <h4 className="mb-0">{currentUser.displayName||currentUser.providerData[0].displayName||currentUser.email}</h4>
+      <p>Test</p>
     </CardHeader>
   </Card>
 );

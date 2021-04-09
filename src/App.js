@@ -6,7 +6,6 @@ import {
   routeAdmin,
   routeStaff,
   routeManager,
-  routeGuest
 } from "./Routes/routes";
 import withTracker from "./withTracker";
 import { createStructuredSelector } from "reselect";
@@ -14,46 +13,17 @@ import { selectCurrentUser } from "./Store/user/user.selector";
 import { checkUserSession } from "./Store/user/user.action";
 import Spinner from "./components/spinner/spinner.component";
 import ErrorBoundary from "./components/error-boundary/error-boundary.component";
-import SignInPage from "./pages/user/sign-in/SignIn";
 import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./shards-dashboard/styles/shards-dashboards.1.1.0.min.css";
-import StaffList from "./staff.json";
-import AdminList from "./admin.json";
-import _ from "lodash";
-//Toast
+import Home from "./views/Home";
 import { Container } from "./utils/toast";
 
 const SignUp = lazy(() => import("./pages/user/sign-up/SignUp"));
 const showMenuHome = (routes, currentUser) => {
   if (routes && routes.length > 0) {
     return routes.map((route, index) => {
-      return currentUser !== null ? (
-        <Route
-          key={index}
-          path={route.path}
-          exact={route.exact}
-          component={ withTracker(props => {
-            return (
-              <route.layout {...props}>
-                <route.component {...props} />
-              </route.layout>
-            );
-          })}
-        />
-      ) : (
-        <Redirect
-        key={index}
-        to="/"
-      />
-      );
-    });
-  }
-};
-const showMenuAdmin = (routes, currentUser) => {
-  if (routes && routes.length > 0) {
-    return routes.map((route, index) => {
-      return currentUser && AdminList.includes(currentUser.email) === true ? (
+      return currentUser? (
         <Route
           key={index}
           path={route.path}
@@ -67,18 +37,15 @@ const showMenuAdmin = (routes, currentUser) => {
           })}
         />
       ) : (
-        <Redirect
-        key={index}
-        to="/"
-      />
+        <Redirect key={index} to="/" />
       );
     });
   }
 };
-const showMenuStaff = (routes, currentUser) => {
+const showMenuAdmin =  (routes) => {
   if (routes && routes.length > 0) {
-    return routes.map((route, index) => {
-      return currentUser && StaffList.includes(currentUser.email) === true ? (
+    return routes.map( (route, index) => {
+      return (
         <Route
           key={index}
           path={route.path}
@@ -91,20 +58,35 @@ const showMenuStaff = (routes, currentUser) => {
             );
           })}
         />
-      ) : (
-        <Redirect
-        key={index}
-        to="/"
-      />
-      );
+      )
     });
+  }
+};
+const showMenuStaff = (routes) => {
+  if (routes && routes.length > 0) {
+    return  routes.map((route, index) => {
+      return (
+        <Route
+          key={index}
+          path={route.path}
+          exact={route.exact}
+          component={(props) => {
+            return (
+              <route.layout {...props}>
+                <route.component {...props} />
+              </route.layout>
+            );
+          }}
+        />
+      )
+    })
   }
 };
 
-const showMenuManager = (routes, currentUser) => {
+const showMenuManager = (routes) => {
   if (routes && routes.length > 0) {
     return routes.map((route, index) => {
-      return currentUser && StaffList.includes(currentUser.email) === true ? (
+      return(
         <Route
           key={index}
           path={route.path}
@@ -117,42 +99,7 @@ const showMenuManager = (routes, currentUser) => {
             );
           })}
         />
-      ) : (
-        <Redirect
-        key={index}
-        to="/"
-      />
-      );
-    });
-  }
-};
-
-const showMenuGuest = (routes, currentUser) => {
-  if (routes && routes.length > 0) {
-    return routes.map((route, index) => {
-      return currentUser ? (
-        <Route
-          key={index}
-          path={route.path}
-          exact={route.exact}
-          component={withTracker((props) => {
-            return (
-              <route.layout {...props}>
-                <route.component {...props} />
-              </route.layout>
-            );
-          })}
-        />
-      ) : (
-        <Route
-        exact
-        key={index}
-        path="/"
-        render={() =>
-          <SignInPage />
-        }
-      />
-      );
+      )
     });
   }
 };
@@ -161,7 +108,10 @@ const App = ({ checkUserSession, currentUser }) => {
   useEffect(() => {
     checkUserSession();
   }, [checkUserSession]);
-
+    const userProvider =  currentUser? currentUser.providerData[1]:null
+    const identifiedManager =userProvider? (userProvider.role==="Manager"?true:false):null
+    const identifiedStaff =userProvider?(userProvider.faulty):null
+    const identifiedAdmin =userProvider?(userProvider.role==='Admin'?true:false):null
   return (
     <>
       <Switch>
@@ -169,17 +119,15 @@ const App = ({ checkUserSession, currentUser }) => {
           <Container />
           <Suspense fallback={<Spinner />}>
             {showMenuHome(routeStudent, currentUser)}
-            {showMenuAdmin(routeAdmin, currentUser)}
-            {showMenuStaff(routeStaff, currentUser)}
-            {showMenuManager(routeManager, currentUser)}
-            {showMenuGuest(routeGuest, currentUser)}
+            {currentUser?(identifiedStaff ? showMenuStaff(routeStaff):(identifiedManager ? showMenuManager(routeManager):(identifiedAdmin ? showMenuAdmin(routeAdmin):<Redirect to='/' />))):<Redirect to='/' />}
             <Route
               exact
               path="/"
               render={() =>
-                currentUser ? <Redirect to="/blog-posts" /> : <SignInPage />
+                currentUser ? <Redirect to="/blog-posts" /> : <Home />
               }
-            />            {/* <Route path="*" component={() => "404 NOT FOUND"} />
+            />
+            {/* <Route path="*" component={() => "404 NOT FOUND"} />
              <Route path="*" component={() => "404 NOT FOUND"} /> */}
             <Route exact={true} path="/register" component={SignUp}></Route>
           </Suspense>
