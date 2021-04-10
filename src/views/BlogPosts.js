@@ -10,7 +10,6 @@ import { createStructuredSelector } from "reselect";
 import { fetchMagazinePostStart } from "../Store/data/data.action";
 import { selectMagazinePost } from "../Store/data/data.selector";
 import {selectCurrentUser} from '../Store/user/user.selector';
-import {Redirect} from 'react-router-dom'
 const styleManager = {
   display: "flex",
   justifyContent: "space-between",

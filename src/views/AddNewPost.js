@@ -30,7 +30,6 @@ const AddNewPost = ({
   }, []);
   return event ? (
     <Container fluid className="main-content-container px-4 pb-4">
-      {/* Page Header */}
       <Row noGutters className="page-header py-4">
         <PageTitle
           sm="4"
@@ -45,13 +44,9 @@ const AddNewPost = ({
             <CardBody>
               <Form className="add-new-post">
                 {event.map((item, index) => {
-                  let sortTime = item.closureDates.sort((a,b)=>new Date(a).toDateString()>new Date(b).toDateString()?-1:1)
-                  return parseInt(item.year) === new Date().getFullYear()?
-                  sortTime.map((item, index) => {
                     return (
-                      <SideBarActions data={item} />
-                    )})
-               :null;
+                      <SideBarActions key={index} data={item} />
+                    )
                 })}
               </Form>
             </CardBody>

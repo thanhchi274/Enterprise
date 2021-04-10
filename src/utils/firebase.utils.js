@@ -3,6 +3,7 @@ import "firebase/firestore";
 import "firebase/auth";
 import "firebase/storage"
 import "firebase/functions"
+
 const configToDB = {
   apiKey: "AIzaSyBxkMxAkuRKDKH-v5SEyu--Bpd5VT_EJhY",
   authDomain: "enterprise-comp1640.firebaseapp.com",
@@ -28,17 +29,6 @@ export const createUserProfileDocument =  async (userAuth, additionData) => {
   }
   return userRef;
 }
-export const getStudentPostByID = async userId => {
-  const cartsRef = firestore.collection('StudentPost').where('id', '==', userId);
-  const snapShot = await cartsRef.get();
-  if (snapShot.empty) {
-    const cartDocRef = firestore.collection('StudentPost').doc();
-    await cartDocRef.set({ userId, studentPost: [] });
-    return cartDocRef;
-  } else {
-    return snapShot.docs[0].ref;
-  }
-};
 export const getUserExtraRef =async (userId) => {
   const dataRef = firestore.collection('magazinePost').where('id', '==', userId)
   const snapShot = await dataRef.get()

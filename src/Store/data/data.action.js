@@ -12,14 +12,14 @@ export const fetchMagazinePostStart = () => ({
   type: DataTypes.FETCH_MAGAZINE_START,
 });
 export const fetchMagazinePostSuccess = (data) => ({
-  type: DataTypes.FETCH_MAGAZINE_START_BY_STAFF,
+  type: DataTypes.FETCH_MAGAZINE_SUCCESS,
   payload: data,
 });
 export const fetchMagazinePostStaffStart = () => ({
   type: DataTypes.FETCH_MAGAZINE_START_BY_STAFF,
 });
 export const fetchMagazinePostStaffSuccess = (data) => ({
-  type: DataTypes.FETCH_MAGAZINE_SUCCESS,
+  type: DataTypes.FETCH_MAGAZINE_SUCCESS_BY_STAFF,
   payload: data,
 });
 export const fetchMagazinePostFailure = (error) => ({

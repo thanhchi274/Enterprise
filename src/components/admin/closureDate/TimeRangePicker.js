@@ -28,7 +28,7 @@ const nameMapper = {
   vi: "Vietnamese",
 };
 
-const TimeRangePicker = ({ title, year,updateClosureDateStart,closureData}) => {
+const TimeRangePicker = ({ event, year,updateClosureDateStart,closureData}) => {
   const localeOptions = Object.keys(locales)
     .map((key) => ({
       value: key,
@@ -40,7 +40,8 @@ const TimeRangePicker = ({ title, year,updateClosureDateStart,closureData}) => {
   const [date, setDate] = useState(null);
   const [closureDates, setClosureDates] = React.useState([]);
   useEffect(() => {
-    setClosureDates(closureData[2].closureDates)
+    console.log(closureDates)
+    // setClosureDates(closureData[0].closureDates)
   }, [])
   const handleChooseDate = (date) => {
     const dateObject = new Date(date);
@@ -65,9 +66,14 @@ const TimeRangePicker = ({ title, year,updateClosureDateStart,closureData}) => {
     var result = "Closure dates:";
     var newline = String.fromCharCode(13, 10);
     if (closureDates.length > 0) {
-      for (let index = 0; index < closureDates.length; index++) {
-        const element = closureDates[index];
-        result += `${newline}-${element}`;
+      for (let index = 0; index < 2; index++) {
+         const element = closureDates[index];
+         if(index=1){
+          result += `${'Start Date'}-${element}`;
+         }
+         if(index=2){
+          result += `${'End Date'}-${element}`;
+         }
       }
       return result;
     }
@@ -92,7 +98,7 @@ const TimeRangePicker = ({ title, year,updateClosureDateStart,closureData}) => {
   return (
     <Card small className="blog-comments">
       <CardHeader className="border-bottom">
-        <h6 className="m-0">{title}</h6>
+        <h6 className="m-0">{event}</h6>
       </CardHeader>
       <CardBody className="p-0" id="body_reports">
         <div style={{ display: "flex", flexFlow: "column nowrap" }}>

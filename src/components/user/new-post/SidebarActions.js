@@ -4,21 +4,18 @@ import React from "react";
 import PropTypes from "prop-types";
 import {
   Card,
-  CardHeader,
   CardBody,
   ListGroup,
   ListGroupItem,
-  Button,
 } from "shards-react";
 import DragDropZone from "../dropzoneDiaglog/dropzoneDialog.component";
-const SidebarActions = ({ editPost, data }) => {
-  let isOutDate = new Date().toLocaleDateString()>new Date(data).toLocaleDateString()?1:-1
+const SidebarActions = ({ data }) => {
   const [agreeTerm, setAgreeTerm] = React.useState(false);
         return (
           <Card small className="mb-3">
             <CardBody className="p-0">
               <ListGroup flush>
-                <h5 style={{ margin: "10px" }}>{new Date(data).toLocaleDateString()}</h5>
+                <h5 style={{ margin: "10px" }}>{data.Faulty}</h5>
                 <ListGroupItem className="px-3 border-0">
                   <form
                     className="d-flex my-3"
@@ -27,7 +24,6 @@ const SidebarActions = ({ editPost, data }) => {
                     <input
                       type="checkbox"
                       defaultValue={agreeTerm}
-                      disabled={isOutDate===1?false:true}
                       onClick={()=>setAgreeTerm(!agreeTerm)}
                     />
                     <span style={{ marginLeft: "10px" }}>
@@ -39,7 +35,9 @@ const SidebarActions = ({ editPost, data }) => {
                       <br />
                     </span>
                   </form>
-                  {agreeTerm?<DragDropZone data={data} />:null}
+                  {agreeTerm?
+                  <DragDropZone data={data} />
+                  :null}
                 </ListGroupItem>
               </ListGroup>
             </CardBody>

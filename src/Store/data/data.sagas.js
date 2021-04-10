@@ -24,10 +24,9 @@ export function* getMagazinePostDataAsync(){
       let populateData = data=>{
         MagazineData.push(data);
       }
-      yield console.log(currentUser.id)
       yield firestore.collection("magazinePost").where('id', '==', currentUser.id).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          populateData({...doc.data(), "id":doc.id})
+          populateData(doc.data())
         });
     });
       yield put(fetchMagazinePostSuccess(MagazineData))
@@ -48,7 +47,7 @@ export function* getMagazinePostDataStaffAsync(){
     }
     yield firestore.collection("magazinePost").get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        populateData({...doc.data(), "id":doc.id})
+        populateData({...doc.data()})
       });
   });
     yield put(fetchMagazinePostStaffSuccess(MagazineData))
@@ -63,9 +62,6 @@ export function* approvePost(data){
 export function* updateStatusPost({payload}){
   const extraDataUserRef =  firestore.collection('magazinePost').doc(payload.id).get();
   const result = yield extraDataUserRef.then(res=>res.data())
-  console.log(result)
-  // console.log(extraDataUserRef)
-  // yield extraDataUserRef.update(userUploadData);
 }
 export function* fetchClosureDateStart(){
   yield takeLatest(DataActionTypes.FETCH_CLOSURE_DATE_START,fetchClosureDateAsync )
@@ -76,9 +72,10 @@ export function* fetchClosureDateAsync(props){
     ClosureData.push(data);
   }
   try {
-    yield firestore.collection("closure_date").get().then((querySnapshot) => {
+    
+    yield firestore.collection("closure_date").orderBy('ID', 'asc').get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        populateData(doc.data())
+        populateData({...doc.data(),"keyID":doc.id})
       });
   });
   yield put(fetchClosureDateSuccess(ClosureData))
@@ -92,12 +89,7 @@ export function* updateClosureDateStart(){
 }
 export function* updateClosureDateAsync({payload}){
   try {
-    let updateData = {
-      closureDates:payload,
-      id:"3",
-      year:"2021"
-    }
-    yield firestore.collection("closure_date").doc('3').update(updateData);
+    yield firestore.collection("closure_date").doc(payload.keyID).update(payload);
     yield put(updateClosureDateSuccess())
     yield alert('Update Success')
   } catch (error) {

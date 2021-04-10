@@ -37,18 +37,20 @@ const PostListOne = ({ post, role }) => {
                 backgroundImage: `url('${"https://picsum.photos/200/300"}')`,
               }}
             >
-              Written by {post.end}
             </a>
           </div>
         </div>
         <CardBody>
           <h5 className="card-title">
             <a href="#" className="text-fiord-blue">
-              {post.createAt}
+             {post.faulty} - {new Date(post.form).toLocaleDateString()}
             </a>
           </h5>
           <div className="d-flex justify-content-between align-items-center">
-            <span className="text-muted">{post.end}</span>
+            <span className="text-muted">Submit At: {new Date(post.createAt).toLocaleString()}</span>
+          </div>
+          <div className="d-flex justify-content-between align-items-center">
+            <span className="text-muted">Final Submit At: {new Date(post.end).toLocaleString()}</span>
           </div>
         </CardBody>
         <Button

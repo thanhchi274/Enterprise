@@ -19,10 +19,6 @@ export function* getSnapshotFromAuth(userAuth,additionalData) {
     let populateData = data=>{
       userRole.push(data);
     }
-    let adminRole = [];
-    let populateAdminData=data=>{
-      adminRole.push(data)
-    }
     const userRef = yield call(createUserProfileDocument, userAuth, additionalData);
     const userSnapShot = yield userRef.get();
     let userEmail = userSnapShot.data().email
@@ -81,9 +77,13 @@ export function* updateDataAsync({files}){
   const currentUser = yield select(selectCurrentUser);
   const currentData = yield select(selectMagazinePost)
   const timeNow= yield new Date().toUTCString()
+  let existsData = []
+  let populateData = data=>{
+    existsData.push(data);
+  }
   if (currentUser) {
     try {
-      if(files.length===2){
+      if(files.length===3){
         yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[0].name).put(files[0])
         const itemDownload = yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[0].name)
         const itemUrl = yield itemDownload.getDownloadURL().then(url=>url)
@@ -92,14 +92,36 @@ export function* updateDataAsync({files}){
           link:itemUrl,
           createAt:toString(timeNow),
           status:"Submitted",
-          end:files[1].endDate
+          end:files[1].End,
+          faulty:files[1].Faulty,
+          start:files[1].Start,
+          form:files[2].dateChoose
         }
-        const extraDataUserRef = yield firestore.collection('magazinePost').add(userUploadData);
-        // let data =  [...currentData, { ...userUploadData}]
+        yield firestore.collection('magazinePost').where('id','==', currentUser.id).where('faulty','==',files[1].Faulty).where('form','==',files[2].dateChoose).get().then((querySnapshot)=>  querySnapshot.forEach((doc) => {
+        return populateData({...doc.data(),"keyID":doc.id})
+        }))
+        if(existsData.length>0){
+          yield firestore.collection('magazinePost').doc(`${existsData[0].keyID}`).update(userUploadData)
+        }
+        else{
+          yield firestore.collection('magazinePost').add(userUploadData);
+        }
+        const Email={
+          to: `${currentUser.email}`,
+          message: {
+            subject: `${files[1].Faulty}_Upload Post Success_${currentUser.email}`,
+            text: `Student ${currentUser.email} has successfully uploaded,${files[1].Faulty} Marketing Coordinator please comment in the system.
+            Thank You`,
+            html: `<p>Student ${currentUser.email} has successfully uploaded,${files[1].Faulty} Marketing Coordinator please comment in the system.
+            </br>Thank You</p>`,
+          },
+        }
         yield put(uploadDataSuccess())
         yield alert('Success Upload')
+        yield firestore.collection("mail").add(Email).then(() => console.log("Queued email for delivery!"));
+        yield window.location.reload()
       }
-      if(files.length===3){
+      if(files.length===4){
         yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[2].endDate).child(files[0].name).put(files[0])
         yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[2].endDate).child(files[1].name).put(files[1])
         const itemDownload1 = yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[2].endDate).child(files[0].name)
@@ -112,12 +134,28 @@ export function* updateDataAsync({files}){
           link2:itemUrl2,
           createAt:toString(timeNow),
           status:"Submitted",
-          end:files[2].endDate
+          end:files[2].End,
+          faulty:files[2].Faulty,
+          start:files[2].Start,
         }
         const extraDataUserRef = yield firestore.collection('magazinePost');
         yield extraDataUserRef.add(userUploadData);
+        const Email={
+          to: `${currentUser.email}`,
+          message: {
+            subject: `${files[1].Faulty}_Upload Post Success_${currentUser.email}`,
+            text: `Student ${currentUser.email} has successfully uploaded at ${toString(timeNow)} ,${files[1].Faulty} Marketing Coordinator please comment in the system.
+            Thank You`,
+            html: `<p>Student ${currentUser.email} has successfully uploaded at ${toString(timeNow)} ,${files[1].Faulty} Marketing Coordinator please comment in the system.
+            </br>Thank You</p>`,
+          },
+        }
+        yield firestore.collection("mail").add(Email)
+        .then(() => console.log("Queued email for delivery!"));
         yield alert('Success Upload')
         yield put(uploadDataSuccess())
+        yield existsData=[]
+        yield window.location.reload()
       }
     }
      catch (error) {

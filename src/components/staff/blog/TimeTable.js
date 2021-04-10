@@ -40,8 +40,8 @@ const TimeTable = ({isATimeSelected,setSelectedATime,ClosureData,fetchEachEventS
                 </tr>
               </thead>
               <tbody>
-              {ClosureData.map((item, index) => {
-                  let sortTime = item.closureDates.sort((a,b)=>a>b?-1:0)
+              {/* {ClosureData.map((item, index) => {
+                  let sortTime = item.sort((a,b)=>a>b?-1:0)
                   return parseInt(item.year) === new Date().getFullYear()?
                   sortTime.map((item, index) => {
                     return (
@@ -57,7 +57,7 @@ const TimeTable = ({isATimeSelected,setSelectedATime,ClosureData,fetchEachEventS
                       </tr>
                     )})
                :null;
-                })}
+                })} */}
               </tbody>
             </table>
           </CardBody>

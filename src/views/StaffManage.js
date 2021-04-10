@@ -8,11 +8,11 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectMagazinePost,selectEachEvent} from "../Store/data/data.selector";
 import { fetchMagazinePostStaffStart } from "../Store/data/data.action";
-const StaffManage = ({data,fetchMagazinePostStaffStart,event}) => {
+const StaffManage = ({fetchMagazinePostStaffStart,event}) => {
   const [isATimeSelected, setSelectedATime] = React.useState(false);
-  useEffect(() => {
-    fetchMagazinePostStaffStart()
-  }, [fetchMagazinePostStaffStart])
+  // useEffect(() => {
+  //   fetchMagazinePostStaffStart()
+  // }, [fetchMagazinePostStaffStart])
   return (
     <Container fluid className="main-content-container px-4">
       <Row noGutters className="page-header py-4">
@@ -43,7 +43,7 @@ const mapStateToProps = createStructuredSelector ({
 })
 
 const mapDispatchToProps = dispatch =>({
-  fetchMagazinePostStaffStart:(data)=>dispatch(fetchMagazinePostStaffStart(data))
+  // fetchMagazinePostStaffStart:(data)=>dispatch(fetchMagazinePostStaffStart(data))
 })
 
 export default connect(mapStateToProps,mapDispatchToProps) (StaffManage);

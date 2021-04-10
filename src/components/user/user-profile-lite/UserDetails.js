@@ -1,15 +1,9 @@
-import React, {useState} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import {
   Card,
   CardHeader,
-  Button,
-  ListGroup,
-  ListGroupItem,
-  Progress,
 } from "shards-react";
-
-//Images
 import user_avatar from "../../../assets/images/avatars/0.jpg";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -27,7 +21,6 @@ const UserDetails = ({ userDetails, currentUser }) => (
         />
       </div>
       <h4 className="mb-0">{currentUser.displayName||currentUser.providerData[0].displayName||currentUser.email}</h4>
-      <p>Test</p>
     </CardHeader>
   </Card>
 );

@@ -3,12 +3,10 @@ import { Container, Row, Col } from "shards-react";
 import {fetchClosureDateStart} from '../Store/data/data.action'
 import { createStructuredSelector } from "reselect";
 import { selectClosureDates } from "../Store/data/data.selector";
-import TimeRangePicker from "../components/admin/closureDate/TimeRangePicker";
 import PageTitle from "../components/common/PageTitle";
 import DateTable from "../components/admin/closureDate/DateTable";
 import { connect } from "react-redux";
 const SetClosureDates = ({closureData,fetchClosureDateStart}) => {
-  const [event, setEvent] = React.useState();
   useEffect(() => {
     fetchClosureDateStart()
   }, [fetchClosureDateStart])
@@ -23,11 +21,8 @@ const SetClosureDates = ({closureData,fetchClosureDateStart}) => {
         />
       </Row>
       <Row>
-        <Col lg="8" md="8" sm="12" className="mb-4">
-          <DateTable closureData={closureData} setEvent={setEvent}/>
-        </Col>
-        <Col lg="4" md="4" sm="12" className="mb-4">
-          {<TimeRangePicker event={event} closureData={closureData}  year={2021}/>}
+        <Col lg="12" md="12" sm="12" className="mb-4">
+          <DateTable closureData={closureData}/>
         </Col>
       </Row>
     </Container>

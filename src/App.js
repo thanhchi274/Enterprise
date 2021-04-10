@@ -18,7 +18,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./shards-dashboard/styles/shards-dashboards.1.1.0.min.css";
 import Home from "./views/Home";
 import { Container } from "./utils/toast";
-
 const SignUp = lazy(() => import("./pages/user/sign-up/SignUp"));
 const showMenuHome = (routes, currentUser) => {
   if (routes && routes.length > 0) {
@@ -127,8 +126,7 @@ const App = ({ checkUserSession, currentUser }) => {
                 currentUser ? <Redirect to="/blog-posts" /> : <Home />
               }
             />
-            {/* <Route path="*" component={() => "404 NOT FOUND"} />
-             <Route path="*" component={() => "404 NOT FOUND"} /> */}
+            <Route path="*" component={() => "404 NOT FOUND"} />
             <Route exact={true} path="/register" component={SignUp}></Route>
           </Suspense>
         </ErrorBoundary>

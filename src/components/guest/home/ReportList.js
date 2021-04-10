@@ -77,7 +77,7 @@ const ReportList = ({ title }) => {
         <h6 className="m-0">{title}</h6>
       </CardHeader>
 
-      <CardBody
+      {/* <CardBody
         className="p-0"
         id="body_reports"
         style={{ height: "270px", overflowY: "scroll" }}
@@ -88,19 +88,15 @@ const ReportList = ({ title }) => {
             className="blog-comments__item d-flex p-3 hover_item_table"
             onClick={(e) => handleOpenModal(e, report)}
           >
-            {/* Avatar */}
             <div className="blog-comments__avatar mr-3">
               <i className="material-icons" style={{ fontSize: "50px" }}>
                 description
               </i>
             </div>
-
-            {/* Content */}
             <div
               className="blog-comments__content"
               style={{ marginLeft: "10px", width: "100%" }}
             >
-              {/* Content :: Title */}
               <div className="blog-comments__meta text-mutes">
                 <a className="text-secondary" href="#">
                   Report of {report.closureDate}
@@ -122,7 +118,7 @@ const ReportList = ({ title }) => {
             </div>
           </div>
         ))}
-      </CardBody>
+      </CardBody> */}
 
       <CardFooter className="border-top">
         <Row>
