@@ -2,7 +2,6 @@ import DataTypes from "./data.type";
 
 const INITIAL_STATE = {
   pendingPost: null,
-  postWithComment: null,
   magazinePost: null,
   isLoading: true,
   error: undefined,
@@ -51,11 +50,6 @@ const dataReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         pendingPost: action.payload,
-      };
-    case DataTypes.SET_COMMENT:
-      return {
-        ...state,
-        postWithComment: action.payload,
       };
     case DataTypes.SET_EDIT_POST:
       return {

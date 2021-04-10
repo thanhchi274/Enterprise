@@ -1,18 +1,13 @@
 import { takeLatest, all, call, put,select } from "redux-saga/effects";
 import UserActionTypes from "./user.type";
-import { getUserExtraRef,
-   cloudStorage,auth, firestore
-  } from '../../utils/firebase.utils';
+import {cloudStorage,auth, firestore} from '../../utils/firebase.utils';
 import { selectCurrentUser } from '../user/user.selector';
-import {selectMagazinePost} from '../data/data.selector'
 import {
   createUserProfileDocument,
   getCurrentUser
 } from "../../utils/firebase.utils";
-import { signInSuccess, signInFailure, signOutSuccess, signOutFailure, signUpSuccess, signUpFailure, uploadDataSuccess, uploadDataFailure, setExtraDataUserInFirebase,updateProfileSuccess,updateProfileFailure  } from "./user.action";
-import axios from "axios";
-import _, { toString } from 'lodash'
-import { toast } from "material-react-toastify";
+import { signInSuccess, signInFailure, signOutSuccess, signOutFailure, signUpSuccess, signUpFailure, uploadDataSuccess, uploadDataFailure } from "./user.action";
+import { toString } from 'lodash'
 export function* getSnapshotFromAuth(userAuth,additionalData) {
   try {
     let userRole = []
@@ -32,12 +27,6 @@ export function* getSnapshotFromAuth(userAuth,additionalData) {
     yield userRole = []
   } catch (err) {
     yield put(signInFailure({ err }));
-  }
-}
-export function* getUserRolesFromAuth(userEmail){
-  try {
-  } catch (error) {
-    
   }
 }
 export function* signInWithEmail({ payload: { email, password } }) {
@@ -75,7 +64,6 @@ export function* onUploadDataStart(){
 }
 export function* updateDataAsync({files}){
   const currentUser = yield select(selectCurrentUser);
-  const currentData = yield select(selectMagazinePost)
   const timeNow= yield new Date().toUTCString()
   let existsData = []
   let populateData = data=>{
@@ -95,7 +83,8 @@ export function* updateDataAsync({files}){
           end:files[1].End,
           faulty:files[1].Faulty,
           start:files[1].Start,
-          form:files[2].dateChoose
+          form:files[2].dateChoose,
+          email:currentUser.email
         }
         yield firestore.collection('magazinePost').where('id','==', currentUser.id).where('faulty','==',files[1].Faulty).where('form','==',files[2].dateChoose).get().then((querySnapshot)=>  querySnapshot.forEach((doc) => {
         return populateData({...doc.data(),"keyID":doc.id})
@@ -122,10 +111,10 @@ export function* updateDataAsync({files}){
         yield window.location.reload()
       }
       if(files.length===4){
-        yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[2].endDate).child(files[0].name).put(files[0])
-        yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[2].endDate).child(files[1].name).put(files[1])
-        const itemDownload1 = yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[2].endDate).child(files[0].name)
-        const itemDownload2 = yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[2].endDate).child(files[1].name)
+        yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[0].name).put(files[0])
+        yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[1].name).put(files[1])
+        const itemDownload1 = yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[0].name)
+        const itemDownload2 = yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[1].name)
         const itemUrl1 = yield itemDownload1.getDownloadURL().then(url=>url)
         const itemUrl2 = yield itemDownload2.getDownloadURL().then(url=>url)
         let userUploadData = {
@@ -137,9 +126,9 @@ export function* updateDataAsync({files}){
           end:files[2].End,
           faulty:files[2].Faulty,
           start:files[2].Start,
+          form:files[3].dateChoose,
+          email:currentUser.email
         }
-        const extraDataUserRef = yield firestore.collection('magazinePost');
-        yield extraDataUserRef.add(userUploadData);
         const Email={
           to: `${currentUser.email}`,
           message: {
@@ -150,6 +139,15 @@ export function* updateDataAsync({files}){
             </br>Thank You</p>`,
           },
         }
+        yield firestore.collection('magazinePost').where('id','==', currentUser.id).where('faulty','==',files[2].Faulty).where('form','==',files[3].dateChoose).get().then((querySnapshot)=>  querySnapshot.forEach((doc) => {
+          return populateData({...doc.data(),"keyID":doc.id})
+          }))
+          if(existsData.length>0){
+            yield firestore.collection('magazinePost').doc(`${existsData[0].keyID}`).update(userUploadData)
+          }
+          else{
+            yield firestore.collection('magazinePost').add(userUploadData);
+          }
         yield firestore.collection("mail").add(Email)
         .then(() => console.log("Queued email for delivery!"));
         yield alert('Success Upload')
@@ -159,9 +157,7 @@ export function* updateDataAsync({files}){
       }
     }
      catch (error) {
-      yield toast.error(`Update Error, please try again!`)
       yield put(uploadDataFailure(error))
-      // yield window.location.reload()
       switch (error.code) {
         case 'storage/object-not-found':
           yield console.log("File doesn't exist")
@@ -175,6 +171,8 @@ export function* updateDataAsync({files}){
         case 'storage/unknown':
         yield  console.log("Unknown error occurred, inspect the server response")
           break;
+        default:
+          yield console.log('Please try again')
       }
     }
   }
@@ -215,12 +213,6 @@ export function* onSignUpStart(){
 }
 export function* onSignUpSuccess(){
   yield takeLatest(UserActionTypes.SIGN_UP_SUCCESS, signInAfterSignUp)
-}
-export function* approvePost(){
-
-}
-export function* rejectPost(){
-  
 }
 export function* userSagas() {
   yield all([ call(onEmailSignInStart), call(onCheckUserSessions), call(onSignOutStart),call(onSignUpStart) ,call(onSignUpSuccess), call(onUploadDataStart), call(onUpdateProfileStart)

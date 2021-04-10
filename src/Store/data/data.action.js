@@ -4,10 +4,6 @@ export const setPendingPost = (data) => ({
   type: DataTypes.SET_PENDING_POST,
   payload: data,
 });
-export const setComment = (data) => ({
-  type: DataTypes.SET_COMMENT,
-  payload: data,
-});
 export const fetchMagazinePostStart = () => ({
   type: DataTypes.FETCH_MAGAZINE_START,
 });
@@ -39,6 +35,14 @@ export const fetchClosureDateFailure = (error) => ({
 });
 export const approvePost = (data) => ({
   type: DataTypes.APPROVE_POST,
+  payload: data,
+});
+export const rejectPost =(data)=>({
+  type:DataTypes.REJECT_POST,
+  payload: data,
+})
+export const setComment = (data) => ({
+  type: DataTypes.SET_COMMENT,
   payload: data,
 });
 export const updateClosureDateStart = (data) => ({
