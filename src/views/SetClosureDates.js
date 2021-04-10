@@ -4,13 +4,11 @@ import {fetchClosureDateStart} from '../Store/data/data.action'
 import { createStructuredSelector } from "reselect";
 import { selectClosureDates } from "../Store/data/data.selector";
 import TimeRangePicker from "../components/admin/closureDate/TimeRangePicker";
-import Login from "../components/guest/home/Login";
-import SignUp from "../components/guest/home/SignUp";
 import PageTitle from "../components/common/PageTitle";
 import DateTable from "../components/admin/closureDate/DateTable";
 import { connect } from "react-redux";
 const SetClosureDates = ({closureData,fetchClosureDateStart}) => {
-  const [year, setYear] = React.useState();
+  const [event, setEvent] = React.useState();
   useEffect(() => {
     fetchClosureDateStart()
   }, [fetchClosureDateStart])
@@ -19,17 +17,17 @@ const SetClosureDates = ({closureData,fetchClosureDateStart}) => {
       <Row noGutters className="page-header py-4">
         <PageTitle
           sm="4"
-          title="Set Closure Dates"
+          title="Set Faculties"
           subtitle="Administrator"
           className="text-sm-left"
         />
       </Row>
       <Row>
         <Col lg="8" md="8" sm="12" className="mb-4">
-          <DateTable closureData={closureData} setYear={setYear}/>
+          <DateTable closureData={closureData} setEvent={setEvent}/>
         </Col>
         <Col lg="4" md="4" sm="12" className="mb-4">
-          {year && <TimeRangePicker closureData={closureData[2]}  year={year}/>}
+          {<TimeRangePicker event={event} closureData={closureData}  year={2021}/>}
         </Col>
       </Row>
     </Container>
