@@ -1,13 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {
-  Row,
-  Col,
-  FormSelect,
   Card,
   CardHeader,
   CardBody,
-  CardFooter
 } from "shards-react";
 
 import Chart from "../../../utils/chart";
@@ -15,14 +11,26 @@ import Chart from "../../../utils/chart";
 class PostsByCategory extends React.Component {
   constructor(props) {
     super(props);
-
     this.canvasRef = React.createRef();
   }
-
   componentDidMount() {
-    const chartConfig = {
+   let {analysisData} = this.props
+    const chartConfig ={
       type: "pie",
-      data: this.props.chartData,
+      data:{
+        datasets: [
+          {
+            hoverBorderColor: "#ffffff",
+            data: [analysisData[0].totalPost, analysisData[1].totalApproved, analysisData[2].totalRejected],
+            backgroundColor: [
+              "rgba(0,123,255,0.9)",
+              "rgba(0,123,255,0.5)",
+              "rgba(0,123,255,0.3)"
+            ]
+          }
+        ],
+        labels: ["Post", "Approved", "Reject"]
+      },
       options: {
         ...{
           legend: {
@@ -42,7 +50,6 @@ class PostsByCategory extends React.Component {
         ...this.props.chartOptions
       }
     };
-
     new Chart(this.canvasRef.current, chartConfig);
   }
 
@@ -66,40 +73,13 @@ class PostsByCategory extends React.Component {
 }
 
 PostsByCategory.propTypes = {
-  /**
-   * The component's title.
-   */
   title: PropTypes.string,
-  /**
-   * The chart config object.
-   */
   chartConfig: PropTypes.object,
-  /**
-   * The Chart.js options.
-   */
   chartOptions: PropTypes.object,
-  /**
-   * The chart data.
-   */
-  chartData: PropTypes.object
 };
 
 PostsByCategory.defaultProps = {
-  title: "Posts by category",
-  chartData: {
-    datasets: [
-      {
-        hoverBorderColor: "#ffffff",
-        data: [68.3, 24.2, 7.5],
-        backgroundColor: [
-          "rgba(0,123,255,0.9)",
-          "rgba(0,123,255,0.5)",
-          "rgba(0,123,255,0.3)"
-        ]
-      }
-    ],
-    labels: ["Business", "Travel", "Assignment"]
-  }
+  title: "Posts of System",
 };
 
 export default PostsByCategory;

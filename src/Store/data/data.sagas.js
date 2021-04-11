@@ -13,6 +13,10 @@ import {
   updateClosureDateFailure,
   fetchEachEventSuccess,
   fetchEachEventFailure,
+  fetchAnalysisDataSuccess,
+  fetchAnalysisDataFailure,
+  fetchDownloadAllDataSuccess,
+  fetchDownloadAllDataFailure
 } from "./data.action";
 export function* getMagazinePostDataStart() {
   yield takeLatest(
@@ -160,6 +164,66 @@ export function* fetchEachEventAsync({ payload }) {
     yield put(fetchEachEventFailure(error));
   }
 }
+export function* fetchAnalysisDataStart() {
+  yield takeLatest(
+    DataActionTypes.FETCH_ANALYSIS_DATA_START,
+    fetchAnalysisDataAsync
+  );
+}
+export function* fetchAnalysisDataAsync() {
+  const analysisData = [];
+  let populateData = (data) => {
+    analysisData.push(data);
+  };
+  try {
+    yield firestore
+      .collection("magazinePost")
+      .get()
+      .then(function (querySnapshot) {
+        populateData({ totalPost: querySnapshot.size });
+      });
+    yield firestore
+      .collection("magazinePost")
+      .where("status", "==", "Approved")
+      .get()
+      .then(function (querySnapshot) {
+        populateData({ totalApproved: querySnapshot.size });
+      });
+    yield firestore
+      .collection("magazinePost")
+      .where("status", "==", "Rejected")
+      .get()
+      .then(function (querySnapshot) {
+        populateData({ totalRejected: querySnapshot.size });
+      });
+    yield firestore
+      .collection("user_data")
+      .get()
+      .then(function (querySnapshot) {
+        populateData({ totalUser: querySnapshot.size });
+      });
+    yield put(fetchAnalysisDataSuccess(analysisData));
+  } catch (error) {
+    yield put(fetchAnalysisDataFailure(error));
+  }
+}
+export function* fetchLinkDownloadAllStart(){
+  yield takeLatest(DataActionTypes.FETCH_ANALYSIS_DATA_SUCCESS,fetchLinkDownloadAllAsync)
+}
+export function* fetchLinkDownloadAllAsync(){
+  let downloadLink =[]
+  const populateData = data=>{
+    downloadLink.push(data)
+  }
+  try {
+    yield firestore.collection('downloadLink').limit(100).get().then((querySnapshot)=>
+    querySnapshot.forEach((doc) =>populateData(doc.data()) ))
+    yield put(fetchDownloadAllDataSuccess(downloadLink))
+    yield downloadLink = []
+  } catch (error) {
+    yield put(fetchDownloadAllDataFailure(error))
+  }
+}
 export function* dataSagas() {
   yield all([
     call(getMagazinePostDataStart),
@@ -170,5 +234,7 @@ export function* dataSagas() {
     call(fetchClosureDateStart),
     call(updateClosureDateStart),
     call(fetchEachEventStart),
+    call(fetchAnalysisDataStart),
+    call(fetchLinkDownloadAllStart)
   ]);
 }

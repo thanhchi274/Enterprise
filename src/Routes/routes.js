@@ -56,12 +56,6 @@ const routeAdmin = [
 ];
 const routeManager = [
   {
-    path: "/all-posts",
-    exact: true,
-    layout: ManagerLayout,
-    component: () => <BlogPosts role="manager" />,
-  },
-  {
     path: "/statistic",
     exact: true,
     layout: ManagerLayout,

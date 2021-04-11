@@ -9,7 +9,6 @@ import Chart from "../../utils/chart";
 class SmallStats extends React.Component {
   constructor(props) {
     super(props);
-
     this.canvasRef = React.createRef();
   }
 

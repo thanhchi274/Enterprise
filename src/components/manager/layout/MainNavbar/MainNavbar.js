@@ -1,9 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { Container, Navbar } from "shards-react";
-
-import NavbarSearch from "./NavbarSearch";
+import { Container, Navbar, Form } from "shards-react";
 import NavbarNav from "./NavbarNav/NavbarNav";
 import NavbarToggle from "./NavbarToggle";
 
@@ -18,7 +16,10 @@ const MainNavbar = ({ layout, stickyTop }) => {
     <div className={classes}>
       <Container className="p-0">
         <Navbar type="light" className="align-items-stretch flex-md-nowrap p-0">
-          <NavbarSearch />
+          <Form
+            className="main-navbar__search w-100 d-none d-md-flex d-lg-flex"
+            style={{ paddingLeft: "10px" }}
+          ></Form>
           <NavbarNav />
           <NavbarToggle />
         </Navbar>
@@ -28,18 +29,12 @@ const MainNavbar = ({ layout, stickyTop }) => {
 };
 
 MainNavbar.propTypes = {
-  /**
-   * The layout type where the MainNavbar is used.
-   */
   layout: PropTypes.string,
-  /**
-   * Whether the main navbar is sticky to the top, or not.
-   */
-  stickyTop: PropTypes.bool
+  stickyTop: PropTypes.bool,
 };
 
 MainNavbar.defaultProps = {
-  stickyTop: true
+  stickyTop: true,
 };
 
 export default MainNavbar;

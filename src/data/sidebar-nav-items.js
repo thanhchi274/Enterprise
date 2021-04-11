@@ -42,12 +42,6 @@ export const routeStaff = [
 
 export const routeManager = [
   {
-    title: "All Posts",
-    to: "/all-posts",
-    htmlBefore: '<i class="material-icons">dynamic_feed</i>',
-    htmlAfter: "",
-  },
-  {
     title: "Statistic",
     to: "/statistic",
     htmlBefore: '<i class="material-icons">analytics</i>',

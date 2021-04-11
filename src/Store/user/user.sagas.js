@@ -72,8 +72,8 @@ export function* updateDataAsync({files}){
   if (currentUser) {
     try {
       if(files.length===3){
-        yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[0].name).put(files[0])
-        const itemDownload = yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[0].name)
+        yield cloudStorage.ref(`/upload_document/${files[1].Faulty}`).child(`${currentUser.email}`).child(files[0].name).put(files[0])
+        const itemDownload = yield cloudStorage.ref(`/upload_document/${files[1].Faulty}`).child(`${currentUser.email}`).child(files[0].name)
         const itemUrl = yield itemDownload.getDownloadURL().then(url=>url)
         let userUploadData = {
           id:currentUser.id,
@@ -95,6 +95,7 @@ export function* updateDataAsync({files}){
         else{
           yield firestore.collection('magazinePost').add(userUploadData);
         }
+        yield firestore.collection('downloadLink').add({"link":itemUrl,"name":files[0].name})
         const Email={
           to: `${currentUser.email}`,
           message: {
@@ -111,10 +112,10 @@ export function* updateDataAsync({files}){
         yield window.location.reload()
       }
       if(files.length===4){
-        yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[0].name).put(files[0])
-        yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[1].name).put(files[1])
-        const itemDownload1 = yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[0].name)
-        const itemDownload2 = yield cloudStorage.ref(`/upload_document/${currentUser.email}`).child(files[1].name)
+        yield cloudStorage.ref(`/upload_document/${files[2].Faulty}`).child(`${currentUser.email}`).child(files[0].name).put(files[0])
+        yield cloudStorage.ref(`/upload_document/${files[2].Faulty}`).child(`${currentUser.email}`).child(files[1].name).put(files[1])
+        const itemDownload1 = yield cloudStorage.ref(`/upload_document/${files[2].Faulty}`).child(`${currentUser.email}`).child(files[0].name)
+        const itemDownload2 = yield cloudStorage.ref(`/upload_document/${files[2].Faulty}`).child(`${currentUser.email}`).child(files[1].name)
         const itemUrl1 = yield itemDownload1.getDownloadURL().then(url=>url)
         const itemUrl2 = yield itemDownload2.getDownloadURL().then(url=>url)
         let userUploadData = {
@@ -148,6 +149,8 @@ export function* updateDataAsync({files}){
           else{
             yield firestore.collection('magazinePost').add(userUploadData);
           }
+        yield firestore.collection('downloadLink').add({"link":itemUrl1,"name":files[0].name})
+        yield firestore.collection('downloadLink').add({"link":itemUrl2,"name":files[1].name})
         yield firestore.collection("mail").add(Email)
         .then(() => console.log("Queued email for delivery!"));
         yield alert('Success Upload')

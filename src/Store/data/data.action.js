@@ -72,3 +72,25 @@ export const fetchEachEventFailure = (error) => ({
   type: DataTypes.FETCH_EACH_EVENT_FAILURE,
   payload: error,
 });
+export const fetchAnalysisDataStart = ()=>({
+  type: DataTypes.FETCH_ANALYSIS_DATA_START
+})
+export const fetchAnalysisDataSuccess = (data)=>({
+  type: DataTypes.FETCH_ANALYSIS_DATA_SUCCESS,
+  payload: data,
+})
+export const fetchAnalysisDataFailure = (error)=>({
+  type: DataTypes.FETCH_ANALYSIS_DATA_FAILURE,
+  payload: error,
+})
+export const fetchDownloadAllDataStart = ()=>({
+  type: DataTypes.FETCH_DOWNLOAD_LINK_START
+})
+export const fetchDownloadAllDataSuccess = (data)=>({
+  type: DataTypes.FETCH_DOWNLOAD_LINK_SUCCESS,
+  payload: data,
+})
+export const fetchDownloadAllDataFailure = (error)=>({
+  type: DataTypes.FETCH_DOWNLOAD_LINK_FAILURE,
+  payload: error,
+})
