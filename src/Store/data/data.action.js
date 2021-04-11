@@ -94,3 +94,14 @@ export const fetchDownloadAllDataFailure = (error)=>({
   type: DataTypes.FETCH_DOWNLOAD_LINK_FAILURE,
   payload: error,
 })
+export const fetchReportGuestViewStart = ()=>({
+  type:DataTypes.FETCH_REPORT_GUEST_VIEW_START
+})
+export const fetchReportGuestViewSuccess = (data)=>({
+  type: DataTypes.FETCH_REPORT_GUEST_VIEW_SUCCESS,
+  payload: data,
+})
+export const fetchReportGuestViewFailure = (error)=>({
+  type: DataTypes.FETCH_REPORT_GUEST_VIEW_FAILURE,
+  payload: error,
+})

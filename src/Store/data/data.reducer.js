@@ -8,7 +8,8 @@ const INITIAL_STATE = {
   closureDates: null,
   faulty: null,
   analysisData: null,
-  downloadLink:null
+  downloadLink:null,
+  guestView:null
 };
 const dataReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -19,10 +20,17 @@ const dataReducer = (state = INITIAL_STATE, action) => {
     case DataTypes.FETCH_EACH_EVENT_START:
     case DataTypes.FETCH_ANALYSIS_DATA_START:
     case DataTypes.FETCH_DOWNLOAD_LINK_START:
+    case DataTypes.FETCH_REPORT_GUEST_VIEW_START:
       return {
         ...state,
         isLoading: true,
       };
+    case DataTypes.FETCH_REPORT_GUEST_VIEW_SUCCESS:
+      return{
+        ...state,
+        isLoading:true,
+        guestView:action.payload
+      }
     case DataTypes.FETCH_ANALYSIS_DATA_SUCCESS:
       return {
         ...state,
@@ -60,6 +68,7 @@ const dataReducer = (state = INITIAL_STATE, action) => {
     case DataTypes.FETCH_EACH_EVENT_FAILURE:
     case DataTypes.FETCH_ANALYSIS_DATA_FAILURE:
     case DataTypes.FETCH_DOWNLOAD_LINK_FAILURE:
+    case DataTypes.FETCH_REPORT_GUEST_VIEW_FAILURE:
       return {
         ...state,
         error: action.payload,

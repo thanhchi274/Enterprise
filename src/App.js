@@ -126,7 +126,6 @@ const App = ({ checkUserSession, currentUser }) => {
                 currentUser ? <Redirect to="/blog-posts" /> : <Home />
               }
             />
-            <Route path="*" component={() => "404 NOT FOUND"} />
             <Route exact={true} path="/register" component={SignUp}></Route>
           </Suspense>
         </ErrorBoundary>

@@ -34,7 +34,6 @@ const onDownloadComplete = (query, blobData) => {
     let { record, fileURLs, count, zip } = query;
     if (count < Object.keys(fileURLs).length) {
       blobToBase64(blobData, function(binaryData){
-        console.log(binaryData)
         let sourceFileName = fileURLs[count].name.substring(fileURLs[count].name.lastIndexOf('/')+1);
         zip.file(sourceFileName, binaryData, {base64: true});
         if (count < fileURLs.length -1){

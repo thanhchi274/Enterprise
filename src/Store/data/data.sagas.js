@@ -16,7 +16,9 @@ import {
   fetchAnalysisDataSuccess,
   fetchAnalysisDataFailure,
   fetchDownloadAllDataSuccess,
-  fetchDownloadAllDataFailure
+  fetchDownloadAllDataFailure,
+  fetchReportGuestViewSuccess,
+  fetchReportGuestViewFailure
 } from "./data.action";
 export function* getMagazinePostDataStart() {
   yield takeLatest(
@@ -164,6 +166,49 @@ export function* fetchEachEventAsync({ payload }) {
     yield put(fetchEachEventFailure(error));
   }
 }
+export function* fetchReportGuestViewStart(){
+  yield takeLatest(
+    DataActionTypes.FETCH_REPORT_GUEST_VIEW_START,
+    fetchReportGuestViewAsync
+  );
+}
+export function* fetchReportGuestViewAsync(){
+  const analysisData = [];
+  let populateData = (data) => {
+    analysisData.push(data);
+  };
+  try {
+    yield firestore
+      .collection("magazinePost")
+      .get()
+      .then(function (querySnapshot) {
+        populateData({ totalPost: querySnapshot.size });
+      });
+    yield firestore
+      .collection("magazinePost")
+      .where("status", "==", "Approved")
+      .get()
+      .then(function (querySnapshot) {
+        populateData({ totalApproved: querySnapshot.size });
+      });
+    yield firestore
+      .collection("magazinePost")
+      .where("status", "==", "Rejected")
+      .get()
+      .then(function (querySnapshot) {
+        populateData({ totalRejected: querySnapshot.size });
+      });
+    yield firestore
+      .collection("user_data")
+      .get()
+      .then(function (querySnapshot) {
+        populateData({ totalUser: querySnapshot.size });
+      });
+    yield put(fetchReportGuestViewSuccess(analysisData));
+  } catch (error) {
+    yield put(fetchReportGuestViewFailure(error));
+  }
+}
 export function* fetchAnalysisDataStart() {
   yield takeLatest(
     DataActionTypes.FETCH_ANALYSIS_DATA_START,
@@ -235,6 +280,7 @@ export function* dataSagas() {
     call(updateClosureDateStart),
     call(fetchEachEventStart),
     call(fetchAnalysisDataStart),
-    call(fetchLinkDownloadAllStart)
+    call(fetchLinkDownloadAllStart),
+    call(fetchReportGuestViewStart)
   ]);
 }
