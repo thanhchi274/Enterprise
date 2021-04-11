@@ -1,5 +1,5 @@
 import React, { useEffect, lazy, Suspense } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, BrowserRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   routeStudent,
@@ -112,7 +112,7 @@ const App = ({ checkUserSession, currentUser }) => {
     const identifiedStaff =userProvider?(userProvider.faulty):null
     const identifiedAdmin =userProvider?(userProvider.role==='Admin'?true:false):null
   return (
-    <>
+    <BrowserRouter basename="/Enterprise">
       <Switch>
         <ErrorBoundary>
           <Container />
@@ -130,7 +130,7 @@ const App = ({ checkUserSession, currentUser }) => {
           </Suspense>
         </ErrorBoundary>
       </Switch>
-    </>
+    </BrowserRouter>
   );
 };
 const mapStateToProps = createStructuredSelector({

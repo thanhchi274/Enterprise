@@ -18,6 +18,7 @@ const DetailAndComment = ({
   title,
   fetchEachEventStart,
   setComment,
+  staffFaulty
 }) => {
   const [comment, setContentComment] = useState(null);
   const [post, setPost] = useState(null);
@@ -26,14 +27,19 @@ const DetailAndComment = ({
   }, [data]);
   const handleSubmitComment = async (e, item) => {
     e.preventDefault();
-    const commentPost = {
-      ...item,
-      comment: { message: comment, createAt: new Date().toLocaleDateString() },
-    };
-    await Promise.all([
-      (async () => setComment(commentPost))(),
-      (async () => fetchEachEventStart(faulty))(),
-    ]);
+    if(staffFaulty===faulty){
+      const commentPost = {
+        ...item,
+        comment: { message: comment, createAt: new Date().toLocaleDateString() },
+      };
+      await Promise.all([
+        (async () => setComment(commentPost))(),
+        (async () => fetchEachEventStart(faulty))(),
+      ]);
+    }
+    else{
+      alert("Sorry you don't have permission to comment this post")
+    }
   };
   const handleInputComment = (e) => {
     var content = e.target.value;

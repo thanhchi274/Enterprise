@@ -9,10 +9,13 @@ import {
   selectMagazinePost,
   selectEachEvent,
 } from "../Store/data/data.selector";
+import {selectCurrentUser} from '../Store/user/user.selector'
 import { fetchMagazinePostStaffStart } from "../Store/data/data.action";
-const StaffManage = ({ fetchMagazinePostStaffStart, event }) => {
+const StaffManage = ({ fetchMagazinePostStaffStart, event,currentUser }) => {
   const [isATimeSelected, setSelectedATime] = useState(false);
   const [faulty, setFaulty] = useState('')
+  const userProvider =  currentUser? currentUser.providerData[1]:null
+
   useEffect(() => {
     fetchMagazinePostStaffStart();
   }, [fetchMagazinePostStaffStart]);
@@ -34,7 +37,7 @@ const StaffManage = ({ fetchMagazinePostStaffStart, event }) => {
       {isATimeSelected && (
         <Row>
           <Col lg="12" md="12" sm="12" className="mb-4">
-         {event?<PendingPosts faulty={faulty} data={event} />:<p>Loading</p>}
+         {event?<PendingPosts staffFaulty={userProvider.faulty} faulty={faulty} data={event} />:<p>Loading</p>}
           </Col>
         </Row>
       )}
@@ -42,6 +45,7 @@ const StaffManage = ({ fetchMagazinePostStaffStart, event }) => {
   );
 };
 const mapStateToProps = createStructuredSelector({
+  currentUser:selectCurrentUser,
   event: selectEachEvent,
   data: selectMagazinePost,
 });

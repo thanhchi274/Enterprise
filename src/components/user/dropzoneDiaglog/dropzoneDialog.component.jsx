@@ -11,19 +11,19 @@ class DropZone extends Component {
     this.state = {
       open: false,
       files: [],
-      date_choose:null
+      date_choose: null,
     };
   }
   handleClose() {
     this.setState({
       open: false,
-      date_choose:null
+      date_choose: null,
     });
   }
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.setState({
-      date_choose:null
-    })
+      date_choose: null,
+    });
   }
   handleSave(files) {
     this.setState(
@@ -31,32 +31,37 @@ class DropZone extends Component {
         files: files,
         open: false,
       },
-      () => this.props.uploadDataStart([...files, this.props.data, {"dateChoose":this.state.date_choose}])
+      () =>
+        this.props.uploadDataStart([
+          ...files,
+          this.props.data,
+          { dateChoose: this.state.date_choose },
+        ])
     );
   }
   handleOpen(event) {
     let { data } = this.props;
-    let target = event.target.value
-    if(target==="first_submit_date"){
+    let target = event.target.value;
+    if (target === "first_submit_date") {
       this.setState({
         open: true,
-        date_choose:data.Start
+        date_choose: data.Start,
       });
     }
-    if(target==="second_submit_date"){
+    if (target === "second_submit_date") {
       this.setState({
         open: true,
-        date_choose:data.End
+        date_choose: data.End,
       });
     }
   }
   render() {
     let { data } = this.props;
-    let isValidStartDay =
-      new Date().toLocaleDateString() >
-      new Date(data.Start).toLocaleDateString();
+    const isValidStartDay =
+      new Date().toISOString() >
+      new Date(data.Start).toISOString();
     let isValidEndDay =
-      new Date().toLocaleDateString() > new Date(data.End).toLocaleDateString();
+      new Date().toISOString() > new Date(data.End).toISOString();
     return (
       <div>
         <h5 className="my-2">
@@ -71,7 +76,7 @@ class DropZone extends Component {
           disabled={isValidStartDay}
           onClick={this.handleOpen.bind(this)}
         >
-          {isValidStartDay ? "Expired" : "Upload"}
+          {!isValidStartDay ?  "Upload":"Expired"}
         </Button>
         <DropzoneDialog
           open={this.state.open}

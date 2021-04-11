@@ -20,6 +20,7 @@ const PendingPosts = ({
   data,
   fetchEachEventStart,
   faulty,
+  staffFaulty
 }) => {
   const [posts, setPosts] = useState(null);
   const [open, setOpen] = useState(false);
@@ -30,19 +31,29 @@ const PendingPosts = ({
   }, [data]);
   const handleApprove = async (e, item) => {
     e.preventDefault();
-    let approvedPost = { ...item, status: "Approved" };
-    await Promise.all([
-      (async () => approvePost(approvedPost))(),
-      (async () => fetchEachEventStart(faulty))(),
-    ]);
+    if(staffFaulty===faulty){
+      let approvedPost = { ...item, status: "Approved" };
+      await Promise.all([
+        (async () => approvePost(approvedPost))(),
+        (async () => fetchEachEventStart(faulty))(),
+      ]);
+    }
+    else{
+      alert("Sorry you don't have permission to approve this post")
+    }
   };
   const handleReject = async (e, item) => {
     e.preventDefault();
-    let rejectedPost = { ...item, status: "Rejected" };
-    await Promise.all([
-      (async () => rejectPost(rejectedPost))(),
-      (async () => fetchEachEventStart(faulty))(),
-    ]);
+    if(staffFaulty===faulty){
+      let rejectedPost = { ...item, status: "Rejected" };
+      await Promise.all([
+        (async () => rejectPost(rejectedPost))(),
+        (async () => fetchEachEventStart(faulty))(),
+      ]);
+    }
+    else{
+      alert("Sorry you don't have permission to reject this post")
+    }
   };
   const handleOpenFile = (item) => {
     window.open(item);
@@ -147,7 +158,7 @@ const PendingPosts = ({
             </div>
           </div>
         ))}
-        {open ? <DetailAndComment faulty={faulty} data={commentData} /> : null}
+        {open ? <DetailAndComment staffFaulty={staffFaulty} faulty={faulty} data={commentData} /> : null}
       </CardBody>
       <CardFooter className="border-top">
         <Row>
