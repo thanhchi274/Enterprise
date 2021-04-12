@@ -38,7 +38,7 @@ class UserActions extends React.Component {
         <DropdownToggle caret tag={NavLink} className="text-nowrap px-3 d-flex align-items-center">
           <span className="d-none d-md-inline-block"> {currentUser.displayName|| currentUser.email|| currentUser.providerData[0].displayName}</span>
         </DropdownToggle>
-        <Collapse tag={DropdownMenu} right small open={this.state.visible}>
+        <Collapse tag={DropdownMenu} small open={this.state.visible}>
           <DropdownItem tag={Link} to="user-profile">
             <i className="material-icons">&#xE7FD;</i> Profile
           </DropdownItem>
