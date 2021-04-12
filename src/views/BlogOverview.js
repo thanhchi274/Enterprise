@@ -16,7 +16,7 @@ const BlogOverview = ({ data,fetchAnalysisDataStart,analysisData,downloadLink })
   useEffect(() => {
     fetchDownloadAllDataStart()
   }, [fetchDownloadAllDataStart])
-return analysisData.length > 0&&downloadLink.length>0?(
+return analysisData&&downloadLink?(
   <Container fluid className="main-content-container px-4 ">
     <Row noGutters className="page-header py-4 d-flex justify-content-between">
     <PageTitle
@@ -31,9 +31,6 @@ return analysisData.length > 0&&downloadLink.length>0?(
     <Chart analysisData={analysisData}/>
     </Row>
     <Row>
-      {/* <Col lg="6" md="6" sm="12" className="mb-4"> */}
-      {/* {analysisData.length>0?<PostsByCategory data={analysisData} />:null} */}
-      {/* </Col> */}
       <Col lg="6" md="6" sm="12" className="mb-4">
       {downloadLink.length>0?<DownloadAllPost allPosts={downloadLink}/>:<p>Loading</p>}
       </Col>
