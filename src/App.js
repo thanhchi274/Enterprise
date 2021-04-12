@@ -112,7 +112,8 @@ const App = ({ checkUserSession, currentUser }) => {
     const identifiedStaff =userProvider?(userProvider.faulty):null
     const identifiedAdmin =userProvider?(userProvider.role==='Admin'?true:false):null
   return (
-    <BrowserRouter basename="/Enterprise">
+    <>
+    <BrowserRouter basename="/">
       <Switch>
         <ErrorBoundary>
           <Container />
@@ -130,7 +131,8 @@ const App = ({ checkUserSession, currentUser }) => {
           </Suspense>
         </ErrorBoundary>
       </Switch>
-    </BrowserRouter>
+      </BrowserRouter>
+      </>
   );
 };
 const mapStateToProps = createStructuredSelector({
