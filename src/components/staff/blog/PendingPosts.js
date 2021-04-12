@@ -99,7 +99,7 @@ const PendingPosts = ({
             >
               <div className="blog-comments__meta d-flex justify-content-between px-2">
                 <p className="text-secondary" href="#">
-                  {post.status}
+                  {post.email}
                 </p>
                 <p className="text-mutes">
                   {new Date(post.createAt).toLocaleString()}

@@ -46,11 +46,15 @@ const PostListOne = ({ post, role }) => {
              {post.faulty} - {new Date(post.form).toLocaleDateString()}
             </a>
           </h5>
+          {console.log(post.comment)}
           <div className="d-flex justify-content-between align-items-center">
             <span className="text-muted">Submit At: {new Date(post.createAt).toLocaleString()}</span>
           </div>
           <div className="d-flex justify-content-between align-items-center">
             <span className="text-muted">Final Submit At: {new Date(post.end).toLocaleString()}</span>
+          </div>
+          <div className="d-flex justify-content-between align-items-center">
+            <span className="text-muted">Latest Comment: {post.comment? post.comment.message:""}</span>
           </div>
         </CardBody>
         <Button

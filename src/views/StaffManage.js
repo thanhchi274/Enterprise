@@ -10,22 +10,24 @@ import {
   selectEachEvent,
 } from "../Store/data/data.selector";
 import {selectCurrentUser} from '../Store/user/user.selector'
-import { fetchMagazinePostStaffStart } from "../Store/data/data.action";
-const StaffManage = ({ fetchMagazinePostStaffStart, event,currentUser }) => {
+import { fetchMagazinePostStaffStart,fetchClosureDateStart } from "../Store/data/data.action";
+const StaffManage = ({ fetchMagazinePostStaffStart,fetchClosureDateStart, event,currentUser }) => {
   const [isATimeSelected, setSelectedATime] = useState(false);
   const [faulty, setFaulty] = useState('')
   const userProvider =  currentUser? currentUser.providerData[1]:null
-
   useEffect(() => {
     fetchMagazinePostStaffStart();
   }, [fetchMagazinePostStaffStart]);
+  useEffect(() => {
+    fetchClosureDateStart()
+  }, [fetchClosureDateStart])
   return (
     <Container fluid className="main-content-container px-4">
       <Row noGutters className="page-header py-4">
         <PageTitle
           sm="4"
           title="Management"
-          subtitle="Staff"
+          subtitle="Marketing Coordinator"
           className="text-sm-left"
         />
       </Row>
@@ -52,5 +54,6 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = (dispatch) => ({
   fetchMagazinePostStaffStart: (data) =>
     dispatch(fetchMagazinePostStaffStart(data)),
+    fetchClosureDateStart:(data)=>dispatch(fetchClosureDateStart(data)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(StaffManage);

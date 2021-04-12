@@ -47,7 +47,7 @@ const TimeTable = ({
                 </tr>
               </thead>
               <tbody>
-                {ClosureData.map((item, index) => {
+                {ClosureData?ClosureData.map((item, index) => {
                   return (
                     <tr
                       key={index}
@@ -60,7 +60,7 @@ const TimeTable = ({
                       <td>{new Date(item.End).toLocaleDateString()}</td>
                     </tr>
                   );
-                })}
+                }):<p>Data is Loading</p>}
               </tbody>
             </table>
           </CardBody>

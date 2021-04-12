@@ -87,10 +87,22 @@ export function* commentPost(data) {
 }
 export function* updateStatusPost({ payload }) {
   try {
+    let time = new Date(payload.form).toLocaleDateString()
+    const Email={
+      to: `${payload.email}`,
+      message: {
+        subject: `${payload.faulty}_Your post is update status${payload.email}`,
+        text: `Student ${payload.email} has new status on post uploaded at ${time} from Marketing Coordinator of ${payload.faulty} Faulty please check in the system.
+        Thank You`,
+        html: `<p>Student ${payload.email} has successfully uploaded at ${time} from  Marketing Coordinator ${payload.faulty} Faulty please check in the system.
+        </br>Thank You</p>`,
+      },
+    }
     yield firestore
       .collection("magazinePost")
       .doc(payload.keyID)
       .update(payload);
+    yield firestore.collection("mail").add(Email)
     yield alert("Success");
   } catch (error) {
     yield console.log(error);
