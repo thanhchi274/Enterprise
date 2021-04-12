@@ -48,7 +48,7 @@ const routeStudent = [
 
 const routeAdmin = [
   {
-    path: "/set-closure-dates",
+    path: "/admin",
     exact: true,
     layout: AdminLayout,
     component: SetClosureDates,
@@ -56,7 +56,7 @@ const routeAdmin = [
 ];
 const routeManager = [
   {
-    path: "/statistic",
+    path: "/manager",
     exact: true,
     layout: ManagerLayout,
     component: BlogOverview,

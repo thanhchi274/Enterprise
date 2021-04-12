@@ -113,7 +113,7 @@ const App = ({ checkUserSession, currentUser }) => {
     const identifiedAdmin =userProvider?(userProvider.role==='Admin'?true:false):null
   return (
     <>
-    <BrowserRouter basename="/">
+    <BrowserRouter basename="/Enterprise">
       <Switch>
         <ErrorBoundary>
           <Container />
