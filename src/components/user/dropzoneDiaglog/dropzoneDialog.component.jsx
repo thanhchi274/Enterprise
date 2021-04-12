@@ -83,7 +83,7 @@ class DropZone extends Component {
           onSave={this.handleSave.bind(this)}
           acceptedFiles={["image/*,.pdf,.doc"]}
           showPreviews={true}
-          maxFileSize={5000000}
+          maxFileSize={10000000}
           filesLimit={2}
           value={"2"}
           onClose={this.handleClose.bind(this)}
