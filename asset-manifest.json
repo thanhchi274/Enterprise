@@ -1,30 +1,30 @@
 {
   "files": {
     "main.css": "/Enterprise/static/css/main.974e79b4.chunk.css",
-    "main.js": "/Enterprise/static/js/main.639a7a5a.chunk.js",
-    "main.js.map": "/Enterprise/static/js/main.639a7a5a.chunk.js.map",
-    "runtime-main.js": "/Enterprise/static/js/runtime-main.fec1832c.js",
-    "runtime-main.js.map": "/Enterprise/static/js/runtime-main.fec1832c.js.map",
+    "main.js": "/Enterprise/static/js/main.baed9f77.chunk.js",
+    "main.js.map": "/Enterprise/static/js/main.baed9f77.chunk.js.map",
+    "runtime-main.js": "/Enterprise/static/js/runtime-main.3829d685.js",
+    "runtime-main.js.map": "/Enterprise/static/js/runtime-main.3829d685.js.map",
     "static/css/2.6236b7ce.chunk.css": "/Enterprise/static/css/2.6236b7ce.chunk.css",
-    "static/js/2.ffae5ef9.chunk.js": "/Enterprise/static/js/2.ffae5ef9.chunk.js",
-    "static/js/2.ffae5ef9.chunk.js.map": "/Enterprise/static/js/2.ffae5ef9.chunk.js.map",
-    "static/js/3.4e1d9859.chunk.js": "/Enterprise/static/js/3.4e1d9859.chunk.js",
-    "static/js/3.4e1d9859.chunk.js.map": "/Enterprise/static/js/3.4e1d9859.chunk.js.map",
+    "static/js/2.da484259.chunk.js": "/Enterprise/static/js/2.da484259.chunk.js",
+    "static/js/2.da484259.chunk.js.map": "/Enterprise/static/js/2.da484259.chunk.js.map",
+    "static/js/3.97f38c3d.chunk.js": "/Enterprise/static/js/3.97f38c3d.chunk.js",
+    "static/js/3.97f38c3d.chunk.js.map": "/Enterprise/static/js/3.97f38c3d.chunk.js.map",
     "static/js/4.54534c94.chunk.js": "/Enterprise/static/js/4.54534c94.chunk.js",
     "static/js/4.54534c94.chunk.js.map": "/Enterprise/static/js/4.54534c94.chunk.js.map",
     "index.html": "/Enterprise/index.html",
     "static/css/2.6236b7ce.chunk.css.map": "/Enterprise/static/css/2.6236b7ce.chunk.css.map",
     "static/css/main.974e79b4.chunk.css.map": "/Enterprise/static/css/main.974e79b4.chunk.css.map",
-    "static/js/2.ffae5ef9.chunk.js.LICENSE.txt": "/Enterprise/static/js/2.ffae5ef9.chunk.js.LICENSE.txt",
+    "static/js/2.da484259.chunk.js.LICENSE.txt": "/Enterprise/static/js/2.da484259.chunk.js.LICENSE.txt",
     "static/media/0.31da962b.jpg": "/Enterprise/static/media/0.31da962b.jpg",
     "static/media/1.931e538f.jpeg": "/Enterprise/static/media/1.931e538f.jpeg",
     "static/media/magazine-system-logo.8fbee1a1.svg": "/Enterprise/static/media/magazine-system-logo.8fbee1a1.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.fec1832c.js",
+    "static/js/runtime-main.3829d685.js",
     "static/css/2.6236b7ce.chunk.css",
-    "static/js/2.ffae5ef9.chunk.js",
+    "static/js/2.da484259.chunk.js",
     "static/css/main.974e79b4.chunk.css",
-    "static/js/main.639a7a5a.chunk.js"
+    "static/js/main.baed9f77.chunk.js"
   ]
 }
