@@ -1,11 +1,16 @@
-# Getting Started with Create React App
+# COMP1640 Enterprise Web Software Development
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Team Group
+Pham Thanh Chi
+Nguyen Tho
+Vo Phi Hung
 
 ## Available Scripts
 
 In the project directory, you can run:
-
+Cancel changes
 ### `yarn start`
 
 Runs the app in the development mode.\
