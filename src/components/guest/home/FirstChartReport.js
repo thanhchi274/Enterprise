@@ -1,24 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {
-  Row,
-  Col,
-  FormSelect,
   Card,
   CardHeader,
   CardBody,
-  CardFooter
 } from "shards-react";
-
 import Chart from "../../../utils/chart";
-
 class FirstChartReport extends React.Component {
   constructor(props) {
     super(props);
-
     this.canvasRef = React.createRef();
   }
-
   componentDidMount() {
     const rateOfPostNoCommentAndTotal = this.props.report.postWithoutComments/this.props.report.allPosts
     const chartConfig = {
@@ -55,10 +47,8 @@ class FirstChartReport extends React.Component {
         ...this.props.chartOptions
       }
     };
-
     new Chart(this.canvasRef.current, chartConfig);
   }
-
   render() {
     const { title } = this.props;
     return (
@@ -79,21 +69,9 @@ class FirstChartReport extends React.Component {
 }
 
 FirstChartReport.propTypes = {
-  /**
-   * The component's title.
-   */
   title: PropTypes.string,
-  /**
-   * The chart config object.
-   */
   chartConfig: PropTypes.object,
-  /**
-   * The Chart.js options.
-   */
   chartOptions: PropTypes.object,
-  /**
-   * The chart data.
-   */
   chartData: PropTypes.object
 };
 

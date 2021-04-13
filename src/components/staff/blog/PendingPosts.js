@@ -102,7 +102,7 @@ const PendingPosts = ({
                   {post.email}
                 </p>
                 <p className="text-mutes">
-                  {new Date(post.createAt).toLocaleString()}
+                  {new Date(post.createAt).toDateString()}
                 </p>
               </div>
               <p className="m-0 mb-2 text-muted">

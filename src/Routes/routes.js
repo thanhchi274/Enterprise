@@ -1,5 +1,4 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
 import UserLayout from "../layouts/user/UserLayout";
 import AdminLayout from "../layouts/admin/Default";
 import GuestLayout from "../layouts/guest/Default";

@@ -1,12 +1,8 @@
 /* eslint jsx-a11y/anchor-is-valid: 0 */
 
-import React, {useState} from "react";
+import React from "react";
 import { Container, Row } from "shards-react";
 import PageTitle from "../components/common/PageTitle";
-import PostListOne from "../components/user/post/PostListOne";
-import PostListTwo from "../components/user/post/PostListTwo";
-import backgroundImage from "../assets/images/content-management/1.jpeg";
-import authorAvatar from "../assets/images/avatars/1.jpg";
 const BlogPosts = ()=> {
     return (
       <Container fluid className="main-content-container px-4">

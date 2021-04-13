@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Row, Col, Card, CardHeader, CardBody, Button } from "shards-react";
-
-import RangeDatePicker from "../../common/RangeDatePicker";
+import { Card, CardHeader, CardBody } from "shards-react";
 import Chart from "../../../utils/chart";
 
 class UsersOverview extends React.Component {
@@ -105,17 +103,8 @@ class UsersOverview extends React.Component {
 }
 
 UsersOverview.propTypes = {
-  /**
-   * The component's title.
-   */
   title: PropTypes.string,
-  /**
-   * The chart dataset.
-   */
   chartData: PropTypes.object,
-  /**
-   * The Chart.js options.
-   */
   chartOptions: PropTypes.object,
 };
 

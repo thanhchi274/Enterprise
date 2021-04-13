@@ -15,7 +15,7 @@ import Spinner from "./components/spinner/spinner.component";
 import ErrorBoundary from "./components/error-boundary/error-boundary.component";
 import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./shards-dashboard/styles/shards-dashboards.1.1.0.min.css";
+import "./assets/css/enterpriseComp1640.min.css";
 import Home from "./views/Home";
 import { Container } from "./utils/toast";
 const SignUp = lazy(() => import("./pages/user/sign-up/SignUp"));

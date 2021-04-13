@@ -13,7 +13,6 @@ import Container from "@material-ui/core/Container";
 import { connect } from "react-redux";
 import { emailSignInStart } from "../../../Store/user/user.action";
 import { Card } from "shards-react";
-
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -107,7 +106,6 @@ const Login = ({ emailSignInStart, setLoginOrSignUp }) => {
         </form>
       </div>
       <Box mt={8}>
-
       </Box>
     </Container>
   </Card>;
