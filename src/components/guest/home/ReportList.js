@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import {
   Card,
@@ -27,9 +27,6 @@ const ReportList = ({ title, data }) => {
     bodyElement.style.overflowY = "scroll";
     setViewAll(false);
   };
-  useEffect(() => {
-    console.log(data)
-  })
   return data?(
     <Card small className="blog-comments">
       <CardHeader className="border-bottom">

@@ -34,7 +34,6 @@ function Header(props) {
   const classes = useStyles();
   const { sections, title,currentUser,signOutStart } = props;
   const handleOnClick =(e)=>{
-    console.log(history)
     history.push('/')
   }
   return (

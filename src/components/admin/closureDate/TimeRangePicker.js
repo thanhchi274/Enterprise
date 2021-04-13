@@ -39,10 +39,6 @@ const TimeRangePicker = ({ event, year,updateClosureDateStart,closureData}) => {
   const [locale, setLocale] = React.useState("ja");
   const [date, setDate] = useState(null);
   const [closureDates, setClosureDates] = React.useState([]);
-  useEffect(() => {
-    console.log(closureDates)
-    // setClosureDates(closureData[0].closureDates)
-  }, [])
   const handleChooseDate = (date) => {
     const dateObject = new Date(date);
     const dateYear = dateObject.getFullYear();
@@ -92,7 +88,6 @@ const TimeRangePicker = ({ event, year,updateClosureDateStart,closureData}) => {
 
   const handleSave = (e) => {
     e.preventDefault();
-    console.log(e)
     updateClosureDateStart(closureDates)
   };
   return (

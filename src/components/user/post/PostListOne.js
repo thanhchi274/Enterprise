@@ -46,7 +46,6 @@ const PostListOne = ({ post, role }) => {
              {post.faulty} - {new Date(post.form).toLocaleDateString()}
             </a>
           </h5>
-          {console.log(post.comment)}
           <div className="d-flex justify-content-between align-items-center">
             <span className="text-muted">Submit At: {new Date(post.createAt).toLocaleString()}</span>
           </div>

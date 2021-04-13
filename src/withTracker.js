@@ -8,7 +8,6 @@ const withTracker = (WrappedComponent, options = {}) => {
     if (process.env.NODE_ENV !== "production") {
       return;
     }
-
     GoogleAnalytics.set({
       page,
       ...options

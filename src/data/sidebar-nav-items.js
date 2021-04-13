@@ -5,12 +5,12 @@ export const routeUser = [
     to: "/blog-posts",
   },
   {
-    title: "Add New Post",
+    title: "New Post",
     htmlBefore: '<i class="material-icons">note_add</i>',
     to: "/new-post",
   },
   {
-    title: "User Profile",
+    title: "Profile",
     htmlBefore: '<i class="material-icons">person</i>',
     to: "/user-profile",
   },
@@ -18,8 +18,8 @@ export const routeUser = [
 
 export const routeAdmin = [
   {
-    title: "Set Closure Dates",
-    to: "/set-closure-dates",
+    title: "Administrator",
+    to: "/admin",
     htmlBefore: '<i class="material-icons">date_range</i>',
     htmlAfter: "",
   },
@@ -27,13 +27,13 @@ export const routeAdmin = [
 
 export const routeStaff = [
   {
-    title: "Staff Dashboard",
+    title: "Dashboard",
     to: "/staff",
     htmlBefore: '<i class="material-icons">edit</i>',
     htmlAfter: "",
   },
   {
-    title: "Staff Profile",
+    title: "Profile",
     to: "/staff-profile",
     htmlBefore: '<i class="material-icons">person</i>',
     htmlAfter: "",
