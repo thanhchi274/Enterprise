@@ -9,7 +9,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 ReactDOM.render(
   <Provider store={store}>
-  <HashRouter basename="/Enterprise" >
+  <HashRouter basename="/" >
     <PersistGate persistor={persistor}>
       <App />
     </PersistGate>
