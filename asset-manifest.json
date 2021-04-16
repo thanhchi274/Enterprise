@@ -1,29 +1,29 @@
 {
   "files": {
-    "main.css": "/static/css/main.87a71591.chunk.css",
-    "main.js": "/static/js/main.f6548d83.chunk.js",
-    "main.js.map": "/static/js/main.f6548d83.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.4e3c5398.js",
-    "runtime-main.js.map": "/static/js/runtime-main.4e3c5398.js.map",
-    "static/css/2.6236b7ce.chunk.css": "/static/css/2.6236b7ce.chunk.css",
-    "static/js/2.01ae4ea1.chunk.js": "/static/js/2.01ae4ea1.chunk.js",
-    "static/js/2.01ae4ea1.chunk.js.map": "/static/js/2.01ae4ea1.chunk.js.map",
-    "static/js/3.d4953cc3.chunk.js": "/static/js/3.d4953cc3.chunk.js",
-    "static/js/3.d4953cc3.chunk.js.map": "/static/js/3.d4953cc3.chunk.js.map",
-    "static/js/4.ccb239fb.chunk.js": "/static/js/4.ccb239fb.chunk.js",
-    "static/js/4.ccb239fb.chunk.js.map": "/static/js/4.ccb239fb.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/2.6236b7ce.chunk.css.map": "/static/css/2.6236b7ce.chunk.css.map",
-    "static/css/main.87a71591.chunk.css.map": "/static/css/main.87a71591.chunk.css.map",
-    "static/js/2.01ae4ea1.chunk.js.LICENSE.txt": "/static/js/2.01ae4ea1.chunk.js.LICENSE.txt",
-    "static/media/0.31da962b.jpg": "/static/media/0.31da962b.jpg",
-    "static/media/magazine-system-logo.8fbee1a1.svg": "/static/media/magazine-system-logo.8fbee1a1.svg"
+    "main.css": "/Enterprise/static/css/main.87a71591.chunk.css",
+    "main.js": "/Enterprise/static/js/main.fce88cc6.chunk.js",
+    "main.js.map": "/Enterprise/static/js/main.fce88cc6.chunk.js.map",
+    "runtime-main.js": "/Enterprise/static/js/runtime-main.62522a9b.js",
+    "runtime-main.js.map": "/Enterprise/static/js/runtime-main.62522a9b.js.map",
+    "static/css/2.6236b7ce.chunk.css": "/Enterprise/static/css/2.6236b7ce.chunk.css",
+    "static/js/2.67b68909.chunk.js": "/Enterprise/static/js/2.67b68909.chunk.js",
+    "static/js/2.67b68909.chunk.js.map": "/Enterprise/static/js/2.67b68909.chunk.js.map",
+    "static/js/3.1b21a344.chunk.js": "/Enterprise/static/js/3.1b21a344.chunk.js",
+    "static/js/3.1b21a344.chunk.js.map": "/Enterprise/static/js/3.1b21a344.chunk.js.map",
+    "static/js/4.0ccc9dfd.chunk.js": "/Enterprise/static/js/4.0ccc9dfd.chunk.js",
+    "static/js/4.0ccc9dfd.chunk.js.map": "/Enterprise/static/js/4.0ccc9dfd.chunk.js.map",
+    "index.html": "/Enterprise/index.html",
+    "static/css/2.6236b7ce.chunk.css.map": "/Enterprise/static/css/2.6236b7ce.chunk.css.map",
+    "static/css/main.87a71591.chunk.css.map": "/Enterprise/static/css/main.87a71591.chunk.css.map",
+    "static/js/2.67b68909.chunk.js.LICENSE.txt": "/Enterprise/static/js/2.67b68909.chunk.js.LICENSE.txt",
+    "static/media/0.31da962b.jpg": "/Enterprise/static/media/0.31da962b.jpg",
+    "static/media/magazine-system-logo.8fbee1a1.svg": "/Enterprise/static/media/magazine-system-logo.8fbee1a1.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.4e3c5398.js",
+    "static/js/runtime-main.62522a9b.js",
     "static/css/2.6236b7ce.chunk.css",
-    "static/js/2.01ae4ea1.chunk.js",
+    "static/js/2.67b68909.chunk.js",
     "static/css/main.87a71591.chunk.css",
-    "static/js/main.f6548d83.chunk.js"
+    "static/js/main.fce88cc6.chunk.js"
   ]
 }
