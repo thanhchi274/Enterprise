@@ -69,6 +69,7 @@ const Login = ({ emailSignInStart, setLoginOrSignUp }) => {
             name="email"
             autoComplete="email"
             autoFocus
+            value={userCredentials.email}
             onChange={handleChange}
           />
           <TextField
@@ -79,6 +80,7 @@ const Login = ({ emailSignInStart, setLoginOrSignUp }) => {
             label="Password"
             type="password"
             id="password"
+            value={userCredentials.password}
             autoComplete="current-password"
             onChange={handleChange}
           />

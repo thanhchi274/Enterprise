@@ -6,6 +6,8 @@ import {
   createUserProfileDocument,
   getCurrentUser
 } from "../../utils/firebase.utils";
+import { notifyError } from "../../utils/toast";
+import { SUCCESS_LOGIN,FAILURE_LOGIN } from "../../const/errors";
 import { signInSuccess, signInFailure, signOutSuccess, signOutFailure, signUpSuccess, signUpFailure, uploadDataSuccess, uploadDataFailure } from "./user.action";
 import { toString } from 'lodash'
 export function* getSnapshotFromAuth(userAuth,additionalData) {
@@ -33,8 +35,10 @@ export function* signInWithEmail({ payload: { email, password } }) {
   try {
     const { user } = yield auth.signInWithEmailAndPassword(email, password);
     yield getSnapshotFromAuth(user);
+    yield notifyError(SUCCESS_LOGIN);
     yield window.location.reload()
   } catch (err) {
+    yield notifyError(FAILURE_LOGIN);
     yield put(signInFailure(err));
   }
 }

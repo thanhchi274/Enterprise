@@ -7,6 +7,7 @@ import {fetchReportGuestViewStart} from '../Store/data/data.action'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from "reselect";
 import {selectProcessGuestData} from '../Store/data/data.selector'
+import Spinner from '../components/spinner/spinner.component'
 const Home = ({fetchReportGuestViewStart,reviewData}) => {
   const [loginOrSignUp, setLoginOrSignUp] = useState("login");
   const [data, setData]=useState(null)
@@ -32,7 +33,7 @@ const Home = ({fetchReportGuestViewStart,reviewData}) => {
         </Col>
       </Row>
     </Container>
-  ):<p>Loading</p>;
+  ):<Spinner />;
 };
 const mapStateToProps = createStructuredSelector({
   reviewData:selectProcessGuestData

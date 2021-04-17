@@ -11,6 +11,7 @@ import {
   Col,
 } from "shards-react";
 import Report from './Report'
+import Spinner from '../../spinner/spinner.component'
 const ReportList = ({ title, data }) => {
   const [viewAll, setViewAll] = React.useState(false);
   const handleViewAll = (e) => {
@@ -58,7 +59,7 @@ const ReportList = ({ title, data }) => {
         </Row>
       </CardFooter>
     </Card>
-  ):<p>Is Loading</p>;
+  ):<Spinner/>
 };
 
 ReportList.propTypes = {

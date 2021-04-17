@@ -16,7 +16,7 @@ import * as locales from "react-date-range/dist/locale";
 import { useState } from "react";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import { notifyError } from "../../../utils/toast";
+import { notifyError,notifySuccess } from "../../../utils/toast";
 import { OLD_DATE } from "../../../const/errors";
 import { FormGroup } from "@material-ui/core";
 import {updateClosureDateStart} from '../../../Store/data/data.action'

@@ -9,6 +9,7 @@ import { createStructuredSelector } from "reselect";
 import {selectCurrentUser} from '../Store/user/user.selector'
 import {fetchAnalysisDataStart,fetchDownloadAllDataStart} from '../Store/data/data.action'
 import {selectAnalysisData,selectDownloadLinkData} from '../Store/data/data.selector'
+import Spinner from '../components/spinner/spinner.component'
 const BlogOverview = ({ data,fetchAnalysisDataStart,analysisData,downloadLink }) => {
   useEffect(() => {
     fetchAnalysisDataStart()
@@ -36,7 +37,7 @@ return analysisData&&downloadLink?(
       </Col>
     </Row>
   </Container>
-      ):<p>IS LOADING</p>
+      ):<Spinner/>
     }
 
 const mapStateToProps =createStructuredSelector({

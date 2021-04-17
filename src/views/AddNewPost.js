@@ -14,6 +14,7 @@ import {
   selectEditPost,
   selectClosureDates,
 } from "../Store/data/data.selector";
+import Spinner from '../components/spinner/spinner.component'
 import { setEditPost } from "../Store/data/data.action";
 import { fetchClosureDateStart } from "../Store/data/data.action";
 import PageTitle from "../components/common/PageTitle";
@@ -55,7 +56,7 @@ const AddNewPost = ({
       </Row>
     </Container>
   ) : (
-    <p>Is Loading</p>
+    <Spinner/>
   );
 };
 

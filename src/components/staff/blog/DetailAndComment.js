@@ -12,6 +12,7 @@ import {
 import { connect } from "react-redux";
 import { setComment } from "../../../Store/data/data.action";
 import { fetchEachEventStart } from "../../../Store/data/data.action";
+import Spinner from '../../spinner/spinner.component'
 const DetailAndComment = ({
   data,
   faulty,
@@ -74,7 +75,7 @@ const DetailAndComment = ({
       </CardBody>
     </Card>
   ) : (
-    <p>Loading</p>
+    <Spinner/>
   );
 };
 

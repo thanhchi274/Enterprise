@@ -7,6 +7,7 @@ import {
 } from "../../../Store/data/data.selector";
 import { connect } from "react-redux";
 import { fetchEachEventStart } from "../../../Store/data/data.action";
+import Spinner from '../../spinner/spinner.component'
 const TimeTable = ({
   isATimeSelected,
   setSelectedATime,
@@ -60,7 +61,7 @@ const TimeTable = ({
                       <td>{new Date(item.End).toLocaleDateString()}</td>
                     </tr>
                   );
-                }):<p>Data is Loading</p>}
+                }):<Spinner/>}
               </tbody>
             </table>
           </CardBody>

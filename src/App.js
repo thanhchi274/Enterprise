@@ -120,11 +120,11 @@ const App = ({ checkUserSession, currentUser }) => {
           <Suspense fallback={<Spinner />}>
             {showMenuHome(routeStudent, currentUser)}
             {currentUser?(identifiedStaff ? showMenuStaff(routeStaff):(identifiedManager ? showMenuManager(routeManager):(identifiedAdmin ? showMenuAdmin(routeAdmin):<Redirect to='/' />))):<Redirect to='/' />}
-            <Route
+               <Route
               exact
               path="/"
               render={() =>
-                currentUser ? <Redirect to="/blog-posts" /> : <Home />
+                currentUser?(identifiedStaff ? <Redirect to="/staff" />:(identifiedManager ? <Redirect to="/manager" />:(identifiedAdmin ? <Redirect to="/admin" />:<Redirect to='/' />))):<Home />
               }
             />
             <Route exact={true} path="/register" component={SignUp}></Route>
