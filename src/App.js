@@ -12,6 +12,7 @@ import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "./Store/user/user.selector";
 import { checkUserSession } from "./Store/user/user.action";
 import Spinner from "./components/spinner/spinner.component";
+import { BrowserRouter } from 'react-router-dom';
 import ErrorBoundary from "./components/error-boundary/error-boundary.component";
 import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -113,6 +114,7 @@ const App = ({ checkUserSession, currentUser }) => {
     const identifiedAdmin =userProvider?(userProvider.role==='Admin'?true:false):null
   return (
     <>
+    <BrowserRouter basename="/Enterprise">
       <Switch>
         <ErrorBoundary>
           <Container />
@@ -130,6 +132,7 @@ const App = ({ checkUserSession, currentUser }) => {
           </Suspense>
         </ErrorBoundary>
       </Switch>
+      </BrowserRouter>
       </>
   );
 };
